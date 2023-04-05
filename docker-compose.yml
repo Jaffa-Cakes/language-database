@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: ./
+      target: runner
+    volumes:
+      - .:/app
+    command: npm run dev
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://postgres:password@db:5432/lang_app
+    links:
+      - db:db
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: lang_app
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: "psql -U postgres -lqt | cut -d \\| -f 1 | grep -qw lang_app" # This check is needed to ensure the lang_app database has been created before Prisma attempts to connect to it
+      interval: 250ms
+      timeout: 3s
+      retries: 40
+      start_period: 30s
+
+volumes:
+  db-data:
