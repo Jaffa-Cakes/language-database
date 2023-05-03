@@ -1,0 +1,34 @@
+import csv
+
+class Source:
+    def __init__(self, name, collector, consultants, date, location, notes) -> None:
+        self.name = name
+        self.collector = collector
+        self.consultants = consultants
+        self.date = date
+        self.location = location
+        self.notes = notes
+
+sources = []
+
+with open('Source.csv', 'r', encoding="utf8") as csv_file:
+    csv_reader = csv.reader(csv_file, delimiter=',')
+    first = True
+    for row in csv_reader:
+        if first:
+            first = False
+            continue
+        if len(row) != 6:
+            print("Row with invalid columns found")
+            continue
+        sources.append(Source(row[0], row[1], row[2], row[3], row[4], row[5]))
+
+for source in sources:
+    print()
+    print(source.name)
+    print(source.collector)
+    print(source.consultants)
+    print(source.date)
+    print(source.location)
+    print(source.notes)
+    print()
