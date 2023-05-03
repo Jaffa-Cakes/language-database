@@ -5,11 +5,14 @@ import styles from './page.module.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+  let wimg = 100
+
   return (
     <main className={styles.main}>
       <div className={styles.description}>
         <p>
-          Get started by editing&nbsp;
+          Get started by editing LESSGO&nbsp;
           <code className={styles.code}>src/app/page.tsx</code>
         </p>
         <div>
@@ -23,7 +26,7 @@ export default function Home() {
               src="/vercel.svg"
               alt="Vercel Logo"
               className={styles.vercelLogo}
-              width={100}
+              width={wimg}
               height={24}
               priority
             />
