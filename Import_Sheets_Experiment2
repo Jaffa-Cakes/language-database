@@ -9,6 +9,20 @@ class Source:
         self.location = location
         self.notes = notes
 
+class Aiatsis:
+    def __init__(self, Gloss, Seman) -> None:
+        self.Gloss = Gloss
+        self.Seman = Seman
+
+class Language:
+    def __init__(Source, EngTran, Original, Fuz, Sonetic) -> None:
+        self.Source = Source
+        self.EngTran = EngTran
+        self.Original = Original
+        self.Fuz = Fuz
+        self.Sonetic = Sonetic
+        
+
 sources = []
 
 with open('Source.csv', 'r', encoding="utf8") as csv_file:
@@ -21,7 +35,7 @@ with open('Source.csv', 'r', encoding="utf8") as csv_file:
         if len(row) != 6:
             print("Row with invalid columns found")
             continue
-        sources.append(Source(row[0], row[1], row[2], row[3], row[4], row[5]))
+        sources.append(Source(row[0], row[1], row[2], row[3], row[4], row[5], row[6], row[7], row[8], row[9]))
 
 for source in sources:
     print()
