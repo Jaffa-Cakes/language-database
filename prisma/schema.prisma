@@ -7,5 +7,83 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = "postgresql://postgres:password@localhost:5432/lang_app"
+}
+
+model Language {
+  Source_ID     String  @id
+  SFSources Sources[]
+  SBWSources BWSources []
+  Original_Text String?
+  Translation   String?
+  Fuzzy_Forms   String?
+  Sonetics      String?
+  Entry_Type    String?
+}
+
+model Sources {
+  Source_ID              String   @id
+  Source_Name            Language? @relation(fields: [Source_ID], references: [Source_ID])
+  SourceName             String?
+  English_Scans          String?
+  Database_Entry         String?
+  File_Name              String?
+  Source_of_Words        String?
+  Publication_Status     String?
+  Type_of_Document       String?
+  Collector              String?
+  Indigenous_Consultants String?
+  Date                   DateTime?
+  Location               String?
+  Language               String?
+  Notes                  String?
+}
+model BWSources {
+Source_ID       String @id
+Source          Language? @relation(fields: [Source_ID], references: [Source_ID])
+Translation     String?
+Original        String?
+}
+model PreliminaryRootGlossaries {
+Root_Spelling     String?
+English_Term      String?
+Synonyms          String?
+Semantic_Field_1  String?
+Semantic_Field_2  String?
+Word_Class        String?
+Source_ID         String @id
+}
+model PreliminaryAffixGlossaries {
+Root_Spelling       String?
+English_Term        String?
+Abreviation         String?
+Semantic_Field_1    String?
+Semantic_Field_2    String?
+Word_Class          String?
+Source_ID           String @id
+}
+
+model AIATSIS {
+  Glossary_Count   Int @id
+  Category         String?
+  Number           Int?
+  Glossary         String?
+  HG_Glossary_Form String?
+  Semantic_Field   String?
+  Speech_Part      String?
+  Other_Note       String?
+  Change_Note      String?
+  Notes            String?
+  Scientific_Name  String?
+  Kin_Designation  String?
+  SW_Rec_ID        String?
+  HG_Basic         String?
+}
+
+model FilteredResults {
+  Source               String?
+  Unique_ID            String @id @unique
+  Entry_ID             String?
+  Glossary_Translation String?
+  Original             String?
 }
