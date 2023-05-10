@@ -37,4 +37,4 @@ next-env.d.ts
 .env
 .vscode/settings.json
 
-.csv
+*.csv
