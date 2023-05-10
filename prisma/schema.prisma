@@ -12,8 +12,8 @@ datasource db {
 
 model Language {
   Source_ID     String  @id
-  SFSources Sources[]
-  SBWSources BWSources []
+  SFSources     Sources[]
+  SBWSources    BWSources[]
   Original_Text String?
   Translation   String?
   Fuzzy_Forms   String?
