@@ -33,7 +33,7 @@ model Sources {
   Type_of_Document       String?
   Collector              String?
   Indigenous_Consultants String?
-  Date                   DateTime?
+  Date                   String?
   Location               String?
   Language               String?
   Notes                  String?
