@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from 'react';
-import Menu from './menu';
-import SourceSelect from './dropdown';
-import SearchButton from './searchbutton';
+import Menu from './../components/menu';
+import SourceSelect from './../components/dropdown';
+import SearchButton from './../components/searchbutton';
 
 export default function AdvancedSearch() {
   return (

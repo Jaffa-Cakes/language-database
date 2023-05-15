@@ -1,9 +1,9 @@
 import { Inter } from 'next/font/google'
-import Menu from './menu';
+import Menu from './../components/menu';
 
 // This is the Home Page
 
-export default function HomePage() {
+export default function Index() {
   return (
     <div>
       <Menu />
