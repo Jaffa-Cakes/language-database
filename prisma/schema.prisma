@@ -12,8 +12,8 @@ datasource db {
 
 model Language {
   Source_ID     String  @id
-  SFSources Sources[]
-  SBWSources BWSources []
+  SFSources     Sources[]
+  SBWSources    BWSources[]
   Original_Text String?
   Translation   String?
   Fuzzy_Forms   String?
@@ -33,34 +33,17 @@ model Sources {
   Type_of_Document       String?
   Collector              String?
   Indigenous_Consultants String?
-  Date                   DateTime?
+  Date                   String?
   Location               String?
   Language               String?
   Notes                  String?
 }
+
 model BWSources {
 Source_ID       String @id
 Source          Language? @relation(fields: [Source_ID], references: [Source_ID])
 Translation     String?
 Original        String?
-}
-model PreliminaryRootGlossaries {
-Root_Spelling     String?
-English_Term      String?
-Synonyms          String?
-Semantic_Field_1  String?
-Semantic_Field_2  String?
-Word_Class        String?
-Source_ID         String @id
-}
-model PreliminaryAffixGlossaries {
-Root_Spelling       String?
-English_Term        String?
-Abreviation         String?
-Semantic_Field_1    String?
-Semantic_Field_2    String?
-Word_Class          String?
-Source_ID           String @id
 }
 
 model AIATSIS {
