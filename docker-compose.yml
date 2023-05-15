@@ -1,13 +1,23 @@
 version: '3.8'
 
 services:
-  web:
+  reverse-proxy:
+    build:
+      context: ./reverse-proxy
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - backend:backend
+
+  backend:
     build:
       context: ./
       target: runner
     volumes:
       - .:/app
-    command: npm run dev
+    command: npx next
     ports:
       - "3000:3000"
     environment:
@@ -29,6 +39,8 @@ services:
       timeout: 3s
       retries: 40
       start_period: 30s
+    ports:
+      - "5432:5432"
 
 volumes:
   db-data:
