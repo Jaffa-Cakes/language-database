@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export default async function handle(req, res) {
   const {
-    source,
+    Source,
     WordID,
     EnglishTranslation,
     WoiWurrung,
@@ -15,7 +15,7 @@ export default async function handle(req, res) {
 
   // Build the query object
   const query = {};
-  if (source) query.source = source;
+  if (Source) query.source = Source;
   if (WordID) query.WordID = Number(WordID);
   if (EnglishTranslation) query.EnglishTranslation = EnglishTranslation;
   if (WoiWurrung) query.WoiWurrung = WoiWurrung;
