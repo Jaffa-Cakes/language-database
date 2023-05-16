@@ -71,6 +71,7 @@ model FilteredResults {
   Original             String?
 }
 
+// Search history table. every searched element is added to this table. EntryCount includes number of entries and is automatically incremented.
 model SearchHistory {
   EntryCount   Int @id @default(autoincrement())
   SearchedWord String
