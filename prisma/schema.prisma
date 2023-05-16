@@ -70,3 +70,8 @@ model FilteredResults {
   Glossary_Translation String?
   Original             String?
 }
+
+model SearchHistory {
+  EntryCount   Int @id @default(autoincrement())
+  SearchedWord String
+}
