@@ -21,7 +21,7 @@ model Language {
   s_id                Sources @relation(fields: [id], references: [source_id])
   id                  String  @id
   //table_sources       Sources[]
-  table_BWSources     BWSources[]
+  //table_BWSources     BWSources[]
   original_text       String?
   translation         String?
   fuzzy               String?
@@ -39,7 +39,8 @@ model Language {
 
 model Sources {
 
-  words Language[]
+  words                  Language[] // creates relation with languages table through source_id field in this table.
+  bw_words               BWSources[] // creates relation with bwsources table through source_id field in this table.
   source_id              String   @id
   //s_id                   Language? @relation(fields: [source_id], references: [id])
   name                   String?
@@ -66,8 +67,9 @@ model Sources {
 
 
 model BWSources {
-source_id       String @id
-s_id            Language? @relation(fields: [source_id], references: [id])
+s_id            Sources @relation(fields: [id], references: [source_id])
+id              String @id
+//s_id            Language? @relation(fields: [source_id], references: [id])
 translation     String?
 original        String?
 }
