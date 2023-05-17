@@ -95,14 +95,15 @@ model lexicon {
 
 //for some reason, this table is related to the languages table.
 //will discuss with andrew how they are related and make the connection following on to it.
+// UPDATE: this table is not needed.
 
-model FilteredResults {
-  source               String?
-  unique_id            String @id @unique
-  entry_id             String?
-  glossary_translation String?
-  original             String?
-}
+// model FilteredResults {
+//   source               String?
+//   unique_id            String @id @unique
+//   entry_id             String?
+//   glossary_translation String?
+//   original             String?
+// }
 
 // Search history table. Every searched element is added to this table. EntryCount includes number of entries and is automatically incremented.
 model SearchHistory {
