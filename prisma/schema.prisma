@@ -10,69 +10,100 @@ datasource db {
   url      = "postgresql://postgres:password@localhost:5432/lang_app"
 }
 
+// IGNORE START
+//id refers to source id.
+//table_sources is to refer to source id in sources table.
+//table_sources is to refer to source id in BWTable table.
+// IGNORE END
+
 model Language {
-  Source_ID     String  @id
-  SFSources     Sources[]
-  SBWSources    BWSources[]
-  Original_Text String?
-  Translation   String?
-  Fuzzy_Forms   String?
-  Sonetics      String?
-  Entry_Type    String?
+
+  s_id                Sources @relation(fields: [id], references: [source_id])
+  id                  String  @id
+  //table_sources       Sources[]
+  table_BWSources     BWSources[]
+  original_text       String?
+  translation         String?
+  fuzzy               String?
+  sonetics            String?
+  entry_type          String?
 }
+
+
+// IGNORE START
+//source_id is referred to in the language table through s_id being the reference medium.
+//this reference shows that source_id is the primary key here, but a foreign key in language table.
+// IGNORE END
+
+
 
 model Sources {
-  Source_ID              String   @id
-  Source_Name            Language? @relation(fields: [Source_ID], references: [Source_ID])
-  SourceName             String?
-  English_Scans          String?
-  Database_Entry         String?
-  File_Name              String?
-  Source_of_Words        String?
-  Publication_Status     String?
-  Type_of_Document       String?
-  Collector              String?
-  Indigenous_Consultants String?
-  Date                   String?
-  Location               String?
-  Language               String?
-  Notes                  String?
+
+  words Language[]
+  source_id              String   @id
+  //s_id                   Language? @relation(fields: [source_id], references: [id])
+  name                   String?
+  english_scans          String?
+  database_entry         String?
+  file_name              String?
+  origin                 String?
+  publication_status     String?
+  document_type          String?
+  collector              String?
+  consultants            String?
+  date_collected         String?
+  location_collected     String?
+  language_name          String?
+  regularized_name       String?
+  notes                  String?
 }
+
+
+// IGNORE START
+//source_id is referred to in the language table through s_id being the reference medium.
+//this reference shows that source_id is the primary key here, but a foreign key in language table.
+// IGNORE END
+
 
 model BWSources {
-Source_ID       String @id
-Source          Language? @relation(fields: [Source_ID], references: [Source_ID])
-Translation     String?
-Original        String?
+source_id       String @id
+s_id            Language? @relation(fields: [source_id], references: [id])
+translation     String?
+original        String?
 }
 
-model AIATSIS {
-  Glossary_Count   Int @id
-  Category         String?
-  Number           Int?
-  Glossary         String?
-  HG_Glossary_Form String?
-  Semantic_Field   String?
-  Speech_Part      String?
-  Other_Note       String?
-  Change_Note      String?
-  Notes            String?
-  Scientific_Name  String?
-  Kin_Designation  String?
-  SW_Rec_ID        String?
-  HG_Basic         String?
+//need a field which will hold the @id attribute.
+
+model lexicon {
+  glossary_count   Int @id
+  category         String?
+  number           Int?
+  gloss            String?
+  hg_glossary_form String?
+  semantic_field   String?
+  speech_part      String?
+  other_note       String?
+  change_note      String?
+  notes            String?
+  scientific_name  String?
+  kin_designation  String?
+  sw_rec_id        String?
+  hg_basic         String?
 }
+
+//for some reason, this table is related to the languages table.
+//will discuss with andrew how they are related and make the connection following on to it.
 
 model FilteredResults {
-  Source               String?
-  Unique_ID            String @id @unique
-  Entry_ID             String?
-  Glossary_Translation String?
-  Original             String?
+  source               String?
+  unique_id            String @id @unique
+  entry_id             String?
+  glossary_translation String?
+  original             String?
 }
 
 // Search history table. Every searched element is added to this table. EntryCount includes number of entries and is automatically incremented.
 model SearchHistory {
-  EntryCount   Int @id @default(autoincrement())
-  SearchedWord String
+  entry_count   Int @id @default(autoincrement())
+  searched_word String
 }
