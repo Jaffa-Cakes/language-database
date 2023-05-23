@@ -128,3 +128,63 @@ loader("aiatsis_word_list.csv", AiatsisWordList, aiatsis_word_lists)
 
 filtered_results = []
 loader("filtered_results.csv", FilteredResults, filtered_results)
+
+# DATABASE EXPORTS
+import psycopg2
+
+conn = psycopg2.connect(
+    host="127.0.0.1",
+    database="lang_app",
+    user="postgres",
+    password="password")
+
+cur = conn.cursor()
+
+# LANGUAGE
+for language in languages:
+    cur.execute("""
+    INSERT INTO language(source_id, temp_id, entry_id, gloss_translation_in_original, language_from_original, fuzzy_forms, sonetic_transliteration, type)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+    """, (language.source, language.temp_id, language.entry_id, language.gloss_translation_in_original, language.language_from_original, language.fuzzy_forms, language.sonetic_transliteration, language.type))
+
+# SOURCE
+for source in sources:
+    cur.execute("""
+    INSERT INTO source(name, original_id, scans_in_src_file, in_database, name_of_file, source, publication_status, document_type, collector, consultants, date, location, languages, language_name, notes)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (source.name, source.id, source.scans_in_src_file, source.in_database, source.name_of_file, source.source, source.publication_status, source.document_type, source.collector, source.consultants, source.date, source.location, source.languages, source.language_name, source.notes))
+
+# BoonSource
+for boon_source in boon_sources:
+    cur.execute("""
+    INSERT INTO boon_source(source, gloss_translation_in_original, language_from_original, possibly_wathaurong)
+    VALUES (%s, %s, %s, %s)
+    """, (boon_source.source, boon_source.gloss_translation_in_original, boon_source.language_from_original, boon_source.possibly_wathaurong))
+
+# RootGloss
+for root_gloss in root_glosses:
+    cur.execute("""
+    INSERT INTO root_gloss(regularised_spelling, regularised_english_gloss, synonym, semantic_one, semantic_two, word_class, entry_id_one, entry_id_two, entry_id_three, notes)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (root_gloss.regularised_spelling, root_gloss.regulatised_english_gloss, root_gloss.synonym, root_gloss.semantic_one, root_gloss.semantic_two, root_gloss.word_class, root_gloss.entry_id_one, root_gloss.entry_id_two, root_gloss.entry_id_three, root_gloss.notes))
+
+# AiatsisWordList
+for aiatsis_word_list in aiatsis_word_lists:
+    cur.execute("""
+    INSERT INTO aiatsis_word_list(gloss_count, category, number, gloss, gloss_form, gemantic_field, gart_of_speech, other_note, change_note, note, scientific_name, kin_designation, rec_id, basic)
+    VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+    """, (aiatsis_word_list.gloss_count, aiatsis_word_list.category, aiatsis_word_list.number, aiatsis_word_list.gloss, aiatsis_word_list.gloss_form, aiatsis_word_list.semantic_field, aiatsis_word_list.part_of_speech, aiatsis_word_list.other_note, aiatsis_word_list.change_note, aiatsis_word_list.note, aiatsis_word_list.scientific_name, aiatsis_word_list.kin_designation, aiatsis_word_list.rec_id, aiatsis_word_list.basic))
+
+# FilteredResults
+for filtered_result in filtered_results:
+    cur.execute("""
+    INSERT INTO filtered_results(source, unique_id, entry_id, translation_in_original, language_form_in_original)
+    VALUES (%s, %s, %s, %s, %s)
+    """, (filtered_result.source, filtered_result.unique_id, filtered_result.entry_id, filtered_result.translation_in_original, filtered_result.language_form_in_original))
+
+# Commit the transaction
+conn.commit()
+
+# Close the cursor and connection
+cur.close()
+conn.close()
