@@ -11,62 +11,81 @@ datasource db {
 }
 
 model Language {
-  Source_ID     String  @id
-  SFSources     Sources[]
-  SBWSources    BWSources[]
-  Original_Text String?
-  Translation   String?
-  Fuzzy_Forms   String?
-  Sonetics      String?
-  Entry_Type    String?
+  id                              Int      @id @default(autoincrement())
+  Source_ID                       String
+  Temp_ID                         String
+  Entry_ID                        String
+  Gloss_Translation_in_Original   String
+  Language_from_Original          String
+  Fuzzy_Forms                     String
+  Sonetic_Transliteration         String
+  Type                            String
 }
 
-model Sources {
-  Source_ID              String   @id
-  Source_Name            Language? @relation(fields: [Source_ID], references: [Source_ID])
-  SourceName             String?
-  English_Scans          String?
-  Database_Entry         String?
-  File_Name              String?
-  Source_of_Words        String?
-  Publication_Status     String?
-  Type_of_Document       String?
-  Collector              String?
-  Indigenous_Consultants String?
-  Date                   String?
-  Location               String?
-  Language               String?
-  Notes                  String?
+model Source {
+  id                          Int      @id @default(autoincrement())
+  Name                        String 
+  Id                          String
+  Scans_in_Src_File           String
+  In_Database                 String
+  Name_of_File                String
+  Source                      String
+  Publication_Status          String
+  Document_Type               String
+  Collector                   String
+  Consultants                 String
+  Date                        String
+  Location                    String
+  Languages                   String
+  Language_Name               String
+  Notes                       String
 }
 
-model BWSources {
-Source_ID       String @id
-Source          Language? @relation(fields: [Source_ID], references: [Source_ID])
-Translation     String?
-Original        String?
+model BoonSource {
+  id                              Int      @id @default(autoincrement())
+  Source                          String
+  Gloss_Translation_in_Original   String
+  Language_from_Original          String
+  Possibly_Wathaurong             String
 }
 
-model AIATSIS {
-  Glossary_Count   Int @id
-  Category         String?
-  Number           Int?
-  Glossary         String?
-  HG_Glossary_Form String?
-  Semantic_Field   String?
-  Speech_Part      String?
-  Other_Note       String?
-  Change_Note      String?
-  Notes            String?
-  Scientific_Name  String?
-  Kin_Designation  String?
-  SW_Rec_ID        String?
-  HG_Basic         String?
+model RootGloss {
+  id                              Int      @id @default(autoincrement())
+  Regularised_Spelling         String
+  Regularised_English_Gloss    String
+  Synonym                      String
+  Semantic_One                 String
+  Semantic_Two                 String
+  Word_Class                   String
+  Entry_Id_One                 String
+  Entry_Id_Two                 String
+  Entry_Id_Three               String
+  Notes                        String
+}
+
+model AiatsisWordList {
+  id                              Int      @id @default(autoincrement())
+  Gloss_Count                  Int
+  Category                     String
+  Number                       Int
+  Gloss                        String
+  Gloss_Form                   String
+  Semantic_Field               String
+  Part_of_Speech               String
+  Other_Note                   String
+  Change_Note                  String
+  Note                         String
+  Scientific_Name              String
+  Kin_Designation              String
+  Rec_Id                       String
+  Basic                        String
 }
 
 model FilteredResults {
-  Source               String?
-  Unique_ID            String @id @unique
-  Entry_ID             String?
-  Glossary_Translation String?
-  Original             String?
+  id                              Int      @id @default(autoincrement())
+  Source                       String
+  Unique_Id                    String
+  Entry_Id                     String
+  Translation_in_Original      String
+  Language_Form_in_Original    String
 }
