@@ -5,7 +5,7 @@ const Home: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>('');
   const [results, setResults] = useState<string[]>([]); // replace any with the actual data type you're expecting
 
-  const apiUrl = 'http://your-api-url.com'; // replace with your API endpoint
+  const apiUrl = 'http://localhost:3000/api/advanced-search';
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
