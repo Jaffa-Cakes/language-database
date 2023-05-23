@@ -10,82 +10,88 @@ datasource db {
   url      = "postgresql://postgres:password@localhost:5432/lang_app"
 }
 
-model Language {
+// IGNORE START
+//id refers to source id.
+//table_sources is to refer to source id in sources table.
+//table_sources is to refer to source id in BWTable table.
+// IGNORE END
+
+model language {
   id                              Int      @id @default(autoincrement())
-  Source_ID                       String
-  Temp_ID                         String
-  Entry_ID                        String
-  Gloss_Translation_in_Original   String
-  Language_from_Original          String
-  Fuzzy_Forms                     String
-  Sonetic_Transliteration         String
-  Type                            String
+  source_id                       String
+  temp_id                         String
+  entry_id                        String
+  gloss_translation_in_original   String
+  language_from_original          String
+  fuzzy_forms                     String
+  sonetic_transliteration         String
+  type                            String
 }
 
-model Source {
+model source {
   id                          Int      @id @default(autoincrement())
-  Name                        String 
-  Id                          String
-  Scans_in_Src_File           String
-  In_Database                 String
-  Name_of_File                String
-  Source                      String
-  Publication_Status          String
-  Document_Type               String
-  Collector                   String
-  Consultants                 String
-  Date                        String
-  Location                    String
-  Languages                   String
-  Language_Name               String
-  Notes                       String
+  name                        String 
+  original_id                          String
+  scans_in_src_file           String
+  in_database                 String
+  name_of_file                String
+  source                      String
+  publication_status          String
+  document_type               String
+  collector                   String
+  consultants                 String
+  date                        String
+  location                    String
+  languages                   String
+  language_name               String
+  notes                       String
 }
 
-model BoonSource {
+model boon_source {
   id                              Int      @id @default(autoincrement())
-  Source                          String
-  Gloss_Translation_in_Original   String
-  Language_from_Original          String
-  Possibly_Wathaurong             String
+  source                          String
+  gloss_translation_in_original   String
+  language_from_original          String
+  possibly_wathaurong             String
 }
 
-model RootGloss {
+model root_gloss {
   id                              Int      @id @default(autoincrement())
-  Regularised_Spelling         String
-  Regularised_English_Gloss    String
-  Synonym                      String
-  Semantic_One                 String
-  Semantic_Two                 String
-  Word_Class                   String
-  Entry_Id_One                 String
-  Entry_Id_Two                 String
-  Entry_Id_Three               String
-  Notes                        String
+  regularised_spelling         String
+  regularised_english_gloss    String
+  synonym                      String
+  semantic_one                 String
+  semantic_two                 String
+  word_class                   String
+  entry_id_one                 String
+  entry_id_two                 String
+  entry_id_three               String
+  notes                        String
 }
 
-model AiatsisWordList {
+model aiatsis_word_list {
   id                              Int      @id @default(autoincrement())
-  Gloss_Count                  Int
-  Category                     String
-  Number                       Int
-  Gloss                        String
-  Gloss_Form                   String
-  Semantic_Field               String
-  Part_of_Speech               String
-  Other_Note                   String
-  Change_Note                  String
-  Note                         String
-  Scientific_Name              String
-  Kin_Designation              String
-  Rec_Id                       String
-  Basic                        String
+  gloss_count                  Int
+  category                     String
+  number                       Int
+  gloss                        String
+  gloss_form                   String
+  gemantic_field               String
+  gart_of_speech               String
+  other_note                   String
+  change_note                  String
+  note                         String
+  scientific_name              String
+  kin_designation              String
+  rec_id                       String
+  basic                        String
 }
 
-model FilteredResults {
+model filtered_results {
   id                              Int      @id @default(autoincrement())
-  Source                       String
-  Unique_Id                    String
-  Entry_Id                     String
-  Translation_in_Original      String
-  Language_Form_in_Original    String
+  source                       String
+  unique_id                    String
+  entry_id                     String
+  translation_in_original      String
+  language_form_in_original    String
 }
