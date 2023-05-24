@@ -71,9 +71,9 @@ model root_gloss {
 
 model aiatsis_word_list {
   id                              Int      @id @default(autoincrement())
-  gloss_count                  Int
+  gloss_count                  String
   category                     String
-  number                       Int
+  number                       String
   gloss                        String
   gloss_form                   String
   gemantic_field               String
