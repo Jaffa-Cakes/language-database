@@ -16,97 +16,82 @@ datasource db {
 //table_sources is to refer to source id in BWTable table.
 // IGNORE END
 
-model Language {
-
-  s_id                Sources @relation(fields: [id], references: [source_id])
-  id                  String  @id
-  //table_sources       Sources[]
-  //table_BWSources     BWSources[]
-  original_text       String?
-  translation         String?
-  fuzzy               String?
-  sonetics            String?
-  entry_type          String?
+model language {
+  id                              Int      @id @default(autoincrement())
+  source_id                       String
+  temp_id                         String
+  entry_id                        String
+  gloss_translation_in_original   String
+  language_from_original          String
+  fuzzy_forms                     String
+  sonetic_transliteration         String
+  type                            String
 }
 
-
-// IGNORE START
-//source_id is referred to in the language table through s_id being the reference medium.
-//this reference shows that source_id is the primary key here, but a foreign key in language table.
-// IGNORE END
-
-
-
-model Sources {
-
-  words                  Language[] // creates relation with languages table through source_id field in this table.
-  bw_words               BWSources[] // creates relation with bwsources table through source_id field in this table.
-  source_id              String   @id
-  //s_id                   Language? @relation(fields: [source_id], references: [id])
-  name                   String?
-  english_scans          String?
-  database_entry         String?
-  file_name              String?
-  origin                 String?
-  publication_status     String?
-  document_type          String?
-  collector              String?
-  consultants            String?
-  date_collected         String?
-  location_collected     String?
-  language_name          String?
-  regularized_name       String?
-  notes                  String?
+model source {
+  id                          Int      @id @default(autoincrement())
+  name                        String 
+  original_id                          String
+  scans_in_src_file           String
+  in_database                 String
+  name_of_file                String
+  source                      String
+  publication_status          String
+  document_type               String
+  collector                   String
+  consultants                 String
+  date                        String
+  location                    String
+  languages                   String
+  language_name               String
+  notes                       String
 }
 
-
-// IGNORE START
-//source_id is referred to in the language table through s_id being the reference medium.
-//this reference shows that source_id is the primary key here, but a foreign key in language table.
-// IGNORE END
-
-
-model BWSources {
-s_id            Sources @relation(fields: [id], references: [source_id])
-id              String @id
-//s_id            Language? @relation(fields: [source_id], references: [id])
-translation     String?
-original        String?
+model boon_source {
+  id                              Int      @id @default(autoincrement())
+  source                          String
+  gloss_translation_in_original   String
+  language_from_original          String
+  possibly_wathaurong             String
 }
 
-//need a field which will hold the @id attribute.
-
-model lexicon {
-  glossary_count   Int @id
-  category         String?
-  number           Int?
-  gloss            String?
-  hg_glossary_form String?
-  semantic_field   String?
-  speech_part      String?
-  other_note       String?
-  change_note      String?
-  notes            String?
-  scientific_name  String?
-  kin_designation  String?
-  sw_rec_id        String?
-  hg_basic         String?
+model root_gloss {
+  id                              Int      @id @default(autoincrement())
+  regularised_spelling         String
+  regularised_english_gloss    String
+  synonym                      String
+  semantic_one                 String
+  semantic_two                 String
+  word_class                   String
+  entry_id_one                 String
+  entry_id_two                 String
+  entry_id_three               String
+  notes                        String
 }
 
-//for some reason, this table is related to the languages table.
-//will discuss with andrew how they are related and make the connection following on to it.
-// UPDATE: this table is not needed.
+model aiatsis_word_list {
+  id                              Int      @id @default(autoincrement())
+  gloss_count                  Int
+  category                     String
+  number                       Int
+  gloss                        String
+  gloss_form                   String
+  gemantic_field               String
+  gart_of_speech               String
+  other_note                   String
+  change_note                  String
+  note                         String
+  scientific_name              String
+  kin_designation              String
+  rec_id                       String
+  basic                        String
+}
 
-// model FilteredResults {
-//   source               String?
-//   unique_id            String @id @unique
-//   entry_id             String?
-//   glossary_translation String?
-//   original             String?
-// }
-
-// Search history table. Every searched element is added to this table. EntryCount includes number of entries and is automatically incremented.
-model SearchHistory {
-  entry_count   Int @id @default(autoincrement())
-  searched_word String
+model filtered_results {
+  id                              Int      @id @default(autoincrement())
+  source                       String
+  unique_id                    String
+  entry_id                     String
+  translation_in_original      String
+  language_form_in_original    String
 }
