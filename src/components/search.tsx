@@ -1,7 +1,7 @@
 import React, { useState, ChangeEvent, MouseEvent } from 'react';
 import axios from 'axios';
 
-const Home: React.FC = () => {
+export default function Search() {
   const [inputValue, setInputValue] = useState<string>('');
   const [results, setResults] = useState<string[]>([]); // replace any with the actual data type you're expecting
 
@@ -28,7 +28,7 @@ const Home: React.FC = () => {
         <button onClick={handleGet}>Get</button>
       </form>
       <ul>
-        {results.map(result => <li>{result}</li>)}
+        {results.map(result => <li>{result.id}</li>)}
       </ul>
     </div>
   );
