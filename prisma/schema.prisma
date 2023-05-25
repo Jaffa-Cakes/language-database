@@ -59,7 +59,6 @@ model boon_source {
   possibly_wathaurong             String
 }
 
-
 //required table as mentioned by Andrew.
 model lexicon {
   id                              Int      @id @default(autoincrement())

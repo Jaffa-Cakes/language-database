@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import Menu from "./menu";
-import ResultContainer from "./resultcontainer";
+import Menu from "../components/menu";
+import ResultContainer from "../components/resultcontainer";
+import Search from '../components/search'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import * as fa from "@fortawesome/free-solid-svg-icons";
 
@@ -16,6 +17,7 @@ export default function OutputPage() {
         </h1>
       </div>
       <ResultContainer />
+      <Search />
     </div>
   );
 }
