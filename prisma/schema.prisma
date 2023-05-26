@@ -51,6 +51,7 @@ model source {
 }
 
 // id is primary/foreign key here.
+// this table is not needed and must be removed as mentioned by Andrew in database table notes in MS teams. 
 model boon_source {
   id                              Int      @id @default(autoincrement())
   source                          String
