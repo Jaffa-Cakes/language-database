@@ -9,3 +9,65 @@ datasource db {
   provider = "postgresql"
   url      = env("DB_URL")
 }
+
+model Source {
+  id              Int           @id @default(autoincrement())
+  name            String?
+  flowScaned      Boolean?
+  flowEntered     Boolean?
+  fileName        String?
+  reference       String?
+  publicationType String?
+  documentType    String?
+  collectors      Individuals[] @relation("Collectors")
+  consultants     Individuals[] @relation("Consultants")
+  date            DateTime?
+  location        String?
+  sourceLangName  String?
+  langName        String?
+  notes           String?
+  data            Data[]
+}
+
+model Individuals {
+  id        Int      @id @default(autoincrement())
+  name      String
+  collected Source[] @relation("Collectors")
+  consulted Source[] @relation("Consultants")
+}
+
+model Lexicon {
+  id         Int       @id @default(autoincrement())
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+  english    String?
+  grammar    String?
+}
+
+model Category {
+  id      Int       @id @default(autoincrement())
+  letter  String?
+  lexicon Lexicon[]
+  data    Data[]
+}
+
+enum Type {
+  ITEM
+  SENT
+  SUFF
+  MISC
+}
+
+model Data {
+  id         Int       @id @default(autoincrement())
+  source     Source?   @relation(fields: [sourceId], references: [id])
+  sourceId   Int?
+  english    String?
+  language   String?
+  sonetic    String?
+  type       Type?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+  semanticId Int?
+  notes      String?
+}
