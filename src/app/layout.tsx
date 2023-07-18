@@ -2,6 +2,7 @@
 
 import { Providers } from "./providers";
 import Navbar from "@/components/Navbar";
+import Exporter from "@/components/Exporter";
 
 export const metadata = {
 	title: 'Woi Wurrung Language App',
@@ -18,6 +19,7 @@ export default function RootLayout({
 				<Providers>
 					<Navbar />
 					{children}
+					<Exporter />
 				</Providers>
 			</body>
 		</html>
