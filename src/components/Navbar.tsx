@@ -11,9 +11,9 @@ export default function Component() {
 
             <Box w={1} h={3} background="red.900" roundedTop="full" roundedBottom="full"/>
 
-            <Link as={NextLink} href="/search/sources">Sources</Link>
-            <Link as={NextLink} href="/search/individuals">Individuals</Link>
             <Link as={NextLink} href="/search/words">Words</Link>
+            <Link as={NextLink} href="/search/sources">Sources</Link>
+            <Link as={NextLink} href="/search/custom-sql">Custom SQL</Link>
         </HStack>
     )
 }
