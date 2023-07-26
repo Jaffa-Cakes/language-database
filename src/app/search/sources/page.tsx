@@ -7,6 +7,7 @@ import searchSources, { Source } from '@/actions/searchSources';
 
 import SimpleTable from '@/components/SimpleTable';
 import SearchType from "@/components/SearchType";
+import Scratchpad from "@/components/Scratchpad";
 
 export default function Page() {
     const [id, setId] = useState<string>('');

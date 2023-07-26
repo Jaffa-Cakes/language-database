@@ -1,7 +1,9 @@
 'use client'
 
 import { Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, Text } from "@chakra-ui/react"
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+import ScratchpadContext from "@/components/Scratchpad/Context";
 
 export interface Props {
     headings: string[];
@@ -10,7 +12,8 @@ export interface Props {
 
 export default function Component(props: Props) {
     let { headings, data } = props;
-    let [toggled, setToggled] = useState<string[]>([]);
+    const [toggled, setToggled] = useState<string[]>([]);
+    const {scratchpad, setScratchpad} = useContext(ScratchpadContext);
 
     const hideScrollbar = {
         '&::-webkit-scrollbar': {
@@ -19,6 +22,12 @@ export default function Component(props: Props) {
     };
 
     async function toggle(id: string) {
+        let newScratchpad = scratchpad.data;
+        newScratchpad.push(data.find((row) => row[0] === id) as string[]);
+        setScratchpad({
+            data: newScratchpad
+        });
+
         if (toggled.includes(id)) {
             setToggled(toggled.filter((item) => item !== id));
         } else {
