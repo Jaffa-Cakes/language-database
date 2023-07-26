@@ -5,6 +5,8 @@ import { useState } from "react";
 
 import searchSources, { Source } from '@/actions/searchSources';
 
+import SimpleTable from '@/components/SimpleTable';
+
 export default function Page() {
     const [id, setId] = useState<string>('');
     const [name, setName] = useState<string>('');
@@ -36,11 +38,50 @@ export default function Page() {
         setResults(newResults);
     }
 
-    const hideScrollbar = {
-        '&::-webkit-scrollbar': {
-            display: 'none'
-        }
-    };
+    let data: string[][] = results.map((result) => {
+
+        let id = result.id.toString();
+
+        let name = '';
+        if (result.name !== null) name = result.name.toString();
+
+        let fileName = '';
+        if (result.fileName !== null) fileName = result.fileName.toString();
+
+        let reference = '';
+        if (result.reference !== null) reference = result.reference.toString();
+
+        let publicationType = '';
+        if (result.publicationType !== null) publicationType = result.publicationType.toString();
+
+        let documentType = '';
+        if (result.documentType !== null) documentType = result.documentType.toString();
+
+        let location = '';
+        if (result.location !== null) location = result.location.toString();
+
+        let sourceLangName = '';
+        if (result.sourceLangName !== null) sourceLangName = result.sourceLangName.toString();
+
+        let langName = '';
+        if (result.langName !== null) langName = result.langName.toString();
+
+        let notes = '';
+        if (result.notes !== null) notes = result.notes.toString();
+        
+        return [
+            id,
+            name,
+            fileName,
+            reference,
+            publicationType,
+            documentType,
+            location,
+            sourceLangName,
+            langName,
+            notes
+        ];
+    });
 
     return (
         <>
@@ -59,56 +100,7 @@ export default function Page() {
 
             <Button onClick={doSearch}>Search</Button>
 
-            <TableContainer mt={10}>
-                <Table size='sm'>
-                    <Thead>
-                        <Tr>
-                            <Th>ID</Th>
-                            <Th>Name</Th>
-                            <Th>File Name</Th>
-                            <Th>Reference</Th>
-                            <Th>Publication Type</Th>
-                            <Th>Document Type</Th>
-                            <Th>Location</Th>
-                            <Th>Source Language Name</Th>
-                            <Th>Language Name</Th>
-                            <Th>Notes</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {
-                            results.map((result) => (
-                                <Tr key={result.id}>
-                                    <Td>{result.id}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.name}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.fileName}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.reference}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.publicationType}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.documentType}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.location}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.sourceLangName}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.langName}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.notes}</Td>
-                                </Tr>
-                            ))
-                        }
-                    </Tbody>
-                    <Tfoot>
-                        <Tr>
-                            <Th>ID</Th>
-                            <Th>Name</Th>
-                            <Th>File Name</Th>
-                            <Th>Reference</Th>
-                            <Th>Publication Type</Th>
-                            <Th>Document Type</Th>
-                            <Th>Location</Th>
-                            <Th>Source Language Name</Th>
-                            <Th>Language Name</Th>
-                            <Th>Notes</Th>
-                        </Tr>
-                    </Tfoot>
-                </Table>
-            </TableContainer>
+            <SimpleTable headings={['ID', 'Name', 'File Name', 'Reference', 'Publication Type', 'Document Type', 'Location', 'Source Language Name', 'Language Name', 'Notes']} data={data} />
         </>
     )
 }

@@ -1,9 +1,11 @@
 'use client'
 
-import { Button, HStack, Input, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
+import { Button, HStack, Input } from "@chakra-ui/react"
 import { useState } from "react";
 
 import searchWords, { Data } from '@/actions/searchWords';
+
+import SimpleTable from '@/components/SimpleTable';
 
 export default function Page() {
     const [id, setId] = useState<string>('');
@@ -28,11 +30,34 @@ export default function Page() {
         setResults(newResults);
     }
 
-    const hideScrollbar = {
-        '&::-webkit-scrollbar': {
-            display: 'none'
-        }
-    };
+    let data: string[][] = results.map((result) => {
+
+        let id = result.id.toString();
+
+        let sourceId = '';
+        if (result.sourceId !== null) sourceId = result.sourceId.toString();
+
+        let english = '';
+        if (result.english !== null) english = result.english;
+
+        let language = '';
+        if (result.language !== null) language = result.language;
+
+        let sonetic = '';
+        if (result.sonetic !== null) sonetic = result.sonetic;
+
+        let notes = '';
+        if (result.notes !== null) notes = result.notes;
+        
+        return [
+            id,
+            sourceId,
+            english,
+            language,
+            sonetic,
+            notes
+        ];
+    });
 
     return (
         <>
@@ -47,44 +72,7 @@ export default function Page() {
 
             <Button onClick={doSearch}>Search</Button>
 
-            <TableContainer mt={10}>
-                <Table size='sm'>
-                    <Thead>
-                        <Tr>
-                            <Th>ID</Th>
-                            <Th>Source ID</Th>
-                            <Th>English</Th>
-                            <Th>Language</Th>
-                            <Th>Sonetic</Th>
-                            <Th>Notes</Th>
-                        </Tr>
-                    </Thead>
-                    <Tbody>
-                        {
-                            results.map((result) => (
-                                <Tr key={result.id}>
-                                    <Td>{result.id}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.sourceId}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.english}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.language}</Td>
-                                    <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result.sonetic}</Td>
-                                    <Td maxW={80} overflowX="auto" css={hideScrollbar}>{result.notes}</Td>
-                                </Tr>
-                            ))
-                        }
-                    </Tbody>
-                    <Tfoot>
-                        <Tr>
-                        <Th>ID</Th>
-                            <Th>Source ID</Th>
-                            <Th>English</Th>
-                            <Th>Language</Th>
-                            <Th>Sonetic</Th>
-                            <Th>Notes</Th>
-                        </Tr>
-                    </Tfoot>
-                </Table>
-            </TableContainer>
+            <SimpleTable headings={['ID', 'Source ID', 'English', 'Language', 'Sonetic', 'Notes']} data={data} />
         </>
     )
 }
