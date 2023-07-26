@@ -1,6 +1,6 @@
 'use client'
 
-import { Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, Text } from "@chakra-ui/react"
+import { Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr, Text, Button } from "@chakra-ui/react"
 import { useContext, useState } from "react";
 
 import ScratchpadContext from "@/components/Scratchpad/Context";
@@ -50,6 +50,7 @@ export default function Component(props: Props) {
                         <Td key={cell} maxW={40} overflowX="auto" css={hideScrollbar}>{cell}</Td>
                     ))
                 }
+                <Td><Button size="xs">E</Button></Td>
             </Tr>
         );
     });
@@ -62,6 +63,7 @@ export default function Component(props: Props) {
                     <Thead>
                         <Tr>
                             {headingElements}
+                            <Th></Th>
                         </Tr>
                     </Thead>
                     <Tbody>
@@ -70,6 +72,7 @@ export default function Component(props: Props) {
                     <Tfoot>
                         <Tr>
                             {headingElements}
+                            <Th></Th>
                         </Tr>
                     </Tfoot>
                 </Table>
