@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, HStack, Input, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
+import { Box, Button, Flex, HStack, Input, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
 import { useState } from "react";
 
 import searchSources, { Source } from '@/actions/searchSources';
@@ -84,8 +84,8 @@ export default function Page() {
     });
 
     return (
-        <>
-            <HStack wrap="wrap" spacing={4} p={4}>
+        <Box pt={2.5} px={5}>
+            <HStack wrap="wrap" spacing={4} p={4} justifyContent="center">
                 <Input w={20} placeholder="ID" onChange={(e) => setId(e.target.value)}/>
                 <Input w={40} placeholder="Name" onChange={(e) => setName(e.target.value)}/>
                 <Input w={40} placeholder="File Name" onChange={(e) => setFileName(e.target.value)}/>
@@ -98,9 +98,9 @@ export default function Page() {
                 <Input w={80} placeholder="Notes" onChange={(e) => setNotes(e.target.value)}/>
             </HStack>
 
-            <Button onClick={doSearch}>Search</Button>
+            <Flex justifyContent="center"><Button onClick={doSearch}>Search</Button></Flex>
 
             <SimpleTable headings={['ID', 'Name', 'File Name', 'Reference', 'Publication Type', 'Document Type', 'Location', 'Source Language Name', 'Language Name', 'Notes']} data={data} />
-        </>
+        </Box>
     )
 }

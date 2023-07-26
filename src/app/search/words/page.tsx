@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, HStack, Input } from "@chakra-ui/react"
+import { Box, Button, Flex, HStack, Input } from "@chakra-ui/react"
 import { useState } from "react";
 
 import searchWords, { Data } from '@/actions/searchWords';
@@ -60,19 +60,19 @@ export default function Page() {
     });
 
     return (
-        <>
-            <HStack wrap="wrap" spacing={4} p={4}>
+        <Box pt={2.5} px={5}>
+            <HStack wrap="wrap" spacing={4} p={4} justifyContent="center">
                 <Input w={20} placeholder="ID" onChange={(e) => setId(e.target.value)}/>
-                <Input w={20} placeholder="Source ID" onChange={(e) => setSourceId(e.target.value)}/>
+                <Input w={28} placeholder="Source ID" onChange={(e) => setSourceId(e.target.value)}/>
                 <Input w={40} placeholder="English" onChange={(e) => setEnglish(e.target.value)}/>
                 <Input w={40} placeholder="Language" onChange={(e) => setLanguage(e.target.value)}/>
                 <Input w={40} placeholder="Sonetic" onChange={(e) => setSonetic(e.target.value)}/>
                 <Input w={80} placeholder="Notes" onChange={(e) => setNotes(e.target.value)}/>
             </HStack>
 
-            <Button onClick={doSearch}>Search</Button>
+            <Flex justifyContent="center"><Button onClick={doSearch}>Search</Button></Flex>
 
             <SimpleTable headings={['ID', 'Source ID', 'English', 'Language', 'Sonetic', 'Notes']} data={data} />
-        </>
+        </Box>
     )
 }
