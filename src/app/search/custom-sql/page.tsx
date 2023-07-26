@@ -1,9 +1,11 @@
 'use client'
 
-import { Button, HStack, Input, Table, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
+import { Box, Button, Flex, Table, TableContainer, Tbody, Td, Textarea, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
 import { useState } from "react";
 
 import searchCustomSql from '@/actions/searchCustomSql';
+
+import SimpleTable from '@/components/SimpleTable';
 
 export default function Page() {
     const [sql, setSql] = useState<string>('');
@@ -22,90 +24,37 @@ export default function Page() {
         }
     };
 
+    let headings: string[] = [];
+    let data: string[][] = [];
+
+    if (results.length > 0) {
+        headings = Object.keys(results[0] as Object);
+        data = results.map((result) => {
+
+                let resultNew = result as any;
+                
+                const row: string[] = [];
+    
+                Object.keys(resultNew as Object).forEach((key) => {
+
+                    let value = '';
+                    if (resultNew[key] !== null) value = resultNew[key].toString();
+
+                    row.push(value);
+                });
+    
+                return row;
+            }
+        );
+    }
+
     return (
-        <>
-            <Input w="100%" placeholder="SQL" onChange={(e) => setSql(e.target.value)}/>
+        <Box pt={2.5} px={5}>
+            <Textarea w="100%" placeholder="SQL" onChange={(e) => setSql(e.target.value)}/>
 
-            <Button onClick={doSearch}>Search</Button>
+            <Flex justifyContent="center" mt={5}><Button onClick={doSearch}>Search</Button></Flex>
 
-            <TableContainer mt={10}>
-                <Table size='sm'>
-                    <Thead>
-                        {
-                            results.map((result, index) => {
-
-                                if (index !== 0) {
-                                    return;
-                                }
-
-                                const tableHeadings = [];
-
-                                Object.keys(result as Object).forEach((key) => {
-                                    tableHeadings.push(
-                                        (
-                                            <Th>{key}</Th>
-                                        )
-                                    );
-                                });
-
-                                return (
-                                    <Tr>
-                                        {tableHeadings}
-                                    </Tr>
-                                )
-                            })
-                        }
-                    </Thead>
-                    <Tbody>
-                        {
-                            results.map((result) => {
-
-                                const tableDatas = [];
-
-                                Object.keys(result as Object).forEach((key) => {
-                                    tableDatas.push(
-                                        (
-                                            <Td maxW={40} overflowX="auto" css={hideScrollbar}>{result[key]}</Td>
-                                        )
-                                    );
-                                });
-
-                                return (
-                                    <Tr>
-                                        {tableDatas}
-                                    </Tr>
-                                )
-                            })
-                        }
-                    </Tbody>
-                    <Tfoot>
-                        {
-                            results.map((result, index) => {
-
-                                if (index !== 0) {
-                                    return;
-                                }
-
-                                const tableHeadings = [];
-
-                                Object.keys(result as Object).forEach((key) => {
-                                    tableHeadings.push(
-                                        (
-                                            <Th>{key}</Th>
-                                        )
-                                    );
-                                });
-
-                                return (
-                                    <Tr>
-                                        {tableHeadings}
-                                    </Tr>
-                                )
-                            })
-                        }
-                    </Tfoot>
-                </Table>
-            </TableContainer>
-        </>
+            <SimpleTable headings={headings} data={data}/>
+        </Box>
     )
 }
