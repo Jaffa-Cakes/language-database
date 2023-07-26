@@ -6,6 +6,7 @@ import { useState } from "react";
 import searchSources, { Source } from '@/actions/searchSources';
 
 import SimpleTable from '@/components/SimpleTable';
+import SearchType from "@/components/SearchType";
 
 export default function Page() {
     const [id, setId] = useState<string>('');
@@ -97,6 +98,8 @@ export default function Page() {
                 <Input w={40} placeholder="Language Name" onChange={(e) => setLangName(e.target.value)}/>
                 <Input w={80} placeholder="Notes" onChange={(e) => setNotes(e.target.value)}/>
             </HStack>
+
+            <SearchType />
 
             <Flex justifyContent="center"><Button onClick={doSearch}>Search</Button></Flex>
 

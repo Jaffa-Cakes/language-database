@@ -1,11 +1,12 @@
 'use client'
 
-import { Box, Button, Flex, HStack, Input } from "@chakra-ui/react"
+import { Box, Button, Checkbox, Flex, HStack, Input, Radio, RadioGroup, Select, Stack } from "@chakra-ui/react"
 import { useState } from "react";
 
 import searchWords, { Data } from '@/actions/searchWords';
 
 import SimpleTable from '@/components/SimpleTable';
+import SearchType from "@/components/SearchType";
 
 export default function Page() {
     const [id, setId] = useState<string>('');
@@ -62,13 +63,15 @@ export default function Page() {
     return (
         <Box pt={2.5} px={5}>
             <HStack wrap="wrap" spacing={4} p={4} justifyContent="center">
-                <Input w={20} placeholder="ID" onChange={(e) => setId(e.target.value)}/>
+                <Input w={20} placeholder="ID" onChange={(e) => setId(e.target.value)} roundedRight="none"/>
                 <Input w={28} placeholder="Source ID" onChange={(e) => setSourceId(e.target.value)}/>
                 <Input w={40} placeholder="English" onChange={(e) => setEnglish(e.target.value)}/>
                 <Input w={40} placeholder="Language" onChange={(e) => setLanguage(e.target.value)}/>
                 <Input w={40} placeholder="Sonetic" onChange={(e) => setSonetic(e.target.value)}/>
                 <Input w={80} placeholder="Notes" onChange={(e) => setNotes(e.target.value)}/>
             </HStack>
+
+            <SearchType />
 
             <Flex justifyContent="center"><Button onClick={doSearch}>Search</Button></Flex>
 
