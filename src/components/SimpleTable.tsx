@@ -13,6 +13,7 @@ import {
 	Button,
 	Box,
 	Flex,
+	HStack,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 
@@ -73,7 +74,10 @@ export default function Component(props: Props) {
 					</Td>
 				))}
 				<Td>
-					<Button size="xs">E</Button>
+					<HStack spacing="2" justifyContent="right">
+						<Button size="xs" background="purple.600">E</Button>
+						<Button size="xs" background="red.600" >X</Button>
+					</HStack>
 				</Td>
 			</Tr>
 		);
@@ -81,15 +85,15 @@ export default function Component(props: Props) {
 
 	return (
 		<Flex
-			flexGrow="1"
 			flexDir="column"
 			minH="0"
 			overflow="hidden"
 			rounded="xl"
 			mt="5"
+			shadow="xl"
+			backgroundColor="blackAlpha.100"
 		>
 			<Box
-				backgroundColor="blackAlpha.100"
 				rounded="lg"
 				py="3"
 				px="3"
@@ -98,10 +102,9 @@ export default function Component(props: Props) {
 				minH="0"
 				pb="10"
 			>
-				<Flex justifyContent="center">
-					<Text color="whiteAlpha.400">{data.length} Results</Text>
-				</Flex>
-				<TableContainer mt={3} maxW="100vw">
+				<TotalResults total={data.length} />
+
+				<TableContainer my={3} maxW="100vw">
 					<Table size="sm">
 						<Thead>
 							<Tr>
@@ -110,9 +113,31 @@ export default function Component(props: Props) {
 							</Tr>
 						</Thead>
 						<Tbody>{dataElements}</Tbody>
+						<Tfoot>
+							<Tr>
+								{headingElements}
+								<Th></Th>
+							</Tr>
+						</Tfoot>
 					</Table>
 				</TableContainer>
+
+				<TotalResults total={data.length} />
 			</Box>
+		</Flex>
+	);
+}
+
+interface TotalResultsProps {
+	total: number;
+}
+
+function TotalResults(props: TotalResultsProps) {
+	const { total } = props;
+	
+	return (
+		<Flex justifyContent="center">
+			<Text color="whiteAlpha.400">{total} Results</Text>
 		</Flex>
 	);
 }
