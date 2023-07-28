@@ -67,6 +67,14 @@ export default function Page() {
 					mb="3"
 					placeholder="SQL"
 					onChange={(e) => setSql(e.target.value)}
+					backgroundColor="blackAlpha.100"
+					borderColor="whiteAlpha.200"
+					_hover={{
+						backgroundColor: "blackAlpha.300",
+					}}
+					_focus={{
+						backgroundColor: "blackAlpha.300",
+					}}
 				/>
 
 				<SearchButton doSearch={doSearch} />
