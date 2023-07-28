@@ -12,6 +12,7 @@ import {
 	Text,
 	Button,
 	Box,
+	Flex,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 
@@ -79,32 +80,34 @@ export default function Component(props: Props) {
 	});
 
 	return (
-		<Box
-			backgroundColor="blackAlpha.100"
-			rounded="lg"
-			py="3"
-			px="3"
-			mt="5"
-			shadow="xl"
-		>
-			<Text align="center">{data.length} Results</Text>
-			<TableContainer mt={3} maxW="100vw">
-				<Table size="sm">
-					<Thead>
-						<Tr>
-							{headingElements}
-							<Th></Th>
-						</Tr>
-					</Thead>
-					<Tbody>{dataElements}</Tbody>
-					<Tfoot>
-						<Tr>
-							{headingElements}
-							<Th></Th>
-						</Tr>
-					</Tfoot>
-				</Table>
-			</TableContainer>
-		</Box>
+		<Flex flexGrow="1" flexDir="column" minH="0" overflow="hidden" rounded="xl" mt="5">
+			<Box
+				backgroundColor="blackAlpha.100"
+				rounded="lg"
+				py="3"
+				px="3"
+				shadow="xl"
+				overflowY="auto"
+				minH="0"
+				pb="10"
+			>
+				<Flex justifyContent="center">
+					<Text color="whiteAlpha.400">{data.length} Results</Text>
+				</Flex>
+				<TableContainer mt={3} maxW="100vw">
+					<Table size="sm">
+						<Thead>
+							<Tr>
+								{headingElements}
+								<Th></Th>
+							</Tr>
+						</Thead>
+						<Tbody>
+							{dataElements}
+						</Tbody>
+					</Table>
+				</TableContainer>
+			</Box>
+		</Flex>
 	);
 }

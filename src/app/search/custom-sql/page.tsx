@@ -60,7 +60,7 @@ export default function Page() {
 	}
 
 	return (
-		<Box>
+		<>
 			<form action={doSearch}>
 				<Textarea
 					w="100%"
@@ -81,6 +81,6 @@ export default function Page() {
 			</form>
 
 			<SimpleTable headings={headings} data={data} />
-		</Box>
+		</>
 	);
 }

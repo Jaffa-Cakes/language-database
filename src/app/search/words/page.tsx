@@ -68,7 +68,7 @@ export default function Page() {
 	});
 
 	return (
-		<Box>
+		<>
 			<form action={doSearch}>
 				<SearchParams>
 					<SearchInput w={20} placeholder="ID" setValue={setId} />
@@ -107,7 +107,7 @@ export default function Page() {
 
 				<SearchButton doSearch={doSearch} />
 			</form>
-
+			
 			<SimpleTable
 				headings={[
 					"ID",
@@ -119,6 +119,6 @@ export default function Page() {
 				]}
 				data={data}
 			/>
-		</Box>
+		</>
 	);
 }
