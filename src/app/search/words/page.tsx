@@ -70,18 +70,38 @@ export default function Page() {
 	return (
 		<Box>
 			<SearchParams>
-				<SearchInput w={20} placeholder="ID" setValue={setId}/>
-				<SearchInput w={28} placeholder="Source ID" setValue={setSourceId}/>
+				<SearchInput w={20} placeholder="ID" setValue={setId} />
+				<SearchInput
+					w={28}
+					placeholder="Source ID"
+					setValue={setSourceId}
+				/>
 				<SearchModeContainer>
-					<SearchInput w={40} placeholder="English" setValue={setEnglish} roundedBottom="none"/>
+					<SearchInput
+						w={40}
+						placeholder="English"
+						setValue={setEnglish}
+						roundedBottom="none"
+						borderBottom="none"
+					/>
 					<SearchMode w={40} />
 				</SearchModeContainer>
 				<SearchModeContainer>
-					<SearchInput w={40} placeholder="Language" setValue={setLanguage} roundedBottom="none"/>
+					<SearchInput
+						w={40}
+						placeholder="Language"
+						setValue={setLanguage}
+						roundedBottom="none"
+						borderBottom="none"
+					/>
 					<SearchMode w={40} />
 				</SearchModeContainer>
-				<SearchInput w={40} placeholder="Sonetic" setValue={setSonetic}/>
-				<SearchInput w={80} placeholder="Notes" setValue={setNotes}/>
+				<SearchInput
+					w={40}
+					placeholder="Sonetic"
+					setValue={setSonetic}
+				/>
+				<SearchInput w={80} placeholder="Notes" setValue={setNotes} />
 			</SearchParams>
 
 			<SearchButton doSearch={doSearch} />

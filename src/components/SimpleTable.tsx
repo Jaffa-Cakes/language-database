@@ -79,10 +79,15 @@ export default function Component(props: Props) {
 	});
 
 	return (
-		<Box backgroundColor="blackAlpha.100" rounded="lg" py="3" px="3" mt="5" shadow="xl">
-			<Text align="center">
-				{data.length} Results
-			</Text>
+		<Box
+			backgroundColor="blackAlpha.100"
+			rounded="lg"
+			py="3"
+			px="3"
+			mt="5"
+			shadow="xl"
+		>
+			<Text align="center">{data.length} Results</Text>
 			<TableContainer mt={3} maxW="100vw">
 				<Table size="sm">
 					<Thead>

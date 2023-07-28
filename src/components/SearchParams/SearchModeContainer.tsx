@@ -1,18 +1,14 @@
-"use client"
+"use client";
 
-import { ReactNode } from "react"
-import { Flex } from "@chakra-ui/react"
+import { ReactNode } from "react";
+import { Flex } from "@chakra-ui/react";
 
 interface Props {
-    children: ReactNode
+	children: ReactNode;
 }
 
 export default function Component(props: Props) {
-    const { children } = props
+	const { children } = props;
 
-    return (
-        <Flex flexDir="column">
-            {children}
-        </Flex>
-    )
+	return <Flex flexDir="column">{children}</Flex>;
 }

@@ -1,18 +1,24 @@
-"use client"
+"use client";
 
-import { ReactNode } from "react"
-import { HStack } from "@chakra-ui/react"
+import { ReactNode } from "react";
+import { HStack } from "@chakra-ui/react";
 
 interface Props {
-    children: ReactNode
+	children: ReactNode;
 }
 
 export default function Component(props: Props) {
-    const { children } = props
+	const { children } = props;
 
-    return (
-        <HStack wrap="wrap" spacing={4} p={4} justifyContent="center" alignItems="start">
-            {children}
-        </HStack>
-    )
+	return (
+		<HStack
+			wrap="wrap"
+			spacing={4}
+			p={4}
+			justifyContent="center"
+			alignItems="start"
+		>
+			{children}
+		</HStack>
+	);
 }

@@ -1,25 +1,40 @@
-"use client"
+"use client";
 
-import { Select } from "@chakra-ui/react"
+import { Select } from "@chakra-ui/react";
 
 export enum Mode {
-    Containes,
-    Regex,
-    Levenshtein
+	Containes,
+	Regex,
+	Levenshtein,
 }
 
 interface Props {
-    w: number
+	w: number;
 }
 
 export default function Component(props: Props) {
-    const { w } = props
+	const { w } = props;
 
-    return (
-        <Select w={w} roundedTop="none" borderTop="none">
-            <option value={Mode.Containes} selected>Contains</option>
-            <option value={Mode.Regex}>Regex</option>
-            <option value={Mode.Levenshtein}>Levenshtein</option>
-        </Select>
-    )
+	return (
+		<Select
+			w={w}
+			roundedTop="none"
+			borderTop="none"
+			backgroundColor="blackAlpha.100"
+			borderColor="whiteAlpha.200"
+			cursor="pointer"
+            _hover={{
+                backgroundColor: "blackAlpha.300",
+            }}
+            _focus={{
+                backgroundColor: "blackAlpha.300",
+            }}
+		>
+			<option value={Mode.Containes} selected>
+				Contains
+			</option>
+			<option value={Mode.Regex}>Regex</option>
+			<option value={Mode.Levenshtein}>Levenshtein</option>
+		</Select>
+	);
 }

@@ -1,17 +1,19 @@
-"use client"
+"use client";
 
-import { Button, Flex } from "@chakra-ui/react"
+import { Button, Flex } from "@chakra-ui/react";
 
 interface Props {
-    doSearch: () => void
+	doSearch: () => void;
 }
 
 export default function Component(props: Props) {
-    const { doSearch } = props
+	const { doSearch } = props;
 
-    return (
-        <Flex justifyContent="center">
-            <Button onClick={doSearch} type="submit">Search</Button>
-        </Flex>
-    )
+	return (
+		<Flex justifyContent="center">
+			<Button onClick={doSearch} type="submit">
+				Search
+			</Button>
+		</Flex>
+	);
 }

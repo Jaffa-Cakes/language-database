@@ -5,15 +5,15 @@ import NextLink from "next/link";
 
 export default function Component() {
 	return (
-        <HStack spacing={4} background="gray.900" px={4} py={2} shadow="base">
-            <NavButton href="/search/words" name="Words" />
-            <NavButton href="/search/sources" name="Sources" />
-            <NavButton href="/search/custom-sql" name="Custom SQL" />
+		<HStack spacing={4} background="gray.900" px={4} py={2} shadow="base">
+			<NavButton href="/search/words" name="Words" />
+			<NavButton href="/search/sources" name="Sources" />
+			<NavButton href="/search/custom-sql" name="Custom SQL" />
 
-            <Box flexGrow={1} />
+			<Box flexGrow={1} />
 
-            <NavButton href="/import" name="Import" />
-        </HStack>
+			<NavButton href="/import" name="Import" />
+		</HStack>
 	);
 }
 
@@ -35,10 +35,10 @@ function NavButton(props: NavButtonProps) {
 			rounded="lg"
 			py="1"
 			px="2"
-            _hover={{
-                textDecoration: "none",
-                backgroundColor: "whiteAlpha.200",
-            }}
+			_hover={{
+				textDecoration: "none",
+				backgroundColor: "whiteAlpha.200",
+			}}
 		>
 			{name}
 		</Link>
