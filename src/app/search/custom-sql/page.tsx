@@ -1,60 +1,76 @@
-'use client'
+"use client";
 
-import { Box, Button, Flex, Table, TableContainer, Tbody, Td, Textarea, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
+import {
+	Box,
+	Button,
+	Flex,
+	Table,
+	TableContainer,
+	Tbody,
+	Td,
+	Textarea,
+	Tfoot,
+	Th,
+	Thead,
+	Tr,
+} from "@chakra-ui/react";
 import { useState } from "react";
 
-import searchCustomSql from '@/actions/searchCustomSql';
+import searchCustomSql from "@/actions/searchCustomSql";
 
-import SimpleTable from '@/components/SimpleTable';
+import SimpleTable from "@/components/SimpleTable";
 
 export default function Page() {
-    const [sql, setSql] = useState<string>('');
+	const [sql, setSql] = useState<string>("");
 
-    const [results, setResults] = useState<unknown[]>([]);
+	const [results, setResults] = useState<unknown[]>([]);
 
-    async function doSearch() {
-        const newResults = await searchCustomSql(sql);
+	async function doSearch() {
+		const newResults = await searchCustomSql(sql);
 
-        setResults(newResults);
-    }
+		setResults(newResults);
+	}
 
-    const hideScrollbar = {
-        '&::-webkit-scrollbar': {
-            display: 'none'
-        }
-    };
+	const hideScrollbar = {
+		"&::-webkit-scrollbar": {
+			display: "none",
+		},
+	};
 
-    let headings: string[] = [];
-    let data: string[][] = [];
+	let headings: string[] = [];
+	let data: string[][] = [];
 
-    if (results.length > 0) {
-        headings = Object.keys(results[0] as Object);
-        data = results.map((result) => {
+	if (results.length > 0) {
+		headings = Object.keys(results[0] as Object);
+		data = results.map((result) => {
+			let resultNew = result as any;
 
-                let resultNew = result as any;
-                
-                const row: string[] = [];
-    
-                Object.keys(resultNew as Object).forEach((key) => {
+			const row: string[] = [];
 
-                    let value = '';
-                    if (resultNew[key] !== null) value = resultNew[key].toString();
+			Object.keys(resultNew as Object).forEach((key) => {
+				let value = "";
+				if (resultNew[key] !== null) value = resultNew[key].toString();
 
-                    row.push(value);
-                });
-    
-                return row;
-            }
-        );
-    }
+				row.push(value);
+			});
 
-    return (
-        <Box pt={2.5} px={5}>
-            <Textarea w="100%" placeholder="SQL" onChange={(e) => setSql(e.target.value)}/>
+			return row;
+		});
+	}
 
-            <Flex justifyContent="center" mt={5}><Button onClick={doSearch}>Search</Button></Flex>
+	return (
+		<Box>
+			<Textarea
+				w="100%"
+				placeholder="SQL"
+				onChange={(e) => setSql(e.target.value)}
+			/>
 
-            <SimpleTable headings={headings} data={data}/>
-        </Box>
-    )
+			<Flex justifyContent="center" mt={5}>
+				<Button onClick={doSearch}>Search</Button>
+			</Flex>
+
+			<SimpleTable headings={headings} data={data} />
+		</Box>
+	);
 }

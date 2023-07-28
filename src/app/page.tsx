@@ -1,15 +1,12 @@
-'use client'
+"use client";
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Page() {
+	let router = useRouter();
 
-    let router = useRouter();
+	router.push("/import");
 
-    router.push('/import');
-
-    return (
-        <h1>Redirecting...</h1>
-    )
+	return <h1>Redirecting...</h1>;
 }

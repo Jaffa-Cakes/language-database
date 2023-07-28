@@ -1,19 +1,19 @@
 import { createContext } from "react";
 
 export interface Scratchpad {
-    data: string[][];
+	data: string[][];
 }
 
 interface ScratchpadContext {
-    scratchpad: Scratchpad;
-    setScratchpad: (scratchpad: Scratchpad) => void;
+	scratchpad: Scratchpad;
+	setScratchpad: (scratchpad: Scratchpad) => void;
 }
 
 const Context = createContext<ScratchpadContext>({
-    scratchpad: {
-        data: []
-    },
-    setScratchpad: () => {}
+	scratchpad: {
+		data: [],
+	},
+	setScratchpad: () => {},
 });
 
 export default Context;
