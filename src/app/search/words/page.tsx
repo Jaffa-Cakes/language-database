@@ -102,12 +102,16 @@ export default function Page() {
 						placeholder="Sonetic"
 						setValue={setSonetic}
 					/>
-					<SearchInput w={80} placeholder="Notes" setValue={setNotes} />
+					<SearchInput
+						w={80}
+						placeholder="Notes"
+						setValue={setNotes}
+					/>
 				</SearchParams>
 
 				<SearchButton doSearch={doSearch} />
 			</form>
-			
+
 			<SimpleTable
 				headings={[
 					"ID",

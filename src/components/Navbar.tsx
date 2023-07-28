@@ -2,7 +2,7 @@
 
 import { Box, HStack, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { usePathname } from "next/navigation"
+import { usePathname } from "next/navigation";
 
 export default function Component() {
 	return (
@@ -36,7 +36,9 @@ function NavButton(props: NavButtonProps) {
 			borderWidth="thin"
 			borderStyle="solid"
 			borderColor="whiteAlpha.100"
-			backgroundColor={pathname == href ? "whiteAlpha.100" : "transparent"}
+			backgroundColor={
+				pathname == href ? "whiteAlpha.100" : "transparent"
+			}
 			rounded="lg"
 			py="1"
 			px="2"

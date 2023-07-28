@@ -18,16 +18,29 @@ export default function RootLayout({
 	const h = "100vh";
 	const w = "100vw";
 	return (
-
 		<html lang="en-AU">
 			<body>
 				<Providers>
-					<Flex h={h}  maxH={h} w={w} maxW={w} overflow="hidden" flexDir="column">
+					<Flex
+						h={h}
+						maxH={h}
+						w={w}
+						maxW={w}
+						overflow="hidden"
+						flexDir="column"
+					>
 						<Box>
 							<Navbar />
 						</Box>
 						<Flex flexGrow="1" minH="0px">
-							<Flex flexGrow="1" py="2.5" px="5" minH="0px" maxH="100%" flexDir="column">
+							<Flex
+								flexGrow="1"
+								py="2.5"
+								px="5"
+								minH="0px"
+								maxH="100%"
+								flexDir="column"
+							>
 								{children}
 							</Flex>
 							<Scratchpad />

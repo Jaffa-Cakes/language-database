@@ -23,17 +23,15 @@ export default function Component(props: Props) {
 			backgroundColor="blackAlpha.100"
 			borderColor="whiteAlpha.200"
 			cursor="pointer"
-            _hover={{
-                backgroundColor: "blackAlpha.300",
-            }}
-            _focus={{
-                backgroundColor: "blackAlpha.300",
-            }}
+			_hover={{
+				backgroundColor: "blackAlpha.300",
+			}}
+			_focus={{
+				backgroundColor: "blackAlpha.300",
+			}}
 			defaultValue={Mode.Containes}
 		>
-			<option value={Mode.Containes}>
-				Contains
-			</option>
+			<option value={Mode.Containes}>Contains</option>
 			<option value={Mode.Regex}>Regex</option>
 			<option value={Mode.Levenshtein}>Levenshtein</option>
 		</Select>

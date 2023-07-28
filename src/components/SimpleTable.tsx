@@ -80,7 +80,14 @@ export default function Component(props: Props) {
 	});
 
 	return (
-		<Flex flexGrow="1" flexDir="column" minH="0" overflow="hidden" rounded="xl" mt="5">
+		<Flex
+			flexGrow="1"
+			flexDir="column"
+			minH="0"
+			overflow="hidden"
+			rounded="xl"
+			mt="5"
+		>
 			<Box
 				backgroundColor="blackAlpha.100"
 				rounded="lg"
@@ -102,9 +109,7 @@ export default function Component(props: Props) {
 								<Th></Th>
 							</Tr>
 						</Thead>
-						<Tbody>
-							{dataElements}
-						</Tbody>
+						<Tbody>{dataElements}</Tbody>
 					</Table>
 				</TableContainer>
 			</Box>

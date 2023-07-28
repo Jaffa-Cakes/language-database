@@ -143,7 +143,11 @@ export default function Page() {
 						placeholder="Language Name"
 						setValue={setLangName}
 					/>
-					<SearchInput w={80} placeholder="Notes" setValue={setNotes} />
+					<SearchInput
+						w={80}
+						placeholder="Notes"
+						setValue={setNotes}
+					/>
 				</SearchParams>
 
 				<SearchButton doSearch={doSearch} />
