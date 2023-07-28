@@ -20,8 +20,8 @@ import { useState } from "react";
 import searchSources, { Source } from "@/actions/searchSources";
 
 import SimpleTable from "@/components/SimpleTable";
-import SearchType from "@/components/SearchType";
-import Scratchpad from "@/components/Scratchpad";
+import SearchInput from "@/components/SearchParams/SearchInput";
+import SearchButton from "@/components/SearchButton";
 
 export default function Page() {
 	const [id, setId] = useState<string>("");
@@ -104,63 +104,19 @@ export default function Page() {
 	return (
 		<Box>
 			<HStack wrap="wrap" spacing={4} p={4} justifyContent="center">
-				<Input
-					w={20}
-					placeholder="ID"
-					onChange={(e) => setId(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="Name"
-					onChange={(e) => setName(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="File Name"
-					onChange={(e) => setFileName(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="Reference"
-					onChange={(e) => setReference(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="Publication Type"
-					onChange={(e) => setPublicationType(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="Document Type"
-					onChange={(e) => setDocumentType(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="Location"
-					onChange={(e) => setLocation(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="Source Language Name"
-					onChange={(e) => setSourceLangName(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="Language Name"
-					onChange={(e) => setLangName(e.target.value)}
-				/>
-				<Input
-					w={80}
-					placeholder="Notes"
-					onChange={(e) => setNotes(e.target.value)}
-				/>
+				<SearchInput w={20} placeholder="ID" setValue={setId}/>
+				<SearchInput w={40} placeholder="Name" setValue={setName}/>
+				<SearchInput w={40} placeholder="File Name" setValue={setFileName}/>
+				<SearchInput w={40} placeholder="Reference" setValue={setReference}/>
+				<SearchInput w={40} placeholder="Publication Type" setValue={setPublicationType}/>
+				<SearchInput w={40} placeholder="Document Type" setValue={setDocumentType}/>
+				<SearchInput w={40} placeholder="Location" setValue={setLocation}/>
+				<SearchInput w={40} placeholder="Source Language Name" setValue={setSourceLangName}/>
+				<SearchInput w={40} placeholder="Language Name" setValue={setLangName}/>
+				<SearchInput w={80} placeholder="Notes" setValue={setNotes}/>
 			</HStack>
 
-			<SearchType />
-
-			<Flex justifyContent="center">
-				<Button onClick={doSearch}>Search</Button>
-			</Flex>
+			<SearchButton doSearch={doSearch} />
 
 			<SimpleTable
 				headings={[

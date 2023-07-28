@@ -11,6 +11,7 @@ import {
 	Tr,
 	Text,
 	Button,
+	Box,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 
@@ -78,8 +79,8 @@ export default function Component(props: Props) {
 	});
 
 	return (
-		<>
-			<Text align="center" mt={5}>
+		<Box backgroundColor="blackAlpha.100" rounded="lg" py="3" px="3" mt="5" shadow="xl">
+			<Text align="center">
 				{data.length} Results
 			</Text>
 			<TableContainer mt={3} maxW="100vw">
@@ -99,6 +100,6 @@ export default function Component(props: Props) {
 					</Tfoot>
 				</Table>
 			</TableContainer>
-		</>
+		</Box>
 	);
 }

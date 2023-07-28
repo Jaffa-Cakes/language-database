@@ -19,6 +19,7 @@ import { useState } from "react";
 import searchCustomSql from "@/actions/searchCustomSql";
 
 import SimpleTable from "@/components/SimpleTable";
+import SearchButton from "@/components/SearchButton";
 
 export default function Page() {
 	const [sql, setSql] = useState<string>("");
@@ -62,13 +63,12 @@ export default function Page() {
 		<Box>
 			<Textarea
 				w="100%"
+				mb="3"
 				placeholder="SQL"
 				onChange={(e) => setSql(e.target.value)}
 			/>
 
-			<Flex justifyContent="center" mt={5}>
-				<Button onClick={doSearch}>Search</Button>
-			</Flex>
+			<SearchButton doSearch={doSearch} />
 
 			<SimpleTable headings={headings} data={data} />
 		</Box>

@@ -17,8 +17,11 @@ import { useState } from "react";
 import searchWords, { Data } from "@/actions/searchWords";
 
 import SimpleTable from "@/components/SimpleTable";
-import SearchType from "@/components/SearchType";
-import Scratchpad from "@/components/Scratchpad";
+import SearchParams from "@/components/SearchParams";
+import SearchModeContainer from "@/components/SearchParams/SearchModeContainer";
+import SearchInput from "@/components/SearchParams/SearchInput";
+import SearchMode from "@/components/SearchParams/SearchMode";
+import SearchButton from "@/components/SearchButton";
 
 export default function Page() {
 	const [id, setId] = useState<string>("");
@@ -66,45 +69,22 @@ export default function Page() {
 
 	return (
 		<Box>
-			<HStack wrap="wrap" spacing={4} p={4} justifyContent="center">
-				<Input
-					w={20}
-					placeholder="ID"
-					onChange={(e) => setId(e.target.value)}
-					roundedRight="none"
-				/>
-				<Input
-					w={28}
-					placeholder="Source ID"
-					onChange={(e) => setSourceId(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="English"
-					onChange={(e) => setEnglish(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="Language"
-					onChange={(e) => setLanguage(e.target.value)}
-				/>
-				<Input
-					w={40}
-					placeholder="Sonetic"
-					onChange={(e) => setSonetic(e.target.value)}
-				/>
-				<Input
-					w={80}
-					placeholder="Notes"
-					onChange={(e) => setNotes(e.target.value)}
-				/>
-			</HStack>
+			<SearchParams>
+				<SearchInput w={20} placeholder="ID" setValue={setId}/>
+				<SearchInput w={28} placeholder="Source ID" setValue={setSourceId}/>
+				<SearchModeContainer>
+					<SearchInput w={40} placeholder="English" setValue={setEnglish} roundedBottom="none"/>
+					<SearchMode w={40} />
+				</SearchModeContainer>
+				<SearchModeContainer>
+					<SearchInput w={40} placeholder="Language" setValue={setLanguage} roundedBottom="none"/>
+					<SearchMode w={40} />
+				</SearchModeContainer>
+				<SearchInput w={40} placeholder="Sonetic" setValue={setSonetic}/>
+				<SearchInput w={80} placeholder="Notes" setValue={setNotes}/>
+			</SearchParams>
 
-			<SearchType />
-
-			<Flex justifyContent="center">
-				<Button onClick={doSearch}>Search</Button>
-			</Flex>
+			<SearchButton doSearch={doSearch} />
 
 			<SimpleTable
 				headings={[
