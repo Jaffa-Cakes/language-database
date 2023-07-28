@@ -61,14 +61,16 @@ export default function Page() {
 
 	return (
 		<Box>
-			<Textarea
-				w="100%"
-				mb="3"
-				placeholder="SQL"
-				onChange={(e) => setSql(e.target.value)}
-			/>
+			<form action={doSearch}>
+				<Textarea
+					w="100%"
+					mb="3"
+					placeholder="SQL"
+					onChange={(e) => setSql(e.target.value)}
+				/>
 
-			<SearchButton doSearch={doSearch} />
+				<SearchButton doSearch={doSearch} />
+			</form>
 
 			<SimpleTable headings={headings} data={data} />
 		</Box>

@@ -11,7 +11,7 @@ export default function Component(props: Props) {
 
 	return (
 		<Flex justifyContent="center">
-			<Button onClick={doSearch} type="submit">
+			<Button onClick={doSearch} type="submit" w="48">
 				Search
 			</Button>
 		</Flex>

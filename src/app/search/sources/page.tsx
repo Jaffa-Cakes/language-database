@@ -22,6 +22,7 @@ import searchSources, { Source } from "@/actions/searchSources";
 import SimpleTable from "@/components/SimpleTable";
 import SearchInput from "@/components/SearchParams/SearchInput";
 import SearchButton from "@/components/SearchButton";
+import SearchParams from "@/components/SearchParams";
 
 export default function Page() {
 	const [id, setId] = useState<string>("");
@@ -103,48 +104,50 @@ export default function Page() {
 
 	return (
 		<Box>
-			<HStack wrap="wrap" spacing={4} p={4} justifyContent="center">
-				<SearchInput w={20} placeholder="ID" setValue={setId} />
-				<SearchInput w={40} placeholder="Name" setValue={setName} />
-				<SearchInput
-					w={40}
-					placeholder="File Name"
-					setValue={setFileName}
-				/>
-				<SearchInput
-					w={40}
-					placeholder="Reference"
-					setValue={setReference}
-				/>
-				<SearchInput
-					w={40}
-					placeholder="Publication Type"
-					setValue={setPublicationType}
-				/>
-				<SearchInput
-					w={40}
-					placeholder="Document Type"
-					setValue={setDocumentType}
-				/>
-				<SearchInput
-					w={40}
-					placeholder="Location"
-					setValue={setLocation}
-				/>
-				<SearchInput
-					w={40}
-					placeholder="Source Language Name"
-					setValue={setSourceLangName}
-				/>
-				<SearchInput
-					w={40}
-					placeholder="Language Name"
-					setValue={setLangName}
-				/>
-				<SearchInput w={80} placeholder="Notes" setValue={setNotes} />
-			</HStack>
+			<form action={doSearch}>
+				<SearchParams>
+					<SearchInput w={20} placeholder="ID" setValue={setId} />
+					<SearchInput w={40} placeholder="Name" setValue={setName} />
+					<SearchInput
+						w={40}
+						placeholder="File Name"
+						setValue={setFileName}
+					/>
+					<SearchInput
+						w={40}
+						placeholder="Reference"
+						setValue={setReference}
+					/>
+					<SearchInput
+						w={40}
+						placeholder="Publication Type"
+						setValue={setPublicationType}
+					/>
+					<SearchInput
+						w={40}
+						placeholder="Document Type"
+						setValue={setDocumentType}
+					/>
+					<SearchInput
+						w={40}
+						placeholder="Location"
+						setValue={setLocation}
+					/>
+					<SearchInput
+						w={40}
+						placeholder="Source Language Name"
+						setValue={setSourceLangName}
+					/>
+					<SearchInput
+						w={40}
+						placeholder="Language Name"
+						setValue={setLangName}
+					/>
+					<SearchInput w={80} placeholder="Notes" setValue={setNotes} />
+				</SearchParams>
 
-			<SearchButton doSearch={doSearch} />
+				<SearchButton doSearch={doSearch} />
+			</form>
 
 			<SimpleTable
 				headings={[
