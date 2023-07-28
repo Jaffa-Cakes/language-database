@@ -29,8 +29,9 @@ export default function Component(props: Props) {
             _focus={{
                 backgroundColor: "blackAlpha.300",
             }}
+			defaultValue={Mode.Containes}
 		>
-			<option value={Mode.Containes} selected>
+			<option value={Mode.Containes}>
 				Contains
 			</option>
 			<option value={Mode.Regex}>Regex</option>
