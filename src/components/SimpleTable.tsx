@@ -27,6 +27,7 @@ import {
 import { useContext, useState } from "react";
 
 import ScratchpadContext from "@/components/ScratchpadPanel/Context";
+import SimpleModal from "@/components/SimpleModal";
 
 export interface Props {
 	headings: string[];
@@ -71,7 +72,11 @@ export default function Component(props: Props) {
 		rowKey++;
 
 		return (
-			<Tr key={rowKey} cursor="pointer">
+			<Tr key={rowKey} cursor="pointer" _hover={
+				{
+					backgroundColor: "whiteAlpha.50",
+				}
+			}>
 				<Td>
 					<Checkbox onChange={(e) => toggle(row)} />
 				</Td>
@@ -88,6 +93,11 @@ export default function Component(props: Props) {
 								textOverflow: "ellipsis",
 							}}
 							onClick={expand}
+							_hover={
+								{
+									backgroundColor: "whiteAlpha.100",
+								}
+							}
 						>
 							{cell}
 						</Td>
@@ -150,29 +160,16 @@ export default function Component(props: Props) {
 				<TotalResults total={data.length} />
 			</Box>
 
-			<Modal isOpen={isOpen} onClose={onClose}>
-				<ModalOverlay />
-				<ModalContent>
-					<ModalHeader>Expanded Field</ModalHeader>
-					<ModalCloseButton />
-					<ModalBody>
-						<Box
-							backgroundColor="gray.800"
-							rounded="lg"
-							px="3"
-							py="2"
-						>
-							<Text>{modal}</Text>
-						</Box>
-					</ModalBody>
-
-					<ModalFooter>
-						<Button colorScheme="blue" mr={3} onClick={onClose}>
-							Close
-						</Button>
-					</ModalFooter>
-				</ModalContent>
-			</Modal>
+			<SimpleModal isOpen={isOpen} onClose={onClose} title="Expanded Field">
+				<Box
+					backgroundColor="gray.800"
+					rounded="lg"
+					px="3"
+					py="2"
+				>
+					<Text>{modal}</Text>
+				</Box>
+			</SimpleModal>
 		</Flex>
 	);
 }
