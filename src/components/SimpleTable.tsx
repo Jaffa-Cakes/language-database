@@ -35,23 +35,19 @@ export interface Props {
 
 export default function Component(props: Props) {
 	let { headings, data } = props;
-	const [toggled, setToggled] = useState<string[]>([]);
 	const { scratchpad, setScratchpad } = useContext(ScratchpadContext);
 	const [modal, setModal] = useState<string>('');
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
-	async function toggle(id: string) {
+	async function toggle(row: string[]) {
+		console.log('start');
 		let newScratchpad = scratchpad.data;
-		newScratchpad.push(data.find((row) => row[0] === id) as string[]);
+		newScratchpad.push(row);
+
 		setScratchpad({
 			data: newScratchpad,
 		});
-
-		if (toggled.includes(id)) {
-			setToggled(toggled.filter((item) => item !== id));
-		} else {
-			setToggled([...toggled, id]);
-		}
+		console.log('end');
 	}
 
 	async function expand(e: React.MouseEvent<HTMLTableCellElement>) {
@@ -80,7 +76,7 @@ export default function Component(props: Props) {
 				cursor="pointer"
 			>
 				<Td>
-					<Checkbox onChange={(e) => toggle(row[0])}/>
+					<Checkbox onChange={(e) => toggle(row)}/>
 				</Td>
 				{row.map((cell) => {
 					cellKey++;

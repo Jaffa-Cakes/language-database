@@ -25,9 +25,27 @@ export default function Component() {
 		},
 	};
 
+	async function remove(row: string[]) {
+		let newData = scratchpad.data.filter((r) => {
+			if (r.length !== row.length) return true;
+
+			let match = true;
+
+			for (let index = 0; index < r.length; index++) {
+				if (r[index] !== row[index]) {
+					match = false;
+					break;
+				}
+			}
+
+			return !match;
+		});
+		setScratchpad({ data: newData });
+	}
+
 	let dataElements = scratchpad.data.map((row) => {
 		return (
-			<Tr key={row[0]}>
+			<Tr key={row[0]} onClick={(e) => remove(row)}>
 				{row.map((cell) => (
 					<Td
 						key={cell}
