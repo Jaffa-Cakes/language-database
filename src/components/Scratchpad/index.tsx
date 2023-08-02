@@ -2,16 +2,11 @@
 
 import {
 	Box,
-	Flex,
-	HStack,
-	Stack,
 	Table,
 	TableContainer,
 	Tbody,
 	Td,
 	Text,
-	Tfoot,
-	Thead,
 	Tr,
 	VStack,
 } from "@chakra-ui/react";
@@ -57,36 +52,37 @@ export default function Component() {
 	}
 
 	return (
-			<VStack spacing={0} h={show ? "100%" : "fit-content"}>
-				<Box
-					background="gray.700"
-					w="14"
-					h="6"
-					roundedTop="full"
-					borderBottomColor="black"
-					borderBottomStyle="solid"
-					borderBottomWidth={1}
-					cursor="pointer"
-					onClick={toggle}
-				>
-				</Box>
+		<VStack spacing={0} h={show ? "100%" : "fit-content"}>
+			<Box
+				background="gray.700"
+				w="14"
+				h="6"
+				roundedTop="full"
+				cursor="pointer"
+				onClick={toggle}
+			></Box>
 
-				<Box
-					backgroundColor="gray.900"
-					flexGrow={1}
-					h="100%"
-					w="100%"
-					display={show ? "block" : "none"}
-					px="3"
-					py="2"
+			<Box
+				backgroundColor="gray.900"
+				flexGrow={1}
+				h="100%"
+				w="100%"
+				display={show ? "block" : "none"}
+				px="3"
+				py="2"
+			>
+				<Text>Scratchpad</Text>
+				<TableContainer
+					mt={3}
+					maxW="100vw"
+					maxH="250px"
+					overflowY="auto"
 				>
-					<Text>Scratchpad</Text>
-					<TableContainer mt={3} maxW="100vw" maxH="250px" overflowY="auto">
-						<Table size="sm">
-							<Tbody>{dataElements}</Tbody>
-						</Table>
-					</TableContainer>
-				</Box>
-			</VStack>
+					<Table size="sm">
+						<Tbody>{dataElements}</Tbody>
+					</Table>
+				</TableContainer>
+			</Box>
+		</VStack>
 	);
 }

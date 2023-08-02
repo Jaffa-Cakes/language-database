@@ -75,8 +75,12 @@ export default function Component(props: Props) {
 				))}
 				<Td>
 					<HStack spacing="2" justifyContent="right">
-						<Button size="xs" background="purple.600">E</Button>
-						<Button size="xs" background="red.600" >X</Button>
+						<Button size="xs" background="purple.600">
+							E
+						</Button>
+						<Button size="xs" background="red.600">
+							X
+						</Button>
 					</HStack>
 				</Td>
 			</Tr>
@@ -133,7 +137,7 @@ interface TotalResultsProps {
 
 function TotalResults(props: TotalResultsProps) {
 	const { total } = props;
-	
+
 	return (
 		<Flex justifyContent="center">
 			<Text color="whiteAlpha.400">{total} Results</Text>

@@ -7,9 +7,7 @@ export default function Component() {
 	const [expanded, setExpanded] = useState<boolean>(false);
 
 	return (
-		<Flex
-			direction={expanded ? "row" : "row-reverse"}
-		>
+		<Flex direction={expanded ? "row" : "row-reverse"}>
 			<Box
 				background="gray.700"
 				h="14"
