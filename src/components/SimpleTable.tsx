@@ -14,6 +14,15 @@ import {
 	Box,
 	Flex,
 	HStack,
+	Modal,
+	useDisclosure,
+	ModalOverlay,
+	ModalContent,
+	ModalHeader,
+	ModalCloseButton,
+	ModalBody,
+	ModalFooter,
+	Checkbox,
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 
@@ -28,12 +37,8 @@ export default function Component(props: Props) {
 	let { headings, data } = props;
 	const [toggled, setToggled] = useState<string[]>([]);
 	const { scratchpad, setScratchpad } = useContext(ScratchpadContext);
-
-	const hideScrollbar = {
-		"&::-webkit-scrollbar": {
-			display: "none",
-		},
-	};
+	const [modal, setModal] = useState<string>('');
+	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	async function toggle(id: string) {
 		let newScratchpad = scratchpad.data;
@@ -49,30 +54,49 @@ export default function Component(props: Props) {
 		}
 	}
 
+	async function expand(e: React.MouseEvent<HTMLTableCellElement>) {
+		e.stopPropagation();
+
+		let contents = e.currentTarget.innerText;
+
+		setModal(contents);
+
+		onOpen();
+	}
+
 	let headingElements = headings.map((heading) => (
 		<Th key={heading}>{heading}</Th>
 	));
 
+	let rowKey = 0;
+	let cellKey = 0;
+
 	let dataElements = data.map((row) => {
-		let color = toggled.includes(row[0]) ? "green.800" : "";
+		rowKey++;
 
 		return (
 			<Tr
-				key={row[0]}
-				onClick={(e) => toggle(row[0])}
-				backgroundColor={color}
+				key={rowKey}
 				cursor="pointer"
 			>
-				{row.map((cell) => (
-					<Td
-						key={cell}
-						maxW={40}
-						overflowX="auto"
-						css={hideScrollbar}
-					>
-						{cell}
-					</Td>
-				))}
+				<Td>
+					<Checkbox onChange={(e) => toggle(row[0])}/>
+				</Td>
+				{row.map((cell) => {
+					cellKey++;
+					
+					return (
+						<Td
+							key={cellKey}
+							maxW={40}
+							overflowX="auto"
+							css={{overflowX: "hidden", textOverflow: "ellipsis" }}
+							onClick={expand}
+						>
+							{cell}
+						</Td>
+					);
+				})}
 				<Td>
 					<HStack spacing="2" justifyContent="right">
 						<Button size="xs" background="purple.600">
@@ -111,6 +135,7 @@ export default function Component(props: Props) {
 					<Table size="sm">
 						<Thead>
 							<Tr>
+								<Th></Th>
 								{headingElements}
 								<Th></Th>
 							</Tr>
@@ -118,6 +143,7 @@ export default function Component(props: Props) {
 						<Tbody>{dataElements}</Tbody>
 						<Tfoot>
 							<Tr>
+								<Th></Th>
 								{headingElements}
 								<Th></Th>
 							</Tr>
@@ -127,6 +153,25 @@ export default function Component(props: Props) {
 
 				<TotalResults total={data.length} />
 			</Box>
+
+			<Modal isOpen={isOpen} onClose={onClose}>
+				<ModalOverlay />
+				<ModalContent>
+					<ModalHeader>Expanded Field</ModalHeader>
+					<ModalCloseButton />
+					<ModalBody>
+						<Box backgroundColor="gray.800" rounded="lg" px="3" py="2">
+							<Text>{modal}</Text>
+						</Box>
+					</ModalBody>
+
+					<ModalFooter>
+						<Button colorScheme='blue' mr={3} onClick={onClose}>
+							Close
+						</Button>
+					</ModalFooter>
+				</ModalContent>
+			</Modal>
 		</Flex>
 	);
 }
