@@ -13,6 +13,7 @@ import {
 	Tfoot,
 	Thead,
 	Tr,
+	VStack,
 } from "@chakra-ui/react";
 
 import { useContext, useState } from "react";
@@ -56,53 +57,36 @@ export default function Component() {
 	}
 
 	return (
-		<Flex flexDir="column" justifyContent="center">
-			<HStack spacing={0} h={show ? "100%" : "fit-content"}>
-				<Flex
-					direction="column"
-					placeSelf="start"
+			<VStack spacing={0} h={show ? "100%" : "fit-content"}>
+				<Box
+					background="gray.700"
+					w="14"
+					h="6"
+					roundedTop="full"
+					borderBottomColor="black"
+					borderBottomStyle="solid"
+					borderBottomWidth={1}
 					cursor="pointer"
 					onClick={toggle}
 				>
-					<Box
-						background="gray.700"
-						roundedTopLeft="2xl"
-						py={2}
-						px={1}
-						borderBottomColor="black"
-						borderBottomStyle="solid"
-						borderBottomWidth={1}
-					>
-						<Text style={vertical as any}>PAD</Text>
-					</Box>
-					<Box
-						background="gray.700"
-						roundedBottomLeft="2xl"
-						pb={2}
-						pt={1}
-						px={1}
-					>
-						<Text style={vertical as any}>
-							{scratchpad.data.length}
-						</Text>
-					</Box>
-				</Flex>
+				</Box>
 
 				<Box
-					backgroundColor="black"
+					backgroundColor="gray.900"
 					flexGrow={1}
 					h="100%"
-					w="15vw"
-					roundedBottomLeft="2xl"
+					w="100%"
 					display={show ? "block" : "none"}
+					px="3"
+					py="2"
 				>
-					<TableContainer mt={3} maxW="100vw">
+					<Text>Scratchpad</Text>
+					<TableContainer mt={3} maxW="100vw" maxH="250px" overflowY="auto">
 						<Table size="sm">
 							<Tbody>{dataElements}</Tbody>
 						</Table>
 					</TableContainer>
 				</Box>
-			</HStack>
-		</Flex>
+			</VStack>
 	);
 }

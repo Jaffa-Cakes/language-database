@@ -2,7 +2,7 @@
 
 import { Providers } from "./providers";
 import Navbar from "@/components/Navbar";
-import Exporter from "@/components/Exporter";
+import Lexicon from "@/components/Lexicon";
 import Scratchpad from "@/components/Scratchpad";
 import { Box, Flex } from "@chakra-ui/react";
 
@@ -43,10 +43,10 @@ export default function RootLayout({
 							>
 								{children}
 							</Flex>
-							<Scratchpad />
+							<Lexicon />
 						</Flex>
 						<Box>
-							<Exporter />
+							<Scratchpad />
 						</Box>
 					</Flex>
 				</Providers>
