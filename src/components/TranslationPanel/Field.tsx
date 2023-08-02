@@ -1,10 +1,6 @@
-"use client"
+"use client";
 
-import {
-    FormLabel,
-    Input,
-    Stack,
-} from "@chakra-ui/react";
+import { FormLabel, Input, Stack } from "@chakra-ui/react";
 
 export interface FieldProps {
 	label: string;
@@ -39,16 +35,12 @@ export default function Component(props: FieldProps) {
 				borderStyle="solid"
 				borderColor="gray.600"
 				placeholder="Type here..."
-				_hover={
-					{
-						backgroundColor: "gray.900",
-					}
-				}
-				_focus={
-					{
-						backgroundColor: "gray.900",
-					}
-				}
+				_hover={{
+					backgroundColor: "gray.900",
+				}}
+				_focus={{
+					backgroundColor: "gray.900",
+				}}
 			/>
 		</Stack>
 	);

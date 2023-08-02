@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 
-import ScratchpadContext, { Scratchpad } from "@/components/ScratchpadPanel/Context";
+import ScratchpadContext, {
+	Scratchpad,
+} from "@/components/ScratchpadPanel/Context";
 
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";

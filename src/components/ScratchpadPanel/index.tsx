@@ -79,11 +79,9 @@ export default function Component() {
 				cursor="pointer"
 				onClick={toggle}
 				display={show ? "none" : "block"}
-				_hover={
-					{
-						background: "gray.600",
-					}
-				}
+				_hover={{
+					background: "gray.600",
+				}}
 			></Box>
 
 			<Box
@@ -93,18 +91,20 @@ export default function Component() {
 				w="100%"
 				display={show ? "block" : "none"}
 			>
-				<Flex background="gray.700" placeContent="center" py="2" onClick={toggle} cursor="pointer" _hover={
-					{
+				<Flex
+					background="gray.700"
+					placeContent="center"
+					py="2"
+					onClick={toggle}
+					cursor="pointer"
+					_hover={{
 						background: "gray.600",
-					}
-				}>
+					}}
+				>
 					<Text fontWeight="medium">Scratchpad Panel</Text>
 				</Flex>
 
-				<Box
-					px="3"
-					py="2"
-				>
+				<Box px="3" py="2">
 					<TableContainer
 						mt={3}
 						maxW="100vw"
