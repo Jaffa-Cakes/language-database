@@ -26,7 +26,7 @@ import {
 } from "@chakra-ui/react";
 import { useContext, useState } from "react";
 
-import ScratchpadContext from "@/components/Scratchpad/Context";
+import ScratchpadContext from "@/components/ScratchpadPanel/Context";
 
 export interface Props {
 	headings: string[];
