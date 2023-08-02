@@ -52,6 +52,9 @@ export default function Page() {
 		let sourceId = "";
 		if (result.sourceId !== null) sourceId = result.sourceId.toString();
 
+		let sourceName = "";
+		if (result.sourceName !== null) sourceName = result.sourceName.toString();
+
 		let english = "";
 		if (result.english !== null) english = result.english;
 
@@ -64,7 +67,7 @@ export default function Page() {
 		let notes = "";
 		if (result.notes !== null) notes = result.notes;
 
-		return [id, sourceId, english, language, sonetic, notes];
+		return [id, sourceId, sourceName, english, language, sonetic, notes];
 	});
 
 	return (
@@ -116,6 +119,7 @@ export default function Page() {
 				headings={[
 					"ID",
 					"Source ID",
+					"Source Name",
 					"English",
 					"Language",
 					"Sonetic",

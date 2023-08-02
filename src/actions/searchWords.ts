@@ -1,9 +1,16 @@
 "use server";
 
 import prisma from "@/db";
-import { Data } from "@prisma/client";
 
-export type { Data };
+export interface Data {
+	id: number;
+	sourceId: number | null;
+	sourceName: string | null;
+	english: string | null;
+	language: string | null;
+	sonetic: string | null;
+	notes: string | null;
+}
 
 interface Params {
 	id: string;
@@ -15,7 +22,20 @@ interface Params {
 }
 
 export default async function Action(params: Params): Promise<Data[]> {
-	return await prisma.data.findMany({
+	const results =  await prisma.data.findMany({
+		select: {
+			id: true,
+			sourceId: true,
+			source: {
+				select: {
+					name: true,
+				},
+			},
+			english: true,
+			language: true,
+			sonetic: true,
+			notes: true,
+		},
 		where: {
 			id: params.id === "" ? undefined : parseInt(params.id),
 			sourceId:
@@ -38,4 +58,27 @@ export default async function Action(params: Params): Promise<Data[]> {
 			},
 		},
 	});
+
+	let out: Data[] = [];
+
+	results.forEach((result) => {
+
+		let name: string | null = null;
+
+		if (result.source !== null) {
+			name = result.source.name;
+		}
+
+		out.push({
+			id: result.id,
+			sourceId: result.sourceId,
+			sourceName: name,
+			english: result.english,
+			language: result.language,
+			sonetic: result.sonetic,
+			notes: result.notes,
+		});
+	});
+
+	return out;
 }
