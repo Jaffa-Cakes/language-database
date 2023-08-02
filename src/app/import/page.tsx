@@ -23,7 +23,9 @@ export default function Page() {
 					<CsvImport name="Lexicon" setData={setLexicon} />
 					<CsvImport name="Data" setData={setData} />
 
-					<Button onClick={onImport} backgroundColor="green.700">Import</Button>
+					<Button onClick={onImport} backgroundColor="green.700">
+						Import
+					</Button>
 				</Flex>
 			</Flex>
 		</Box>

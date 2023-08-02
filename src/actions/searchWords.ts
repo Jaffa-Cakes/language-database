@@ -22,7 +22,7 @@ interface Params {
 }
 
 export default async function Action(params: Params): Promise<Data[]> {
-	const results =  await prisma.data.findMany({
+	const results = await prisma.data.findMany({
 		select: {
 			id: true,
 			sourceId: true,
@@ -62,7 +62,6 @@ export default async function Action(params: Params): Promise<Data[]> {
 	let out: Data[] = [];
 
 	results.forEach((result) => {
-
 		let name: string | null = null;
 
 		if (result.source !== null) {

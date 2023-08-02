@@ -53,7 +53,8 @@ export default function Page() {
 		if (result.sourceId !== null) sourceId = result.sourceId.toString();
 
 		let sourceName = "";
-		if (result.sourceName !== null) sourceName = result.sourceName.toString();
+		if (result.sourceName !== null)
+			sourceName = result.sourceName.toString();
 
 		let english = "";
 		if (result.english !== null) english = result.english;

@@ -17,7 +17,13 @@ export default function Component(props: Props) {
 			title="Translation Variants"
 		>
 			<Flex>
-				<Stack direction="column" spacing="2" pr="2" borderRight="2px" borderColor="gray.800">
+				<Stack
+					direction="column"
+					spacing="2"
+					pr="2"
+					borderRight="2px"
+					borderColor="gray.800"
+				>
 					<Button>Variant 1</Button>
 					<Button>Variant 2</Button>
 					<Button>Variant 3</Button>

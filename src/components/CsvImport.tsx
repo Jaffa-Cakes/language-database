@@ -28,8 +28,17 @@ export default function Component<T>(props: Props<T>) {
 	}
 
 	return (
-		<Box mb={2} borderWidth="thin" borderStyle="solid" borderColor="gray.600" rounded="md" overflow="hidden">
-			<Box backgroundColor="gray.700" px="2" py="1"><Text fontWeight="medium">{name}</Text></Box>
+		<Box
+			mb={2}
+			borderWidth="thin"
+			borderStyle="solid"
+			borderColor="gray.600"
+			rounded="md"
+			overflow="hidden"
+		>
+			<Box backgroundColor="gray.700" px="2" py="1">
+				<Text fontWeight="medium">{name}</Text>
+			</Box>
 			<Flex px="3" py="2">
 				<input type="file" accept=".csv" onChange={handleFileSelect} />
 				<Box background="purple.700" rounded="md" px={2} py={1}>
