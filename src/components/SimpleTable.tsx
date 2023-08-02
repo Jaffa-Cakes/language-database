@@ -100,7 +100,6 @@ export default function Component(props: Props) {
 				shadow="xl"
 				overflowY="auto"
 				minH="0"
-				pb="10"
 			>
 				<TotalResults total={data.length} />
 
