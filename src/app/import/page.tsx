@@ -1,7 +1,7 @@
 "use client";
 
 import CsvImport from "@/components/CsvImport";
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, Flex } from "@chakra-ui/react";
 import runImport, { CsvData, CsvLexicon, CsvSource } from "@/actions/runImport";
 
 import { useState } from "react";
@@ -16,12 +16,16 @@ export default function Page() {
 	}
 
 	return (
-		<Box>
-			<CsvImport name="Sources" setData={setSources} />
-			<CsvImport name="Lexicon" setData={setLexicon} />
-			<CsvImport name="Data" setData={setData} />
+		<Box h="100%">
+			<Flex flexDir="row" placeContent="center" h="100%">
+				<Flex flexDir="column" placeContent="center" pb="32">
+					<CsvImport name="Sources" setData={setSources} />
+					<CsvImport name="Lexicon" setData={setLexicon} />
+					<CsvImport name="Data" setData={setData} />
 
-			<Button onClick={onImport}>Import</Button>
+					<Button onClick={onImport} backgroundColor="green.700">Import</Button>
+				</Flex>
+			</Flex>
 		</Box>
 	);
 }
