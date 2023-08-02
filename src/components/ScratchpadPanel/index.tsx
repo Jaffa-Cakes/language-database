@@ -2,6 +2,7 @@
 
 import {
 	Box,
+	Flex,
 	Table,
 	TableContainer,
 	Tbody,
@@ -73,11 +74,16 @@ export default function Component() {
 		<VStack spacing={0} h={show ? "100%" : "fit-content"}>
 			<Box
 				background="gray.700"
-				w="14"
-				h="6"
-				roundedTop="full"
+				w="100%"
+				h="4"
 				cursor="pointer"
 				onClick={toggle}
+				display={show ? "none" : "block"}
+				_hover={
+					{
+						background: "gray.600",
+					}
+				}
 			></Box>
 
 			<Box
@@ -86,20 +92,30 @@ export default function Component() {
 				h="100%"
 				w="100%"
 				display={show ? "block" : "none"}
-				px="3"
-				py="2"
 			>
-				<Text>Scratchpad</Text>
-				<TableContainer
-					mt={3}
-					maxW="100vw"
-					maxH="250px"
-					overflowY="auto"
+				<Flex background="gray.700" placeContent="center" py="2" onClick={toggle} cursor="pointer" _hover={
+					{
+						background: "gray.600",
+					}
+				}>
+					<Text fontWeight="medium">Scratchpad Panel</Text>
+				</Flex>
+
+				<Box
+					px="3"
+					py="2"
 				>
-					<Table size="sm">
-						<Tbody>{dataElements}</Tbody>
-					</Table>
-				</TableContainer>
+					<TableContainer
+						mt={3}
+						maxW="100vw"
+						maxH="250px"
+						overflowY="auto"
+					>
+						<Table size="sm">
+							<Tbody>{dataElements}</Tbody>
+						</Table>
+					</TableContainer>
+				</Box>
 			</Box>
 		</VStack>
 	);

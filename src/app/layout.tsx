@@ -2,8 +2,8 @@
 
 import { Providers } from "./providers";
 import Navbar from "@/components/Navbar";
-import Lexicon from "@/components/Lexicon";
-import Scratchpad from "@/components/Scratchpad";
+import TranslationPanel from "@/components/TranslationPanel";
+import ScratchpadPanel from "@/components/ScratchpadPanel";
 import { Box, Flex } from "@chakra-ui/react";
 
 export const metadata = {
@@ -43,10 +43,10 @@ export default function RootLayout({
 							>
 								{children}
 							</Flex>
-							<Lexicon />
+							<TranslationPanel />
 						</Flex>
 						<Box>
-							<Scratchpad />
+							<ScratchpadPanel />
 						</Box>
 					</Flex>
 				</Providers>

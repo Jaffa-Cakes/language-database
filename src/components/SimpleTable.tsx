@@ -36,18 +36,18 @@ export interface Props {
 export default function Component(props: Props) {
 	let { headings, data } = props;
 	const { scratchpad, setScratchpad } = useContext(ScratchpadContext);
-	const [modal, setModal] = useState<string>('');
+	const [modal, setModal] = useState<string>("");
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	async function toggle(row: string[]) {
-		console.log('start');
+		console.log("start");
 		let newScratchpad = scratchpad.data;
 		newScratchpad.push(row);
 
 		setScratchpad({
 			data: newScratchpad,
 		});
-		console.log('end');
+		console.log("end");
 	}
 
 	async function expand(e: React.MouseEvent<HTMLTableCellElement>) {
@@ -71,22 +71,22 @@ export default function Component(props: Props) {
 		rowKey++;
 
 		return (
-			<Tr
-				key={rowKey}
-				cursor="pointer"
-			>
+			<Tr key={rowKey} cursor="pointer">
 				<Td>
-					<Checkbox onChange={(e) => toggle(row)}/>
+					<Checkbox onChange={(e) => toggle(row)} />
 				</Td>
 				{row.map((cell) => {
 					cellKey++;
-					
+
 					return (
 						<Td
 							key={cellKey}
 							maxW={40}
 							overflowX="auto"
-							css={{overflowX: "hidden", textOverflow: "ellipsis" }}
+							css={{
+								overflowX: "hidden",
+								textOverflow: "ellipsis",
+							}}
 							onClick={expand}
 						>
 							{cell}
@@ -156,13 +156,18 @@ export default function Component(props: Props) {
 					<ModalHeader>Expanded Field</ModalHeader>
 					<ModalCloseButton />
 					<ModalBody>
-						<Box backgroundColor="gray.800" rounded="lg" px="3" py="2">
+						<Box
+							backgroundColor="gray.800"
+							rounded="lg"
+							px="3"
+							py="2"
+						>
 							<Text>{modal}</Text>
 						</Box>
 					</ModalBody>
 
 					<ModalFooter>
-						<Button colorScheme='blue' mr={3} onClick={onClose}>
+						<Button colorScheme="blue" mr={3} onClick={onClose}>
 							Close
 						</Button>
 					</ModalFooter>
