@@ -1,6 +1,13 @@
 "use client";
 
-import { Box, Button, Flex, Stack, Text, useDisclosure } from "@chakra-ui/react";
+import {
+	Box,
+	Button,
+	Flex,
+	Stack,
+	Text,
+	useDisclosure,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import Field from "./Field";
 import Senses from "./Senses";
@@ -12,7 +19,7 @@ export default function Component() {
 	function createDisclosure() {
 		const { isOpen, onOpen, onClose } = useDisclosure();
 
-		return {isOpen, onOpen, onClose};
+		return { isOpen, onOpen, onClose };
 	}
 
 	const senses = createDisclosure();
@@ -62,20 +69,27 @@ export default function Component() {
 								<Field label="Pronounciation" />
 
 								<Button onClick={senses.onOpen}>Senses</Button>
-								<Button onClick={variants.onOpen}>Variants</Button>
+								<Button onClick={variants.onOpen}>
+									Variants
+								</Button>
 								<hr />
-								<Button backgroundColor="green.700" type="submit">
+								<Button
+									backgroundColor="green.700"
+									type="submit"
+								>
 									Save
 								</Button>
-								<Button backgroundColor="red.700">Delete</Button>
+								<Button backgroundColor="red.700">
+									Delete
+								</Button>
 							</Stack>
 						</form>
 					</Box>
 				</Box>
 			</Flex>
 
-			<Senses isOpen={senses.isOpen} onClose={senses.onClose}/>
-			<Variants isOpen={variants.isOpen} onClose={variants.onClose}/>
+			<Senses isOpen={senses.isOpen} onClose={senses.onClose} />
+			<Variants isOpen={variants.isOpen} onClose={variants.onClose} />
 		</>
 	);
 }

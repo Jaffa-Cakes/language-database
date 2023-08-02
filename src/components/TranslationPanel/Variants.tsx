@@ -2,16 +2,20 @@ import { Text } from "@chakra-ui/react";
 import SimpleModal from "@/components/SimpleModal";
 
 export interface Props {
-    isOpen: boolean,
-    onClose: () => void,
+	isOpen: boolean;
+	onClose: () => void;
 }
 
 export default function Component(props: Props) {
-    const { isOpen, onClose } = props;
+	const { isOpen, onClose } = props;
 
-    return (
-        <SimpleModal isOpen={isOpen} onClose={onClose} title="Translation Variants">
-            <Text>Hello from Variants</Text>
-        </SimpleModal>
-    )
+	return (
+		<SimpleModal
+			isOpen={isOpen}
+			onClose={onClose}
+			title="Translation Variants"
+		>
+			<Text>Hello from Variants</Text>
+		</SimpleModal>
+	);
 }

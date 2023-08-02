@@ -72,11 +72,13 @@ export default function Component(props: Props) {
 		rowKey++;
 
 		return (
-			<Tr key={rowKey} cursor="pointer" _hover={
-				{
+			<Tr
+				key={rowKey}
+				cursor="pointer"
+				_hover={{
 					backgroundColor: "whiteAlpha.50",
-				}
-			}>
+				}}
+			>
 				<Td>
 					<Checkbox onChange={(e) => toggle(row)} />
 				</Td>
@@ -93,11 +95,9 @@ export default function Component(props: Props) {
 								textOverflow: "ellipsis",
 							}}
 							onClick={expand}
-							_hover={
-								{
-									backgroundColor: "whiteAlpha.100",
-								}
-							}
+							_hover={{
+								backgroundColor: "whiteAlpha.100",
+							}}
 						>
 							{cell}
 						</Td>
@@ -160,13 +160,12 @@ export default function Component(props: Props) {
 				<TotalResults total={data.length} />
 			</Box>
 
-			<SimpleModal isOpen={isOpen} onClose={onClose} title="Expanded Field">
-				<Box
-					backgroundColor="gray.800"
-					rounded="lg"
-					px="3"
-					py="2"
-				>
+			<SimpleModal
+				isOpen={isOpen}
+				onClose={onClose}
+				title="Expanded Field"
+			>
+				<Box backgroundColor="gray.800" rounded="lg" px="3" py="2">
 					<Text>{modal}</Text>
 				</Box>
 			</SimpleModal>
