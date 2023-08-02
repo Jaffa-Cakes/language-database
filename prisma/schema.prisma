@@ -7,91 +7,67 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://postgres:password@localhost:5432/lang_app"
+  url      = env("DB_URL")
 }
 
-// IGNORE START
-//id refers to source id.
-//table_sources is to refer to source id in sources table.
-//table_sources is to refer to source id in BWTable table.
-// IGNORE END
-
-model language {
-  id                              Int      @id @default(autoincrement())
-  source_id                       String
-  temp_id                         String
-  entry_id                        String
-  gloss_translation_in_original   String
-  language_from_original          String
-  fuzzy_forms                     String
-  sonetic_transliteration         String
-  type                            String
+model Source {
+  id              Int           @id @default(autoincrement())
+  name            String?
+  flowScaned      Boolean?
+  flowEntered     Boolean?
+  fileName        String?
+  reference       String?
+  publicationType String?
+  documentType    String?
+  collectors      Individuals[] @relation("Collectors")
+  consultants     Individuals[] @relation("Consultants")
+  date            DateTime?
+  location        String?
+  sourceLangName  String?
+  langName        String?
+  notes           String?
+  data            Data[]
 }
 
-model source {
-  id                          Int      @id @default(autoincrement())
-  name                        String 
-  original_id                          String
-  scans_in_src_file           String
-  in_database                 String
-  name_of_file                String
-  source                      String
-  publication_status          String
-  document_type               String
-  collector                   String
-  consultants                 String
-  date                        String
-  location                    String
-  languages                   String
-  language_name               String
-  notes                       String
+model Individuals {
+  id        Int      @id @default(autoincrement())
+  name      String
+  collected Source[] @relation("Collectors")
+  consulted Source[] @relation("Consultants")
 }
 
-model boon_source {
-  id                              Int      @id @default(autoincrement())
-  source                          String
-  gloss_translation_in_original   String
-  language_from_original          String
-  possibly_wathaurong             String
+model Lexicon {
+  id         Int       @id @default(autoincrement())
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+  english    String?
+  grammar    String?
 }
 
-model root_gloss {
-  id                              Int      @id @default(autoincrement())
-  regularised_spelling         String
-  regularised_english_gloss    String
-  synonym                      String
-  semantic_one                 String
-  semantic_two                 String
-  word_class                   String
-  entry_id_one                 String
-  entry_id_two                 String
-  entry_id_three               String
-  notes                        String
+model Category {
+  id      Int       @id @default(autoincrement())
+  letter  String?
+  lexicon Lexicon[]
+  data    Data[]
 }
 
-model aiatsis_word_list {
-  id                              Int      @id @default(autoincrement())
-  gloss_count                  String
-  category                     String
-  number                       String
-  gloss                        String
-  gloss_form                   String
-  gemantic_field               String
-  gart_of_speech               String
-  other_note                   String
-  change_note                  String
-  note                         String
-  scientific_name              String
-  kin_designation              String
-  rec_id                       String
-  basic                        String
+enum Type {
+  ITEM
+  SENT
+  SUFF
+  MISC
 }
 
-model filtered_results {
-  id                              Int      @id @default(autoincrement())
-  source                       String
-  unique_id                    String
-  entry_id                     String
-  translation_in_original      String
-  language_form_in_original    String
+model Data {
+  id         Int       @id @default(autoincrement())
+  source     Source?   @relation(fields: [sourceId], references: [id])
+  sourceId   Int?
+  english    String?
+  language   String?
+  sonetic    String?
+  type       Type?
+  category   Category? @relation(fields: [categoryId], references: [id])
+  categoryId Int?
+  semanticId Int?
+  notes      String?
 }
