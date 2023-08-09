@@ -2,14 +2,21 @@
 
 import Lift from "@/Lift";
 import Word from "@/Lift/Word";
-import getLexiconWords from "@/actions/getLexiconWords";
+import searchLexiconWords from "@/actions/searchLexiconWords";
 import { Button } from "@chakra-ui/react";
 
 interface Props {}
 
 export default function Component(props: Props) {
 	async function handleExport() {
-		const wordsRaw = await getLexiconWords();
+		const wordsRaw = await searchLexiconWords({
+			id: "",
+			lexemeForm: "",
+			morphType: "",
+			dialectLabels: "",
+			variantOf: "",
+			pronounciation: "",
+		});
 
 		const words: Word[] = wordsRaw.map((word) => {
 			return {
