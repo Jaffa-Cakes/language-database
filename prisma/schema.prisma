@@ -27,6 +27,8 @@ model Source {
   langName        String?
   notes           String?
   data            Data[]
+  senseReference  Sense[]       @relation("Reference")
+  senseSource     Sense[]       @relation("Source")
 }
 
 model Individuals {
@@ -42,26 +44,6 @@ model Lexicon {
   categoryId Int?
   english    String?
   grammar    String?
-}
-
-model LexiconWord {
-  id             Int       @id @default(autoincrement())
-  lexemeForm     String?   @unique
-  morphType      String?
-  dialectLabels  String?
-  variantOf      String?
-  pronounciation String?
-  variant        Variant[]
-}
-
-model Variant {
-  id            Int          @id @default(autoincrement())
-  lexiconWord   LexiconWord? @relation(fields: [lexiconWordId], references: [id])
-  lexiconWordId Int?
-  variantForm   String?
-  dialectLabels String?
-  variantType   String?
-  comment       String?
 }
 
 model Category {
@@ -90,4 +72,82 @@ model Data {
   categoryId Int?
   semanticId Int?
   notes      String?
+}
+
+//////////////////// LEXICON
+enum MorphType {
+  TYPEONE
+  TYPETWO
+  TYPETHREE
+}
+
+enum DialectLabels {
+  LABELONE
+  LABELTWO
+  LABELTHREE
+}
+
+model Word {
+  id             Int             @id @default(autoincrement())
+  lexemeForm     String?         @unique
+  morphType      MorphType?
+  dialectLabels  DialectLabels[]
+  pronounciation String?
+  wordId         Int?
+
+  variantParent Variant[] @relation("ParentWord")
+  variantChild  Variant[] @relation("ChildWord")
+}
+
+model Variant {
+  id           Int  @id @default(autoincrement())
+  parentWord   Word @relation("ParentWord", fields: [parentWordId], references: [id])
+  parentWordId Int
+  childWord    Word @relation("ChildWord", fields: [childWordId], references: [id])
+  childWordId  Int
+
+  dialectLabels String?
+  variantType   String?
+  note          String?
+}
+
+enum GrammaticalInfo {
+  INFOONE
+  INFOTWO
+  INFOTHREE
+}
+
+enum SemanticDomains {
+  DOMAINONE
+  DOMAINTWO
+  DOMAINTHREE
+}
+
+enum Status {
+  STATUSONE
+  STATUSTWO
+  STATUSTHREE
+}
+
+model Sense {
+  id              Int              @id @default(autoincrement())
+  gloss           String?
+  reversal        String?
+  definition      String?
+  grammaticalInfo GrammaticalInfo?
+  example         String?
+  translation     String?
+
+  reference   Source? @relation("Reference", fields: [referenceId], references: [id])
+  referenceId Int?
+
+  scientific   String?
+  bibliography String?
+  general      String?
+
+  source   Source? @relation("Source", fields: [sourceId], references: [id])
+  sourceId Int?
+
+  semanticDomains SemanticDomains?
+  status          Status?
 }
