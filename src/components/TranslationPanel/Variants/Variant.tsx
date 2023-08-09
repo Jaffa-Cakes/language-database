@@ -6,17 +6,17 @@ import { IVariant } from "@/actions/newLexiconWord";
 
 export interface Props {
 	value: IVariant;
-	set: (value: IVariant) => void;
+	save: (newVariant: IVariant) => void;
 }
 
 export default function Component(props: Props) {
-	const [variantForm, setVariantForm] = useState<string>("");
-	const [dialectLabels, setDialectLabels] = useState<string>("");
-	const [variantType, setVariantType] = useState<string>("");
-	const [comment, setComment] = useState<string>("");
+	const [variantForm, setVariantForm] = useState<string>(props.value.variantForm || "");
+	const [dialectLabels, setDialectLabels] = useState<string>(props.value.dialectLabels || "");
+	const [variantType, setVariantType] = useState<string>(props.value.variantType || "");
+	const [comment, setComment] = useState<string>(props.value.comment || "");
 
     async function saveChanges() {
-        props.set({
+        props.save({
             variantForm,
             dialectLabels,
             variantType,
@@ -25,7 +25,7 @@ export default function Component(props: Props) {
     }
 
 	return (
-        <Stack direction="column" spacing="2" flexGrow="1" pl="2">
+        <Stack direction="column" spacing="2">
             <Field label="Variant Form" value={variantForm} set={setVariantForm}/>
             <Drop
                 label="Dialect Labels"

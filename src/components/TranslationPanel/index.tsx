@@ -8,7 +8,7 @@ import {
 	Text,
 	useDisclosure,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import Field from "./Field";
 import Drop from "./Drop";
 import Senses from "./Senses";
@@ -18,9 +18,17 @@ import { IVariant } from "@/actions/newLexiconWord";
 import { MorphType, DialectLabel } from "@prisma/client";
 
 import newLexiconWord from "@/actions/newLexiconWord";
+import { match } from "assert";
+
+enum SubPanel {
+	None,
+	Senses,
+	Variants,
+}
 
 export default function Component() {
 	const [expanded, setExpanded] = useState<boolean>(false);
+	const [subPanel, setSubPanel] = useState<SubPanel>(SubPanel.None);
 
 	// Values
 	const [lexemeForm, setLexemeForm] = useState<string>("");
@@ -36,15 +44,6 @@ export default function Component() {
 		comment: "",
 	}]);
 
-	function createDisclosure() {
-		const { isOpen, onOpen, onClose } = useDisclosure();
-
-		return { isOpen, onOpen, onClose };
-	}
-
-	const senses = createDisclosure();
-	const variants = createDisclosure();
-
 	async function handleSave() {
 		await newLexiconWord({
 			lexemeForm,
@@ -54,6 +53,24 @@ export default function Component() {
 			pronounciation,
 			variantsDefinition,
 		});
+	}
+
+	async function closeSubPanel() {
+		setSubPanel(SubPanel.None);
+	}
+
+	let subPanelDisplay: ReactNode;
+
+	switch (subPanel) {
+		case SubPanel.Senses:
+			subPanelDisplay = <Senses />;
+			break;
+		case SubPanel.Variants:
+			subPanelDisplay = <Variants value={variantsDefinition} set={setVariantsDefinition} close={closeSubPanel}/>;
+			break;
+		default:
+			subPanelDisplay = <></>;
+			break;
 	}
 
 	return (
@@ -92,63 +109,68 @@ export default function Component() {
 
 					<Box px="3" py="2">
 						<form action={handleSave}>
-							<Stack spacing="2" mt="4" h="100%">
-								<Field
-									label="Lexeme Form"
-									value={lexemeForm}
-									set={setLexemeForm}
-								/>
-								<Drop
-									label="Morph Type"
-									value={morphType}
-									set={setMorphType}
-								>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-								</Drop>
-								<Drop
-									label="Dialect Labels"
-									value={dialectLabels}
-									set={setDialectLabels}
-								>
-									<option value="1">1</option>
-									<option value="2">2</option>
-									<option value="3">3</option>
-								</Drop>
-								<Field
-									label="Variant of"
-									value={variantOf}
-									set={setVariantOf}
-								/>
-								<Field
-									label="Pronounciation"
-									value={pronounciation}
-									set={setPronounciation}
-								/>
+							<Stack direction="row" spacing="2" h="100%">
+								<Stack spacing="2" mt="4" h="100%">
+									<Field
+										label="Lexeme Form"
+										value={lexemeForm}
+										set={setLexemeForm}
+									/>
+									<Drop
+										label="Morph Type"
+										value={morphType}
+										set={setMorphType}
+									>
+										{
+											Object.keys(MorphType).map((key) => (
+												<option value={key}>{key}</option>
+											))
+										}
+									</Drop>
+									<Drop
+										label="Dialect Labels"
+										value={dialectLabels}
+										set={setDialectLabels}
+									>
+										{
+											Object.keys(DialectLabel).map((key) => (
+												<option value={key}>{key}</option>
+											))
+										}
+									</Drop>
+									<Field
+										label="Variant of"
+										value={variantOf}
+										set={setVariantOf}
+									/>
+									<Field
+										label="Pronounciation"
+										value={pronounciation}
+										set={setPronounciation}
+									/>
 
-								<Button onClick={senses.onOpen}>Senses</Button>
-								<Button onClick={variants.onOpen}>
-									Variants
-								</Button>
-								<hr />
-								<Button
-									backgroundColor="green.700"
-									type="submit"
-								>
-									Save
-								</Button>
-								<Button backgroundColor="red.700">
-									Delete
-								</Button>
+									<Button onClick={() => setSubPanel(SubPanel.Senses)}>Senses</Button>
+									<Button onClick={() => setSubPanel(SubPanel.Variants)}>
+										Variants
+									</Button>
+									<hr />
+									<Button
+										backgroundColor="green.700"
+										type="submit"
+									>
+										Save
+									</Button>
+									<Button backgroundColor="red.700">
+										Delete
+									</Button>
+								</Stack>
+								
+								{subPanelDisplay}
 							</Stack>
 						</form>
 					</Box>
 				</Box>
 			</Flex>
-
-			<Senses isOpen={senses.isOpen} onClose={senses.onClose}/>
-			<Variants isOpen={variants.isOpen} onClose={variants.onClose} value={variantsDefinition} set={setVariantsDefinition}/>
 		</>
 	);
 }
