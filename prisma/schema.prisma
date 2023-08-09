@@ -44,6 +44,23 @@ model Lexicon {
   grammar    String?
 }
 
+model LexiconWord {
+  id             Int     @id @default(autoincrement())
+  lexemeForm     String? @unique
+  morphType      String?
+  dialectLabels  String?
+  variantOf      String?
+  pronounciation String?
+  // sense          Sense[]
+}
+
+// model Sense {
+//   id            Int          @id @default(autoincrement())
+//   lexiconWord   LexiconWord? @relation(fields: [lexiconWordId], references: [id])
+//   lexiconWordId Int?
+//   gloss
+// }
+
 model Category {
   id      Int       @id @default(autoincrement())
   letter  String?

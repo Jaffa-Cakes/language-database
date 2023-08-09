@@ -14,6 +14,7 @@ export default function Component() {
 
 			<Box flexGrow={1} />
 
+			<NavButton href="/lexicon" name="Lexicon" />
 			<NavButton href="/import" name="Import" />
 		</HStack>
 	);

@@ -10,11 +10,21 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import Field from "./Field";
+import Drop from "./Drop";
 import Senses from "./Senses";
 import Variants from "./Variants";
 
+import newLexiconWord from "@/actions/newLexiconWord";
+
 export default function Component() {
 	const [expanded, setExpanded] = useState<boolean>(false);
+
+	// Values
+	const [lexemeForm, setLexemeForm] = useState<string>("");
+	const [morphType, setMorphType] = useState<string>("");
+	const [dialectLabels, setDialectLabels] = useState<string>("");
+	const [variantOf, setVariantOf] = useState<string>("");
+	const [pronounciation, setPronounciation] = useState<string>("");
 
 	function createDisclosure() {
 		const { isOpen, onOpen, onClose } = useDisclosure();
@@ -24,6 +34,16 @@ export default function Component() {
 
 	const senses = createDisclosure();
 	const variants = createDisclosure();
+
+	async function handleSave() {
+		await newLexiconWord({
+			lexemeForm,
+			morphType,
+			dialectLabels,
+			variantOf,
+			pronounciation,
+		});
+	}
 
 	return (
 		<>
@@ -60,13 +80,41 @@ export default function Component() {
 					</Flex>
 
 					<Box px="3" py="2">
-						<form>
+						<form action={handleSave}>
 							<Stack spacing="2" mt="4" h="100%">
-								<Field label="Lexeme Form" />
-								<Field label="Morph Type" />
-								<Field label="Dialect Labels" />
-								<Field label="Variant of" />
-								<Field label="Pronounciation" />
+								<Field
+									label="Lexeme Form"
+									value={lexemeForm}
+									set={setLexemeForm}
+								/>
+								<Drop
+									label="Morph Type"
+									value={morphType}
+									set={setMorphType}
+								>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</Drop>
+								<Drop
+									label="Dialect Labels"
+									value={dialectLabels}
+									set={setDialectLabels}
+								>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</Drop>
+								<Field
+									label="Variant of"
+									value={variantOf}
+									set={setVariantOf}
+								/>
+								<Field
+									label="Pronounciation"
+									value={pronounciation}
+									set={setPronounciation}
+								/>
 
 								<Button onClick={senses.onOpen}>Senses</Button>
 								<Button onClick={variants.onOpen}>

@@ -1,6 +1,7 @@
 import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 import SimpleModal from "@/components/SimpleModal";
 import Field from "./Field";
+import Drop from "./Drop";
 
 export interface Props {
 	isOpen: boolean;
@@ -32,7 +33,13 @@ export default function Component(props: Props) {
 					<Field label="Gloss" />
 					<Field label="Reversal Entries" />
 					<Field label="Definition" />
-					<Field label="Grammatical Info" />
+					<Drop label="Grammatical Info">
+						<option value="1">Not Sure</option>
+						<option value="2">Noun</option>
+						<option value="3">Verb</option>
+						<option value="4">Adverb</option>
+						<option value="5">Pronoun</option>
+					</Drop>
 					<Field label="Example" />
 					<Field label="Translation" />
 					<Field label="Reference" />
