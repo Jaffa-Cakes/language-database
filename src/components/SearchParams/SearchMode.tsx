@@ -10,6 +10,7 @@ export enum Mode {
 
 interface Props {
 	w: number;
+	set: (mode: Mode) => void;
 }
 
 export default function Component(props: Props) {
