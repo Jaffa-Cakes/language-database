@@ -15,6 +15,8 @@ import Senses from "./Senses";
 import Variants from "./Variants";
 import { IVariant } from "@/actions/newLexiconWord";
 
+import { MorphType, DialectLabel } from "@prisma/client";
+
 import newLexiconWord from "@/actions/newLexiconWord";
 
 export default function Component() {

@@ -81,17 +81,17 @@ enum MorphType {
   TYPETHREE
 }
 
-enum DialectLabels {
+enum DialectLabel {
   LABELONE
   LABELTWO
   LABELTHREE
 }
 
 model Word {
-  id             Int             @id @default(autoincrement())
-  lexemeForm     String?         @unique
+  id             Int            @id @default(autoincrement())
+  lexemeForm     String?        @unique
   morphType      MorphType?
-  dialectLabels  DialectLabels[]
+  dialectLabels  DialectLabel[]
   pronounciation String?
   wordId         Int?
 
@@ -117,7 +117,7 @@ enum GrammaticalInfo {
   INFOTHREE
 }
 
-enum SemanticDomains {
+enum SemanticDomain {
   DOMAINONE
   DOMAINTWO
   DOMAINTHREE
@@ -148,6 +148,6 @@ model Sense {
   source   Source? @relation("Source", fields: [sourceId], references: [id])
   sourceId Int?
 
-  semanticDomains SemanticDomains?
+  semanticDomains SemanticDomain?
   status          Status?
 }
