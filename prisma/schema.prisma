@@ -45,21 +45,24 @@ model Lexicon {
 }
 
 model LexiconWord {
-  id             Int     @id @default(autoincrement())
-  lexemeForm     String? @unique
+  id             Int       @id @default(autoincrement())
+  lexemeForm     String?   @unique
   morphType      String?
   dialectLabels  String?
   variantOf      String?
   pronounciation String?
-  // sense          Sense[]
+  variant        Variant[]
 }
 
-// model Sense {
-//   id            Int          @id @default(autoincrement())
-//   lexiconWord   LexiconWord? @relation(fields: [lexiconWordId], references: [id])
-//   lexiconWordId Int?
-//   gloss
-// }
+model Variant {
+  id            Int          @id @default(autoincrement())
+  lexiconWord   LexiconWord? @relation(fields: [lexiconWordId], references: [id])
+  lexiconWordId Int?
+  variantForm   String?
+  dialectLabels String?
+  variantType   String?
+  comment       String?
+}
 
 model Category {
   id      Int       @id @default(autoincrement())

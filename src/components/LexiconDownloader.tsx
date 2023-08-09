@@ -19,6 +19,9 @@ export default function Component(props: Props) {
 		});
 
 		const words: Word[] = wordsRaw.map((word) => {
+
+			console.log(word.variants);
+
 			return {
         id: word.id,
 				lexemeForm: word.lexemeForm || undefined,
@@ -26,8 +29,19 @@ export default function Component(props: Props) {
 				dialectLabels: word.dialectLabels || undefined,
 				variantOf: word.variantOf || undefined,
 				pronounciation: word.pronounciation || undefined,
+				variants: word.variants.map((variant) => {
+					return {
+						id: variant.id,
+						variantForm: variant.variantForm || undefined,
+						dialectLabels: variant.dialectLabels || undefined,
+						variantType: variant.variantType || undefined,
+						comment: variant.comment || undefined,
+					};
+				}),
 			};
 		});
+
+		console.log(words);
 
 		const lift = new Lift(words);
 

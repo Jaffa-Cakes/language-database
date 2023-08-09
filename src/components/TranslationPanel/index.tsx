@@ -13,6 +13,7 @@ import Field from "./Field";
 import Drop from "./Drop";
 import Senses from "./Senses";
 import Variants from "./Variants";
+import { IVariant } from "@/actions/newLexiconWord";
 
 import newLexiconWord from "@/actions/newLexiconWord";
 
@@ -25,6 +26,13 @@ export default function Component() {
 	const [dialectLabels, setDialectLabels] = useState<string>("");
 	const [variantOf, setVariantOf] = useState<string>("");
 	const [pronounciation, setPronounciation] = useState<string>("");
+	// Variants
+	const [variantsDefinition, setVariantsDefinition] = useState<IVariant[]>([{
+		variantForm: "coolguy",
+		dialectLabels: "",
+		variantType: "",
+		comment: "",
+	}]);
 
 	function createDisclosure() {
 		const { isOpen, onOpen, onClose } = useDisclosure();
@@ -42,6 +50,7 @@ export default function Component() {
 			dialectLabels,
 			variantOf,
 			pronounciation,
+			variantsDefinition,
 		});
 	}
 
@@ -136,8 +145,8 @@ export default function Component() {
 				</Box>
 			</Flex>
 
-			<Senses isOpen={senses.isOpen} onClose={senses.onClose} />
-			<Variants isOpen={variants.isOpen} onClose={variants.onClose} />
+			<Senses isOpen={senses.isOpen} onClose={senses.onClose}/>
+			<Variants isOpen={variants.isOpen} onClose={variants.onClose} value={variantsDefinition} set={setVariantsDefinition}/>
 		</>
 	);
 }

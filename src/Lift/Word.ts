@@ -1,3 +1,5 @@
+import { IVariant } from "@/actions/newLexiconWord";
+
 export default interface Word {
 	id: number;
 	lexemeForm?: string;
@@ -5,4 +7,5 @@ export default interface Word {
 	dialectLabels?: string;
 	variantOf?: string;
 	pronounciation?: string;
+	variants: IVariant[];
 }

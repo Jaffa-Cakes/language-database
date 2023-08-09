@@ -22,8 +22,6 @@ export default class Lift {
 			result += "</form>";
 			result += "</lexical-unit>";
 
-            console.log(word.pronounciation !== undefined)
-            console.log(word.pronounciation)
             if (word.pronounciation !== undefined) {
                 result += "<pronunciation>";
                 result += '<form lang="en">';
@@ -39,6 +37,16 @@ export default class Lift {
             if (word.dialectLabels !== undefined) {
                 result += '<trait name="dialect-labels" value="' + word.dialectLabels + '"/>';
             }
+
+			if (word.variants !== undefined) {
+				word.variants.forEach((variant) => {
+					result += "<variant>";
+					result += '<form lang="en">';
+					result += "<text>" + variant.variantForm + "</text>";
+					result += "</form>";
+					result += "</variant>";
+				});
+			}
 
 			result += "</entry>";
 		});
