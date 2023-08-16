@@ -52,7 +52,7 @@ export default function Component(props: Props) {
 	}
 
 	async function blankSense() {
-		set([...value, { gloss: "New Sense" }]);
+		set([...value, { gloss: "New Sense", reversalEntries: undefined }]);
 		setSenseDrop(value.length.toString());
 	}
 

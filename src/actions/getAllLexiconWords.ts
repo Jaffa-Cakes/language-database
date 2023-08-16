@@ -23,6 +23,7 @@ export interface IGetAllLexiconWordsReturns {
 	senses: {
 		id: number;
 		gloss: string;
+		reversalEntries: string | null;
 	}[];
 }
 
@@ -55,6 +56,7 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 				select: {
 					id: true,
 					gloss: true,
+					reversalEntries: true,
 				},
 			},
 		},
@@ -84,6 +86,7 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 				return {
 					id: senseRaw.id,
 					gloss: senseRaw.gloss,
+					reversalEntries: senseRaw.reversalEntries,
 				};
 			}),
 		};

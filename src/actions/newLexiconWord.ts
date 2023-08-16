@@ -14,6 +14,7 @@ export interface IWord {
 	}[];
 	senses: {
 		gloss: string;
+		reversalEntries?: string;
 	}[];
 }
 
@@ -28,6 +29,7 @@ export default async function Action(word: IWord) {
 				create: word.senses.map((sense) => {
 					return {
 						gloss: sense.gloss,
+						reversalEntries: sense.reversalEntries,
 					};
 				}),
 			},

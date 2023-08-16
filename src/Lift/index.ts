@@ -77,6 +77,21 @@ export default class Lift {
 							}
 							result += "</gloss>";
 						}
+
+						console.log(sense.reversalEntries);
+
+						if (sense.reversalEntries !== undefined) {
+							result += '<reversal type="en">';
+							{
+								result += '<form lang="en">';
+								{
+									result += "<text>" + sense.reversalEntries + "</text>";
+								}
+								result += "</form>";
+							}
+							result += "</reversal>";	
+						}
+
 						result += "</sense>";
 
 						senseIndex += 1;
