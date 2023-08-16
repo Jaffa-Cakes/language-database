@@ -9,7 +9,7 @@ export interface IWord {
 	references: {
 		spelling: string;
 		entry: number;
-	}[]
+	}[];
 }
 
 export default async function Action(word: IWord) {

@@ -43,7 +43,10 @@ export default class Lift {
 				// }
 
 				if (word.morphType !== undefined) {
-					result += '<trait name="morph-type" value="' + morphTypePretty(word.morphType) + '"/>';
+					result +=
+						'<trait name="morph-type" value="' +
+						morphTypePretty(word.morphType) +
+						'"/>';
 				}
 
 				// if (word.dialectLabels !== undefined) {

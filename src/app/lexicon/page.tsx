@@ -1,7 +1,9 @@
 "use client";
 
 import LexiconDownloader from "@/components/LexiconDownloader";
-import getAllLexiconWords, { IGetAllLexiconWordsReturns } from "@/actions/getAllLexiconWords";
+import getAllLexiconWords, {
+	IGetAllLexiconWordsReturns,
+} from "@/actions/getAllLexiconWords";
 import SimpleTable from "@/components/SimpleTable";
 import { useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
@@ -18,17 +20,12 @@ export default function Page() {
 	}, []);
 
 	const data = words.map((word) => {
-
 		let morphType = "";
 		if (word.morphType !== null) {
 			morphType = morphTypePretty(word.morphType);
 		}
 
-		return [
-			word.id as unknown as string,
-			word.spelling,
-			morphType,
-		];
+		return [word.id as unknown as string, word.spelling, morphType];
 	});
 
 	return (
@@ -38,11 +35,7 @@ export default function Page() {
 			</Flex>
 
 			<SimpleTable
-				headings={[
-					"ID",
-					"Lexeme Form",
-					"Morph Type",
-				]}
+				headings={["ID", "Lexeme Form", "Morph Type"]}
 				data={data}
 			/>
 		</>

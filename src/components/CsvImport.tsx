@@ -9,7 +9,9 @@ interface Props<T extends { length: number }> {
 	name: string;
 }
 
-export default function Component<T extends { length: number }>(props: Props<T>) {
+export default function Component<T extends { length: number }>(
+	props: Props<T>,
+) {
 	const { setData, name } = props;
 
 	const [lines, setLines] = useState<number>(0);

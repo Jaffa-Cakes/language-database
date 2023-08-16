@@ -46,9 +46,6 @@ export default function Component() {
 	// ]);
 
 	async function handleSave() {
-
-
-
 		await newLexiconWord({
 			spelling,
 			morphType: getMorphType(morphType),
@@ -129,9 +126,10 @@ export default function Component() {
 										set={setMorphType}
 									>
 										{Object.keys(MorphType).map((key) => (
-												<option key={key} value={key}>{morphTypePretty(key)}</option>
-											)
-										)}
+											<option key={key} value={key}>
+												{morphTypePretty(key)}
+											</option>
+										))}
 									</Drop>
 									{/* <Drop
 										label="Dialect Labels"
