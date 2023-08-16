@@ -122,6 +122,7 @@ model Sense {
   gloss           String
   wordId          Int
   reversalEntries String?
+  definition      String?
 
   word Word @relation(fields: [wordId], references: [id])
 }

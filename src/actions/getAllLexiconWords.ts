@@ -24,6 +24,7 @@ export interface IGetAllLexiconWordsReturns {
 		id: number;
 		gloss: string;
 		reversalEntries: string | null;
+		definition: string | null;
 	}[];
 }
 
@@ -57,6 +58,7 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 					id: true,
 					gloss: true,
 					reversalEntries: true,
+					definition: true,
 				},
 			},
 		},
@@ -87,6 +89,7 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 					id: senseRaw.id,
 					gloss: senseRaw.gloss,
 					reversalEntries: senseRaw.reversalEntries,
+					definition: senseRaw.definition,
 				};
 			}),
 		};

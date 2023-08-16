@@ -60,7 +60,7 @@ export default function Page() {
 					"Morph Type",
 					"Dialect Labels",
 					"Pronunciation",
-					"Senses"
+					"Senses",
 				]}
 				data={data}
 			/>

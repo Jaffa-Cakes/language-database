@@ -85,11 +85,27 @@ export default class Lift {
 							{
 								result += '<form lang="en">';
 								{
-									result += "<text>" + sense.reversalEntries + "</text>";
+									result +=
+										"<text>" +
+										sense.reversalEntries +
+										"</text>";
 								}
 								result += "</form>";
 							}
-							result += "</reversal>";	
+							result += "</reversal>";
+						}
+
+						if (sense.definition !== undefined) {
+							result += "<definition>";
+							{
+								result += '<form lang="en">';
+								{
+									result +=
+										"<text>" + sense.definition + "</text>";
+								}
+								result += "</form>";
+							}
+							result += "</definition>";
 						}
 
 						result += "</sense>";

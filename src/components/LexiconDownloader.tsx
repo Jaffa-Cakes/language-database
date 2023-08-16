@@ -29,7 +29,12 @@ export default function Component(props: Props) {
 				senses: word.senses.map((sense) => {
 					return {
 						gloss: sense.gloss,
-						reversalEntries: sense.reversalEntries ? sense.reversalEntries : undefined
+						reversalEntries: sense.reversalEntries
+							? sense.reversalEntries
+							: undefined,
+						definition: sense.definition
+							? sense.definition
+							: undefined,
 					};
 				}),
 			};
