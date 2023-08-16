@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/db";
-import { MorphType, DialectLabel } from "@prisma/client";
+import { MorphType, DialectLabel, GrammaticalInfo } from "@prisma/client";
 
 export interface IGetAllLexiconWordsReturns {
 	id: number;
@@ -25,6 +25,7 @@ export interface IGetAllLexiconWordsReturns {
 		gloss: string;
 		reversalEntries: string | null;
 		definition: string | null;
+		grammaticalInfo: GrammaticalInfo | null;
 	}[];
 }
 
@@ -59,6 +60,7 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 					gloss: true,
 					reversalEntries: true,
 					definition: true,
+					grammaticalInfo: true,
 				},
 			},
 		},
@@ -90,6 +92,7 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 					gloss: senseRaw.gloss,
 					reversalEntries: senseRaw.reversalEntries,
 					definition: senseRaw.definition,
+					grammaticalInfo: senseRaw.grammaticalInfo,
 				};
 			}),
 		};

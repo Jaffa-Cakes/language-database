@@ -35,6 +35,9 @@ export default function Component(props: Props) {
 						definition: sense.definition
 							? sense.definition
 							: undefined,
+						grammaticalInfo: sense.grammaticalInfo
+							? sense.grammaticalInfo
+							: undefined,
 					};
 				}),
 			};

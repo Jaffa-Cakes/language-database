@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from "@/db";
-import { MorphType, DialectLabel } from "@prisma/client";
+import { MorphType, DialectLabel, GrammaticalInfo } from "@prisma/client";
 
 export interface IWord {
 	spelling: string;
@@ -16,6 +16,7 @@ export interface IWord {
 		gloss: string;
 		reversalEntries?: string;
 		definition?: string;
+		grammaticalInfo?: GrammaticalInfo;
 	}[];
 }
 
@@ -32,6 +33,7 @@ export default async function Action(word: IWord) {
 						gloss: sense.gloss,
 						reversalEntries: sense.reversalEntries,
 						definition: sense.definition,
+						grammaticalInfo: sense.grammaticalInfo,
 					};
 				}),
 			},

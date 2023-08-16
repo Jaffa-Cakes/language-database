@@ -1,3 +1,4 @@
+import grammaticalInfoPretty from "@/utils/grammaticalInfoPretty";
 import Word from "./Word";
 import { dialectLabelPretty, morphTypePretty } from "@/utils";
 
@@ -106,6 +107,14 @@ export default class Lift {
 								result += "</form>";
 							}
 							result += "</definition>";
+						}
+
+						if (sense.grammaticalInfo !== undefined) {
+							result +=
+								'<grammatical-info value="' +
+								grammaticalInfoPretty(sense.grammaticalInfo) +
+								'">';
+							result += "</grammatical-info>";
 						}
 
 						result += "</sense>";

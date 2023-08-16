@@ -117,12 +117,22 @@ model Reference {
   word  Word @relation(fields: [wordId], references: [id])
 }
 
+enum GrammaticalInfo {
+  ADVERB
+  COORDINATINGCONNECTIVE
+  NOUN
+  PROFORM
+  PRONOUN
+  VERB
+}
+
 model Sense {
-  id              Int     @id @default(autoincrement())
+  id              Int              @id @default(autoincrement())
   gloss           String
   wordId          Int
   reversalEntries String?
   definition      String?
+  grammaticalInfo GrammaticalInfo?
 
   word Word @relation(fields: [wordId], references: [id])
 }
