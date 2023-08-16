@@ -7,7 +7,7 @@ import getAllLexiconWords, {
 import SimpleTable from "@/components/SimpleTable";
 import { useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
-import { morphTypePretty } from "@/utils";
+import { dialectLabelPretty, morphTypePretty } from "@/utils";
 
 export default function Page() {
 	const [words, setWords] = useState<IGetAllLexiconWordsReturns[]>([]);
@@ -25,7 +25,18 @@ export default function Page() {
 			morphType = morphTypePretty(word.morphType);
 		}
 
-		return [word.id as unknown as string, word.spelling, morphType];
+		const dialectLabels = word.dialectLabels
+			.map((dialectLabel) => {
+				return dialectLabelPretty(dialectLabel);
+			})
+			.join(", ");
+
+		return [
+			word.id as unknown as string,
+			word.spelling,
+			morphType,
+			dialectLabels,
+		];
 	});
 
 	return (
@@ -35,7 +46,7 @@ export default function Page() {
 			</Flex>
 
 			<SimpleTable
-				headings={["ID", "Lexeme Form", "Morph Type"]}
+				headings={["ID", "Lexeme Form", "Morph Type", "Dialect Labels"]}
 				data={data}
 			/>
 		</>

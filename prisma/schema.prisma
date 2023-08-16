@@ -90,16 +90,17 @@ enum MorphType {
   STEM
 }
 
-// enum DialectLabel {
-//   LABELONE
-//   LABELTWO
-//   LABELTHREE
-// }
+enum DialectLabel {
+  ONE
+  TWO
+  THREE
+}
 
 model Word {
-  id        Int        @id @default(autoincrement())
-  spelling  String     @unique
-  morphType MorphType?
+  id            Int            @id @default(autoincrement())
+  spelling      String         @unique
+  morphType     MorphType?
+  dialectLabels DialectLabel[]
 
   references Reference[]
 }

@@ -15,6 +15,7 @@ export default function Component(props: Props) {
 			return {
 				spelling: word.spelling,
 				morphType: word.morphType ? word.morphType : undefined,
+				dialectLabels: word.dialectLabels,
 				references: word.references.map((reference) => {
 					return {
 						spelling: reference.spelling,

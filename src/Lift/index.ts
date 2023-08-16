@@ -1,5 +1,5 @@
 import Word from "./Word";
-import { morphTypePretty } from "@/utils";
+import { dialectLabelPretty, morphTypePretty } from "@/utils";
 
 export default class Lift {
 	words: Word[];
@@ -49,9 +49,12 @@ export default class Lift {
 						'"/>';
 				}
 
-				// if (word.dialectLabels !== undefined) {
-				//     result += '<trait name="dialect-labels" value="' + word.dialectLabels + '"/>';
-				// }
+				word.dialectLabels.forEach((dialectLabel) => {
+					result +=
+						'<trait name="dialect-label" value="' +
+						dialectLabelPretty(dialectLabel) +
+						'"/>';
+				});
 
 				// if (word.variants !== undefined) {
 				// 	word.variants.forEach((variant) => {

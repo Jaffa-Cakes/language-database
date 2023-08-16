@@ -16,8 +16,14 @@ import Senses from "./Senses";
 
 import newLexiconWord from "@/actions/newLexiconWord";
 import { match } from "assert";
-import { MorphType } from "@prisma/client";
-import { getMorphType, morphTypePretty } from "@/utils";
+import { MorphType, DialectLabel } from "@prisma/client";
+import {
+	getMorphType,
+	morphTypePretty,
+	getDialectLabel,
+	dialectLabelPretty,
+} from "@/utils";
+import { MultiSelect, Option } from "chakra-multiselect";
 
 enum SubPanel {
 	None,
@@ -32,7 +38,7 @@ export default function Component() {
 	// Values
 	const [spelling, setSpelling] = useState<string>("");
 	const [morphType, setMorphType] = useState<string>("");
-	// const [dialectLabels, setDialectLabels] = useState<string>("");
+	const [dialectLabels, setDialectLabels] = useState<string[]>([]);
 	// const [variantOf, setVariantOf] = useState<string>("");
 	// const [pronounciation, setPronounciation] = useState<string>("");
 	// Variants
@@ -46,9 +52,14 @@ export default function Component() {
 	// ]);
 
 	async function handleSave() {
+		const realDialectLabels = dialectLabels.map(
+			(dialectLabel) => getDialectLabel(dialectLabel) as DialectLabel,
+		);
+
 		await newLexiconWord({
 			spelling,
 			morphType: getMorphType(morphType),
+			dialectLabels: realDialectLabels,
 			references: [],
 		});
 	}
@@ -131,19 +142,19 @@ export default function Component() {
 											</option>
 										))}
 									</Drop>
-									{/* <Drop
-										label="Dialect Labels"
-										value={dialectLabels}
-										set={setDialectLabels}
-									>
-										{Object.keys(DialectLabel).map(
-											(key) => (
-												<option key={key} value={key}>
-													{key}
-												</option>
-											),
+									<MultiSelect
+										options={Object.keys(DialectLabel).map(
+											(key) => ({
+												label: dialectLabelPretty(key),
+												value: dialectLabelPretty(key),
+											}),
 										)}
-									</Drop> */}
+										value={dialectLabels}
+										onChange={(e) =>
+											setDialectLabels(e as string[])
+										}
+										label="Dialect Labels"
+									/>
 									{/* <Field
 										label="Variant of"
 										value={variantOf}

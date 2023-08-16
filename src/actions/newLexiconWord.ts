@@ -1,11 +1,12 @@
 "use server";
 
 import prisma from "@/db";
-import { MorphType } from "@prisma/client";
+import { MorphType, DialectLabel } from "@prisma/client";
 
 export interface IWord {
 	spelling: string;
 	morphType?: MorphType;
+	dialectLabels?: DialectLabel[];
 	references: {
 		spelling: string;
 		entry: number;
@@ -17,7 +18,7 @@ export default async function Action(word: IWord) {
 		data: {
 			spelling: word.spelling,
 			morphType: word.morphType,
-			// dialectLabels: word.dialectLabels,
+			dialectLabels: word.dialectLabels,
 			// pronounciation: word.pronounciation,
 		},
 	});

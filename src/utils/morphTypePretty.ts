@@ -1,5 +1,3 @@
-import { MorphType } from "@prisma/client";
-
 export default function morphTypePretty(morphType: string): string {
 	switch (morphType) {
 		case "BOUNDROOT":
