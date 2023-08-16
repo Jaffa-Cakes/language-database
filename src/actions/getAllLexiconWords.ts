@@ -8,6 +8,7 @@ export interface IGetAllLexiconWordsReturns {
 	spelling: string;
 	morphType: MorphType | null;
 	dialectLabels: DialectLabel[];
+	pronunciation: string | null;
 	references: {
 		id: number;
 		spelling: string;
@@ -28,6 +29,7 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 			spelling: true,
 			morphType: true,
 			dialectLabels: true,
+			pronunciation: true,
 			references: {
 				select: {
 					id: true,
@@ -54,6 +56,7 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 			spelling: wordRaw.spelling,
 			morphType: wordRaw.morphType,
 			dialectLabels: wordRaw.dialectLabels,
+			pronunciation: wordRaw.pronunciation,
 			references: wordRaw.references.map((referenceRaw) => {
 				return {
 					id: referenceRaw.id,

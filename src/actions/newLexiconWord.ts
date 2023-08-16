@@ -7,6 +7,7 @@ export interface IWord {
 	spelling: string;
 	morphType?: MorphType;
 	dialectLabels?: DialectLabel[];
+	pronunciation?: string;
 	references: {
 		spelling: string;
 		entry: number;
@@ -19,7 +20,7 @@ export default async function Action(word: IWord) {
 			spelling: word.spelling,
 			morphType: word.morphType,
 			dialectLabels: word.dialectLabels,
-			// pronounciation: word.pronounciation,
+			pronunciation: word.pronunciation,
 		},
 	});
 

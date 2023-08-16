@@ -36,6 +36,7 @@ export default function Page() {
 			word.spelling,
 			morphType,
 			dialectLabels,
+			word.pronunciation ? word.pronunciation : "",
 		];
 	});
 
@@ -46,7 +47,7 @@ export default function Page() {
 			</Flex>
 
 			<SimpleTable
-				headings={["ID", "Lexeme Form", "Morph Type", "Dialect Labels"]}
+				headings={["ID", "Lexeme Form", "Morph Type", "Dialect Labels", "Pronunciation"]}
 				data={data}
 			/>
 		</>

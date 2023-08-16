@@ -39,8 +39,7 @@ export default function Component() {
 	const [spelling, setSpelling] = useState<string>("");
 	const [morphType, setMorphType] = useState<string>("");
 	const [dialectLabels, setDialectLabels] = useState<string[]>([]);
-	// const [variantOf, setVariantOf] = useState<string>("");
-	// const [pronounciation, setPronounciation] = useState<string>("");
+	const [pronunciation, setPronunciation] = useState<string>("");
 	// Variants
 	// const [variantsDefinition, setVariantsDefinition] = useState<IVariant[]>([
 	// 	{
@@ -60,6 +59,7 @@ export default function Component() {
 			spelling,
 			morphType: getMorphType(morphType),
 			dialectLabels: realDialectLabels,
+			pronunciation: pronunciation !== "" ? pronunciation : undefined,
 			references: [],
 		});
 	}
@@ -155,16 +155,11 @@ export default function Component() {
 										}
 										label="Dialect Labels"
 									/>
-									{/* <Field
-										label="Variant of"
-										value={variantOf}
-										set={setVariantOf}
-									/>
 									<Field
-										label="Pronounciation"
-										value={pronounciation}
-										set={setPronounciation}
-									/> */}
+										label="Pronunciation"
+										value={pronunciation}
+										set={setPronunciation}
+									/>
 
 									<Button
 										onClick={() =>

@@ -34,14 +34,6 @@ export default class Lift {
 				}
 				result += "</lexical-unit>";
 
-				// if (word.pronounciation !== undefined) {
-				//     result += "<pronunciation>";
-				//     result += '<form lang="en">';
-				//     result += "<text>" + word.pronounciation + "</text>";
-				//     result += "</form>";
-				//     result += "</pronunciation>";
-				// }
-
 				if (word.morphType !== undefined) {
 					result +=
 						'<trait name="morph-type" value="' +
@@ -56,15 +48,13 @@ export default class Lift {
 						'"/>';
 				});
 
-				// if (word.variants !== undefined) {
-				// 	word.variants.forEach((variant) => {
-				// 		result += "<variant>";
-				// 		result += '<form lang="en">';
-				// 		result += "<text>" + variant.variantForm + "</text>";
-				// 		result += "</form>";
-				// 		result += "</variant>";
-				// 	});
-				// }
+				if (word.pronunciation !== undefined) {
+				    result += "<pronunciation>";
+				    result += '<form lang="en">';
+				    result += "<text>" + word.pronunciation + "</text>";
+				    result += "</form>";
+				    result += "</pronunciation>";
+				}
 			}
 			result += "</entry>";
 

@@ -5,5 +5,6 @@ export default interface Word {
 	spelling: string;
 	morphType?: MorphType;
 	dialectLabels: DialectLabel[];
+	pronunciation?: string;
 	references: Reference[];
 }

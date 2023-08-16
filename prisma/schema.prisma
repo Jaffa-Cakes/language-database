@@ -101,6 +101,7 @@ model Word {
   spelling      String         @unique
   morphType     MorphType?
   dialectLabels DialectLabel[]
+  pronunciation String?
 
   references Reference[]
 }
