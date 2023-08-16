@@ -51,7 +51,7 @@ export default class Lift {
 
 				word.dialectLabels.forEach((dialectLabel) => {
 					result +=
-						'<trait name="dialect-label" value="' +
+						'<trait name="dialect-labels" value="' +
 						dialectLabelPretty(dialectLabel) +
 						'"/>';
 				});
