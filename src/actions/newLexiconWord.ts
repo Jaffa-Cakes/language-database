@@ -2,29 +2,21 @@
 
 import prisma from "@/db";
 
-export interface Word {
-	lexemeForm?: string;
-	morphType?: string;
-	dialectLabels?: string;
-	variantOf?: string;
-	pronounciation?: string;
-	variantsDefinition: IVariant[];
+export interface IWord {
+	spelling: string;
+	references: {
+		spelling: string;
+		entry: number;
+	}[]
 }
 
-export interface IVariant {
-	variantForm?: string;
-	dialectLabels?: string;
-	variantType?: string;
-	comment?: string;
-}
-
-export default async function Action(word: Word) {
+export default async function Action(word: IWord) {
 	const lexiconWord = await prisma.word.create({
 		data: {
-			lexemeForm: word.lexemeForm,
+			spelling: word.spelling,
 			// morphType: word.morphType,
 			// dialectLabels: word.dialectLabels,
-			pronounciation: word.pronounciation,
+			// pronounciation: word.pronounciation,
 		},
 	});
 

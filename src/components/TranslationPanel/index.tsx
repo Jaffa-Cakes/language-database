@@ -12,10 +12,7 @@ import { ReactNode, useState } from "react";
 import Field from "./Field";
 import Drop from "./Drop";
 import Senses from "./Senses";
-import Variants from "./Variants";
-import { IVariant } from "@/actions/newLexiconWord";
-
-import { MorphType, DialectLabel } from "@prisma/client";
+// import Variants from "./Variants";
 
 import newLexiconWord from "@/actions/newLexiconWord";
 import { match } from "assert";
@@ -31,29 +28,25 @@ export default function Component() {
 	const [subPanel, setSubPanel] = useState<SubPanel>(SubPanel.None);
 
 	// Values
-	const [lexemeForm, setLexemeForm] = useState<string>("");
+	const [spelling, setSpelling] = useState<string>("");
 	const [morphType, setMorphType] = useState<string>("");
 	const [dialectLabels, setDialectLabels] = useState<string>("");
 	const [variantOf, setVariantOf] = useState<string>("");
 	const [pronounciation, setPronounciation] = useState<string>("");
 	// Variants
-	const [variantsDefinition, setVariantsDefinition] = useState<IVariant[]>([
-		{
-			variantForm: "coolguy",
-			dialectLabels: "",
-			variantType: "",
-			comment: "",
-		},
-	]);
+	// const [variantsDefinition, setVariantsDefinition] = useState<IVariant[]>([
+	// 	{
+	// 		variantForm: "coolguy",
+	// 		dialectLabels: "",
+	// 		variantType: "",
+	// 		comment: "",
+	// 	},
+	// ]);
 
 	async function handleSave() {
 		await newLexiconWord({
-			lexemeForm,
-			morphType,
-			dialectLabels,
-			variantOf,
-			pronounciation,
-			variantsDefinition,
+			spelling,
+			references: [],
 		});
 	}
 
@@ -68,13 +61,13 @@ export default function Component() {
 			subPanelDisplay = <Senses />;
 			break;
 		case SubPanel.Variants:
-			subPanelDisplay = (
-				<Variants
-					value={variantsDefinition}
-					set={setVariantsDefinition}
-					close={closeSubPanel}
-				/>
-			);
+			// subPanelDisplay = (
+			// 	<Variants
+			// 		value={variantsDefinition}
+			// 		set={setVariantsDefinition}
+			// 		close={closeSubPanel}
+			// 	/>
+			// );
 			break;
 		default:
 			subPanelDisplay = <></>;
@@ -121,31 +114,31 @@ export default function Component() {
 								<Stack spacing="2" mt="4" h="100%">
 									<Field
 										label="Lexeme Form"
-										value={lexemeForm}
-										set={setLexemeForm}
+										value={spelling}
+										set={setSpelling}
 									/>
-									<Drop
+									{/* <Drop
 										label="Morph Type"
 										value={morphType}
 										set={setMorphType}
 									>
 										{Object.keys(MorphType).map((key) => (
-											<option value={key}>{key}</option>
+											<option key={key} value={key}>{key}</option>
 										))}
-									</Drop>
-									<Drop
+									</Drop> */}
+									{/* <Drop
 										label="Dialect Labels"
 										value={dialectLabels}
 										set={setDialectLabels}
 									>
 										{Object.keys(DialectLabel).map(
 											(key) => (
-												<option value={key}>
+												<option key={key} value={key}>
 													{key}
 												</option>
 											),
 										)}
-									</Drop>
+									</Drop> */}
 									<Field
 										label="Variant of"
 										value={variantOf}

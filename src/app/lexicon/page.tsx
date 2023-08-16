@@ -7,7 +7,6 @@ import SearchInput from "@/components/SearchParams/SearchInput";
 import SearchMode from "@/components/SearchParams/SearchMode";
 import SearchModeContainer from "@/components/SearchParams/SearchModeContainer";
 import SimpleTable from "@/components/SimpleTable";
-import searchLexiconWords, { Data } from "@/actions/searchLexiconWords";
 import { useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
 

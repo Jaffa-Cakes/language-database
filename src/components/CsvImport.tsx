@@ -1,27 +1,27 @@
 "use client";
 
 import { Box, Flex, Text } from "@chakra-ui/react";
-import Papa from "papaparse";
+import Papa, { ParseResult } from "papaparse";
 import { useState } from "react";
 
-interface Props<T> {
+interface Props<T extends { length: number }> {
 	setData: (data: T) => void;
 	name: string;
 }
 
-export default function Component<T>(props: Props<T>) {
+export default function Component<T extends { length: number }>(props: Props<T>) {
 	const { setData, name } = props;
 
 	const [lines, setLines] = useState<number>(0);
 
 	function handleFileSelect(event: React.ChangeEvent<HTMLInputElement>) {
-		const file = event.target.files?.[0];
+		const file = event.target.files?.[0] as File;
 
 		Papa.parse(file, {
 			header: true,
 			dynamicTyping: false,
-			complete: function (results: { data: T }) {
-				setData(results.data);
+			complete: function (results: ParseResult<T>) {
+				setData(results.data as any);
 				setLines(results.data.length);
 			},
 		});
