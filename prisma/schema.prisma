@@ -77,11 +77,18 @@ model Data {
 }
 
 //////////////////// LEXICON
-// enum MorphType {
-//   TYPEONE
-//   TYPETWO
-//   TYPETHREE
-// }
+enum MorphType {
+  BOUNDROOT
+  BOUNDSTEM
+  CLITIC
+  DISCONTIGUOUSPHRASE
+  ENCLITIC
+  PARTICLE
+  PHRASE
+  PROCLITIC
+  ROOT
+  STEM
+}
 
 // enum DialectLabel {
 //   LABELONE
@@ -90,8 +97,9 @@ model Data {
 // }
 
 model Word {
-  id       Int    @id @default(autoincrement())
-  spelling String @unique
+  id        Int        @id @default(autoincrement())
+  spelling  String     @unique
+  morphType MorphType?
 
   references Reference[]
 }

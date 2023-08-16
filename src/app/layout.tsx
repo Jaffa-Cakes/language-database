@@ -43,7 +43,7 @@ export default function RootLayout({
 							>
 								{children}
 							</Flex>
-							{/* <TranslationPanel /> */}
+							<TranslationPanel />
 						</Flex>
 						<Box>
 							<ScratchpadPanel />

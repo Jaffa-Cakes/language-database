@@ -1,9 +1,11 @@
 "use server";
 
 import prisma from "@/db";
+import { MorphType } from "@prisma/client";
 
 export interface IWord {
 	spelling: string;
+	morphType?: MorphType;
 	references: {
 		spelling: string;
 		entry: number;
@@ -14,7 +16,7 @@ export default async function Action(word: IWord) {
 	const lexiconWord = await prisma.word.create({
 		data: {
 			spelling: word.spelling,
-			// morphType: word.morphType,
+			morphType: word.morphType,
 			// dialectLabels: word.dialectLabels,
 			// pronounciation: word.pronounciation,
 		},

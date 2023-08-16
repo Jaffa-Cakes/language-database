@@ -16,6 +16,7 @@ import Senses from "./Senses";
 
 import newLexiconWord from "@/actions/newLexiconWord";
 import { match } from "assert";
+import { MorphType } from "@prisma/client";
 
 enum SubPanel {
 	None,
@@ -30,9 +31,9 @@ export default function Component() {
 	// Values
 	const [spelling, setSpelling] = useState<string>("");
 	const [morphType, setMorphType] = useState<string>("");
-	const [dialectLabels, setDialectLabels] = useState<string>("");
-	const [variantOf, setVariantOf] = useState<string>("");
-	const [pronounciation, setPronounciation] = useState<string>("");
+	// const [dialectLabels, setDialectLabels] = useState<string>("");
+	// const [variantOf, setVariantOf] = useState<string>("");
+	// const [pronounciation, setPronounciation] = useState<string>("");
 	// Variants
 	// const [variantsDefinition, setVariantsDefinition] = useState<IVariant[]>([
 	// 	{
@@ -44,8 +45,12 @@ export default function Component() {
 	// ]);
 
 	async function handleSave() {
+
+
+
 		await newLexiconWord({
 			spelling,
+			morphType: getMorphType(morphType),
 			references: [],
 		});
 	}
@@ -117,15 +122,16 @@ export default function Component() {
 										value={spelling}
 										set={setSpelling}
 									/>
-									{/* <Drop
+									<Drop
 										label="Morph Type"
 										value={morphType}
 										set={setMorphType}
 									>
 										{Object.keys(MorphType).map((key) => (
-											<option key={key} value={key}>{key}</option>
-										))}
-									</Drop> */}
+												<option key={key} value={key}>{morphTypePretty(key)}</option>
+											)
+										)}
+									</Drop>
 									{/* <Drop
 										label="Dialect Labels"
 										value={dialectLabels}
@@ -139,7 +145,7 @@ export default function Component() {
 											),
 										)}
 									</Drop> */}
-									<Field
+									{/* <Field
 										label="Variant of"
 										value={variantOf}
 										set={setVariantOf}
@@ -148,7 +154,7 @@ export default function Component() {
 										label="Pronounciation"
 										value={pronounciation}
 										set={setPronounciation}
-									/>
+									/> */}
 
 									<Button
 										onClick={() =>
@@ -184,4 +190,58 @@ export default function Component() {
 			</Flex>
 		</>
 	);
+}
+
+function morphTypePretty(morphType: string): string {
+	switch (morphType) {
+		case "BOUNDROOT":
+			return "Bound Root";
+		case "BOUNDSTEM":
+			return "Bound Stem";
+		case "CLITIC":
+			return "Clitic";
+		case "DISCONTIGUOUSPHRASE":
+			return "Discontiguous Phrase";
+		case "ENCLITIC":
+			return "Enclitic";
+		case "PARTICLE":
+			return "Particle";
+		case "PHRASE":
+			return "Phrase";
+		case "PROCLITIC":
+			return "Proclitic";
+		case "ROOT":
+			return "Root";
+		case "STEM":
+			return "Stem";
+		default:
+			return "Unknown";
+	}
+}
+
+function getMorphType(morphType: string): MorphType | undefined {
+	switch (morphType) {
+		case "BOUNDROOT":
+			return MorphType.BOUNDROOT;
+		case "BOUNDSTEM":
+			return MorphType.BOUNDSTEM;
+		case "CLITIC":
+			return MorphType.CLITIC;
+		case "DISCONTIGUOUSPHRASE":
+			return MorphType.DISCONTIGUOUSPHRASE;
+		case "ENCLITIC":
+			return MorphType.ENCLITIC;
+		case "PARTICLE":
+			return MorphType.PARTICLE;
+		case "PHRASE":
+			return MorphType.PHRASE;
+		case "PROCLITIC":
+			return MorphType.PROCLITIC;
+		case "ROOT":
+			return MorphType.ROOT;
+		case "STEM":
+			return MorphType.STEM;
+		default:
+			return undefined;
+	}
 }
