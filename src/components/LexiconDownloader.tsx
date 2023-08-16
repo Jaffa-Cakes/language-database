@@ -26,6 +26,11 @@ export default function Component(props: Props) {
 						entry: reference.entry.id as unknown as string,
 					};
 				}),
+				senses: word.senses.map((sense) => {
+					return {
+						gloss: sense.gloss,
+					};
+				}),
 			};
 		});
 

@@ -55,6 +55,33 @@ export default class Lift {
 					result += "</form>";
 					result += "</pronunciation>";
 				}
+
+				// Senses
+				{
+					let senseIndex = 1;
+					word.senses.forEach((sense) => {
+						uid += 1;
+
+						const senseId = uid;
+
+						result +=
+							'<sense id="' +
+							senseId +
+							'" order="' +
+							senseIndex +
+							'">';
+						{
+							result += '<gloss lang="en">';
+							{
+								result += "<text>" + sense.gloss + "</text>";
+							}
+							result += "</gloss>";
+						}
+						result += "</sense>";
+
+						senseIndex += 1;
+					});
+				}
 			}
 			result += "</entry>";
 

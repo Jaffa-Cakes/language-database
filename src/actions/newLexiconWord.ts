@@ -12,27 +12,25 @@ export interface IWord {
 		spelling: string;
 		entry: number;
 	}[];
+	senses: {
+		gloss: string;
+	}[];
 }
 
 export default async function Action(word: IWord) {
-	const lexiconWord = await prisma.word.create({
+	await prisma.word.create({
 		data: {
 			spelling: word.spelling,
 			morphType: word.morphType,
 			dialectLabels: word.dialectLabels,
 			pronunciation: word.pronunciation,
+			senses: {
+				create: word.senses.map((sense) => {
+					return {
+						gloss: sense.gloss,
+					};
+				}),
+			},
 		},
 	});
-
-	// await prisma.variant.createMany({
-	// 	data: word.variantsDefinition.map((variant) => {
-	// 		return {
-	// 			variantForm: variant.variantForm,
-	// 			dialectLabels: variant.dialectLabels,
-	// 			variantType: variant.variantType,
-	// 			comment: variant.comment,
-	// 			lexiconWordId: lexiconWord.id
-	// 		};
-	// 	}
-	// )});
 }

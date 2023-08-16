@@ -31,12 +31,19 @@ export default function Page() {
 			})
 			.join(", ");
 
+		const senses = word.senses
+			.map((sense) => {
+				return sense.gloss;
+			})
+			.join(", ");
+
 		return [
 			word.id as unknown as string,
 			word.spelling,
 			morphType,
 			dialectLabels,
 			word.pronunciation ? word.pronunciation : "",
+			senses,
 		];
 	});
 
@@ -53,6 +60,7 @@ export default function Page() {
 					"Morph Type",
 					"Dialect Labels",
 					"Pronunciation",
+					"Senses",
 				]}
 				data={data}
 			/>

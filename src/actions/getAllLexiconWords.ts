@@ -20,6 +20,10 @@ export interface IGetAllLexiconWordsReturns {
 			};
 		};
 	}[];
+	senses: {
+		id: number;
+		gloss: string;
+	}[];
 }
 
 export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
@@ -47,6 +51,12 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 					},
 				},
 			},
+			senses: {
+				select: {
+					id: true,
+					gloss: true,
+				},
+			},
 		},
 	});
 
@@ -68,6 +78,12 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 							name: referenceRaw.entry.source?.name as string,
 						},
 					},
+				};
+			}),
+			senses: wordRaw.senses.map((senseRaw) => {
+				return {
+					id: senseRaw.id,
+					gloss: senseRaw.gloss,
 				};
 			}),
 		};

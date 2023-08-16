@@ -12,6 +12,7 @@ import { ReactNode, useState } from "react";
 import Field from "./Field";
 import Drop from "./Drop";
 import Senses from "./Senses";
+import { ISense } from "./Senses/Sense";
 // import Variants from "./Variants";
 
 import newLexiconWord from "@/actions/newLexiconWord";
@@ -40,6 +41,7 @@ export default function Component() {
 	const [morphType, setMorphType] = useState<string>("");
 	const [dialectLabels, setDialectLabels] = useState<string[]>([]);
 	const [pronunciation, setPronunciation] = useState<string>("");
+	const [senses, setSenses] = useState<ISense[]>([]);
 	// Variants
 	// const [variantsDefinition, setVariantsDefinition] = useState<IVariant[]>([
 	// 	{
@@ -61,6 +63,7 @@ export default function Component() {
 			dialectLabels: realDialectLabels,
 			pronunciation: pronunciation !== "" ? pronunciation : undefined,
 			references: [],
+			senses: senses,
 		});
 	}
 
@@ -72,7 +75,9 @@ export default function Component() {
 
 	switch (subPanel) {
 		case SubPanel.Senses:
-			subPanelDisplay = <Senses />;
+			subPanelDisplay = (
+				<Senses value={senses} set={setSenses} close={closeSubPanel} />
+			);
 			break;
 		case SubPanel.Variants:
 			// subPanelDisplay = (

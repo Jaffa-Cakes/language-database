@@ -1,4 +1,5 @@
 import Reference from "./Reference";
+import Senses from "./Senses";
 import { MorphType, DialectLabel } from "@prisma/client";
 
 export default interface Word {
@@ -7,4 +8,5 @@ export default interface Word {
 	dialectLabels: DialectLabel[];
 	pronunciation?: string;
 	references: Reference[];
+	senses: Senses[];
 }

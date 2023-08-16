@@ -104,6 +104,7 @@ model Word {
   pronunciation String?
 
   references Reference[]
+  senses     Sense[]
 }
 
 model Reference {
@@ -116,43 +117,10 @@ model Reference {
   word  Word @relation(fields: [wordId], references: [id])
 }
 
-// enum GrammaticalInfo {
-//   INFOONE
-//   INFOTWO
-//   INFOTHREE
-// }
+model Sense {
+  id     Int    @id @default(autoincrement())
+  gloss  String
+  wordId Int
 
-// enum SemanticDomain {
-//   DOMAINONE
-//   DOMAINTWO
-//   DOMAINTHREE
-// }
-
-// enum Status {
-//   STATUSONE
-//   STATUSTWO
-//   STATUSTHREE
-// }
-
-// model Sense {
-//   id              Int              @id @default(autoincrement())
-//   gloss           String?
-//   reversal        String?
-//   definition      String?
-//   grammaticalInfo GrammaticalInfo?
-//   example         String?
-//   translation     String?
-
-//   reference   Source? @relation("Reference", fields: [referenceId], references: [id])
-//   referenceId Int?
-
-//   scientific   String?
-//   bibliography String?
-//   general      String?
-
-//   source   Source? @relation("Source", fields: [sourceId], references: [id])
-//   sourceId Int?
-
-//   semanticDomains SemanticDomain?
-//   status          Status?
-// }
+  word Word @relation(fields: [wordId], references: [id])
+}
