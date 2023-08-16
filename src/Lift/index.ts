@@ -18,17 +18,21 @@ export default class Lift {
 		this.words.forEach((word) => {
 			uid += 1;
 
-			let wordId = uid;
+			const wordId = uid;
 
 			// Word Entry
 			result += '<entry id="' + wordId + '" guid="' + wordId + '">';
-
-			result += "<lexical-unit>";
-			result += '<form lang="en">';
-			result += "<text>" + word.spelling + "</text>";
-			result += "</form>";
-			result += "</lexical-unit>";
-
+			{
+				result += "<lexical-unit>";
+				{
+					result += '<form lang="en">';
+					{
+						result += "<text>" + word.spelling + "</text>";
+					}
+					result += "</form>";
+				}
+				result += "</lexical-unit>";
+			}
 			result += "</entry>";
 
             // if (word.pronounciation !== undefined) {
@@ -58,32 +62,37 @@ export default class Lift {
 			// }
 
 			// Reference Entries
-			let referenceIndex = 1;
-			word.references.forEach((reference) => {
-				uid += 1;
+			{
+				let referenceIndex = 1;
+				word.references.forEach((reference) => {
+					uid += 1;
 
-				let referenceId = uid;
+					const referenceId = uid;
 
-				result += '<entry id="' + referenceId + '" guid="' + referenceId + '">';
+					result += '<entry id="' + referenceId + '" guid="' + referenceId + '">';
+					{
+						result += "<lexical-unit>";
+						{
+							result += '<form lang="en">';
+							{
+								result += "<text>" + reference.spelling + "</text>";
+							}
+							result += "</form>";
+						}
+						result += "</lexical-unit>";
 
-				result += "<lexical-unit>";
-				result += '<form lang="en">';
-				result += "<text>" + reference.spelling + "</text>";
-				result += "</form>";
-				result += "</lexical-unit>";
+						result += '<relation type="_component-lexeme" ref="' + wordId + '" order="' + referenceIndex + '">';
+						{
+							result += '<trait name="variant-type" value="' + reference.source + ':' + reference.entry + '"/>';
+							result += '<trait name="hide-minor-entry" value="1"/>';
+						}
+						result += '</relation>';
+					}
+					result += "</entry>";
 
-				result += '<trait name="source" value="' + reference.source + '"/>';
-				result += '<trait name="entry" value="' + reference.entry + '"/>';
-				result += '<trait name="morph-type" value="stem"/>';
-
-				result += '<relation type="_component-lexeme" ref="' + wordId + '" order="' + referenceIndex + '">';
-				result += '<trait name="hide-minor-entry" value="1"/>';
-				result += '</relation>';
-
-				result += "</entry>";
-
-				referenceIndex += 1;
-			});
+					referenceIndex += 1;
+				});
+			}
 		});
 
 		result += "</lift>";

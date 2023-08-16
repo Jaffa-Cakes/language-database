@@ -8,13 +8,13 @@ export interface IGetAllLexiconWordsReturns {
     references: {
         id: number;
         spelling: string;
-        source: {
-            id: number;
-            name: string;
-        }
         entry: {
             id: number;
-        }
+            source: {
+                id: number;
+                name: string;
+            };
+        };
     }[];
 }
 
@@ -28,15 +28,15 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
                 select: {
                     id: true,
                     spelling: true,
-                    source: {
-                        select: {
-                            id: true,
-                            name: true,
-                        }
-                    },
                     entry: {
                         select: {
                             id: true,
+                            source: {
+                                select: {
+                                    id: true,
+                                    name: true,
+                                }
+                            }
                         }
                     }
                 }
@@ -52,13 +52,13 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
                 return {
                     id: referenceRaw.id,
                     spelling: referenceRaw.spelling,
-                    source: {
-                        id: referenceRaw.source.id,
-                        name: referenceRaw.source.name as string,
-                    },
                     entry: {
                         id: referenceRaw.entry.id,
-                    }
+                        source: {
+                            id: referenceRaw.entry.source?.id as number,
+                            name: referenceRaw.entry.source?.name as string,
+                        },
+                    },
                 }
             })
         };

@@ -17,7 +17,7 @@ export default function Component(props: Props) {
 				references: word.references.map((reference) => {
 					return {
 						spelling: reference.spelling,
-						source: reference.source.name,
+						source: reference.entry.source.name,
 						entry: reference.entry.id as unknown as string,
 					};
 				})

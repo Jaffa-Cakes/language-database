@@ -27,7 +27,6 @@ model Source {
   langName        String?
   notes           String?
   data            Data[]
-  variants        Reference[]
   // senseReference  Sense[]       @relation("Reference")
   // senseSource     Sense[]       @relation("Source")
 }
@@ -101,12 +100,10 @@ model Reference {
   id       Int    @id @default(autoincrement())
   spelling String
   wordId   Int
-  sourceId Int
   entryId  Int
 
-  source Source @relation(fields: [sourceId], references: [id])
-  entry  Data   @relation(fields: [entryId], references: [id])
-  word   Word   @relation(fields: [wordId], references: [id])
+  entry Data @relation(fields: [entryId], references: [id])
+  word  Word @relation(fields: [wordId], references: [id])
 }
 
 // enum GrammaticalInfo {
