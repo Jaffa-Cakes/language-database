@@ -70,7 +70,7 @@ export default function Page() {
 	// 		dialectLabels,
 	// 		pronounciation];
 	// });
-	
+
 	return (
 		<>
 			{/* <form action={doSearch}>

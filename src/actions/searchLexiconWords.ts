@@ -56,10 +56,14 @@ export default async function Action(params: Params): Promise<Data[]> {
 	const out: Data[] = results.map((result) => {
 		return {
 			id: result.id,
-			lexemeForm: result.lexemeForm === null ? undefined : result.lexemeForm,
+			lexemeForm:
+				result.lexemeForm === null ? undefined : result.lexemeForm,
 			morphType: result.morphType === null ? undefined : result.morphType,
 			dialectLabels: undefined,
-			pronounciation: result.pronounciation === null ? undefined : result.pronounciation,
+			pronounciation:
+				result.pronounciation === null
+					? undefined
+					: result.pronounciation,
 		};
 	});
 

@@ -37,12 +37,14 @@ export default function Component() {
 	const [variantOf, setVariantOf] = useState<string>("");
 	const [pronounciation, setPronounciation] = useState<string>("");
 	// Variants
-	const [variantsDefinition, setVariantsDefinition] = useState<IVariant[]>([{
-		variantForm: "coolguy",
-		dialectLabels: "",
-		variantType: "",
-		comment: "",
-	}]);
+	const [variantsDefinition, setVariantsDefinition] = useState<IVariant[]>([
+		{
+			variantForm: "coolguy",
+			dialectLabels: "",
+			variantType: "",
+			comment: "",
+		},
+	]);
 
 	async function handleSave() {
 		await newLexiconWord({
@@ -66,7 +68,13 @@ export default function Component() {
 			subPanelDisplay = <Senses />;
 			break;
 		case SubPanel.Variants:
-			subPanelDisplay = <Variants value={variantsDefinition} set={setVariantsDefinition} close={closeSubPanel}/>;
+			subPanelDisplay = (
+				<Variants
+					value={variantsDefinition}
+					set={setVariantsDefinition}
+					close={closeSubPanel}
+				/>
+			);
 			break;
 		default:
 			subPanelDisplay = <></>;
@@ -121,22 +129,22 @@ export default function Component() {
 										value={morphType}
 										set={setMorphType}
 									>
-										{
-											Object.keys(MorphType).map((key) => (
-												<option value={key}>{key}</option>
-											))
-										}
+										{Object.keys(MorphType).map((key) => (
+											<option value={key}>{key}</option>
+										))}
 									</Drop>
 									<Drop
 										label="Dialect Labels"
 										value={dialectLabels}
 										set={setDialectLabels}
 									>
-										{
-											Object.keys(DialectLabel).map((key) => (
-												<option value={key}>{key}</option>
-											))
-										}
+										{Object.keys(DialectLabel).map(
+											(key) => (
+												<option value={key}>
+													{key}
+												</option>
+											),
+										)}
 									</Drop>
 									<Field
 										label="Variant of"
@@ -149,8 +157,18 @@ export default function Component() {
 										set={setPronounciation}
 									/>
 
-									<Button onClick={() => setSubPanel(SubPanel.Senses)}>Senses</Button>
-									<Button onClick={() => setSubPanel(SubPanel.Variants)}>
+									<Button
+										onClick={() =>
+											setSubPanel(SubPanel.Senses)
+										}
+									>
+										Senses
+									</Button>
+									<Button
+										onClick={() =>
+											setSubPanel(SubPanel.Variants)
+										}
+									>
 										Variants
 									</Button>
 									<hr />
@@ -164,7 +182,7 @@ export default function Component() {
 										Delete
 									</Button>
 								</Stack>
-								
+
 								{subPanelDisplay}
 							</Stack>
 						</form>

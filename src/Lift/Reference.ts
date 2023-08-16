@@ -1,5 +1,5 @@
 export default interface Reference {
-    spelling: string;
-    source: string;
-    entry: string;
+	spelling: string;
+	source: string;
+	entry: string;
 }

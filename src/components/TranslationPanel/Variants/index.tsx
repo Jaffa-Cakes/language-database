@@ -13,7 +13,9 @@ export interface Props {
 }
 
 export default function Component(props: Props) {
-	const [selectedVariant, setSelectedVariant] = useState<IVariant | null>(null);
+	const [selectedVariant, setSelectedVariant] = useState<IVariant | null>(
+		null,
+	);
 	const [variantDrop, setVariantDrop] = useState<string>("");
 
 	useEffect(() => {
@@ -50,34 +52,36 @@ export default function Component(props: Props) {
 			displayedVariant = (
 				<>
 					<hr />
-					<Variant value={selectedVariant} save={saveVariant}/>
+					<Variant value={selectedVariant} save={saveVariant} />
 				</>
 			);
 			break;
 	}
 
 	return (
-			<Stack
-				direction="column"
-				spacing="2"
-				pl="2"
-				borderLeft="2px"
-				borderColor="gray.800"
-				mt="4"
-			>
-				<Drop label="Variant" value={variantDrop} set={setVariantDrop}>
-					{
-						props.value.map((variant, index) => {
-							return <option key={index} value={variant.variantForm}>{variant.variantForm}</option>
-						})
-					}
-				</Drop>
-				
-				{displayedVariant}
-				
-				<hr />
+		<Stack
+			direction="column"
+			spacing="2"
+			pl="2"
+			borderLeft="2px"
+			borderColor="gray.800"
+			mt="4"
+		>
+			<Drop label="Variant" value={variantDrop} set={setVariantDrop}>
+				{props.value.map((variant, index) => {
+					return (
+						<option key={index} value={variant.variantForm}>
+							{variant.variantForm}
+						</option>
+					);
+				})}
+			</Drop>
 
-				<Button onClick={() => props.close()}>Close</Button>
-			</Stack>
+			{displayedVariant}
+
+			<hr />
+
+			<Button onClick={() => props.close()}>Close</Button>
+		</Stack>
 	);
 }

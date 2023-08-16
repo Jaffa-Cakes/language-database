@@ -24,10 +24,9 @@ export default async function Action(word: Word) {
 			lexemeForm: word.lexemeForm,
 			// morphType: word.morphType,
 			// dialectLabels: word.dialectLabels,
-			pronounciation: word.pronounciation
+			pronounciation: word.pronounciation,
 		},
 	});
-
 
 	// await prisma.variant.createMany({
 	// 	data: word.variantsDefinition.map((variant) => {

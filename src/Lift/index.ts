@@ -35,21 +35,21 @@ export default class Lift {
 			}
 			result += "</entry>";
 
-            // if (word.pronounciation !== undefined) {
-            //     result += "<pronunciation>";
-            //     result += '<form lang="en">';
-            //     result += "<text>" + word.pronounciation + "</text>";
-            //     result += "</form>";
-            //     result += "</pronunciation>";
-            // }
+			// if (word.pronounciation !== undefined) {
+			//     result += "<pronunciation>";
+			//     result += '<form lang="en">';
+			//     result += "<text>" + word.pronounciation + "</text>";
+			//     result += "</form>";
+			//     result += "</pronunciation>";
+			// }
 
-            // if (word.morphType !== undefined) {
-            //     result += '<trait name="morph-type" value="' + word.morphType + '"/>';
-            // }
+			// if (word.morphType !== undefined) {
+			//     result += '<trait name="morph-type" value="' + word.morphType + '"/>';
+			// }
 
-            // if (word.dialectLabels !== undefined) {
-            //     result += '<trait name="dialect-labels" value="' + word.dialectLabels + '"/>';
-            // }
+			// if (word.dialectLabels !== undefined) {
+			//     result += '<trait name="dialect-labels" value="' + word.dialectLabels + '"/>';
+			// }
 
 			// if (word.variants !== undefined) {
 			// 	word.variants.forEach((variant) => {
@@ -69,24 +69,41 @@ export default class Lift {
 
 					const referenceId = uid;
 
-					result += '<entry id="' + referenceId + '" guid="' + referenceId + '">';
+					result +=
+						'<entry id="' +
+						referenceId +
+						'" guid="' +
+						referenceId +
+						'">';
 					{
 						result += "<lexical-unit>";
 						{
 							result += '<form lang="en">';
 							{
-								result += "<text>" + reference.spelling + "</text>";
+								result +=
+									"<text>" + reference.spelling + "</text>";
 							}
 							result += "</form>";
 						}
 						result += "</lexical-unit>";
 
-						result += '<relation type="_component-lexeme" ref="' + wordId + '" order="' + referenceIndex + '">';
+						result +=
+							'<relation type="_component-lexeme" ref="' +
+							wordId +
+							'" order="' +
+							referenceIndex +
+							'">';
 						{
-							result += '<trait name="variant-type" value="' + reference.source + ':' + reference.entry + '"/>';
-							result += '<trait name="hide-minor-entry" value="1"/>';
+							result +=
+								'<trait name="variant-type" value="' +
+								reference.source +
+								":" +
+								reference.entry +
+								'"/>';
+							result +=
+								'<trait name="hide-minor-entry" value="1"/>';
 						}
-						result += '</relation>';
+						result += "</relation>";
 					}
 					result += "</entry>";
 
