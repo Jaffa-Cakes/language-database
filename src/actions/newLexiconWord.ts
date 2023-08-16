@@ -27,6 +27,14 @@ export default async function Action(word: IWord) {
 			morphType: word.morphType,
 			dialectLabels: word.dialectLabels,
 			pronunciation: word.pronunciation,
+			references: {
+				create: word.references.map((reference) => {
+					return {
+						spelling: reference.spelling,
+						entryId: reference.entry,
+					};
+				}),
+			},
 			senses: {
 				create: word.senses.map((sense) => {
 					return {

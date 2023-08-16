@@ -27,8 +27,6 @@ model Source {
   langName        String?
   notes           String?
   data            Data[]
-  // senseReference  Sense[]       @relation("Reference")
-  // senseSource     Sense[]       @relation("Source")
 }
 
 model Individuals {

@@ -1,22 +1,15 @@
 "use client";
 
-import {
-	Box,
-	Button,
-	Flex,
-	Stack,
-	Text,
-	useDisclosure,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Stack, Text } from "@chakra-ui/react";
 import { ReactNode, useState } from "react";
 import Field from "./Field";
 import Drop from "./Drop";
 import Senses from "./Senses";
 import { ISense } from "./Senses/Sense";
-// import Variants from "./Variants";
+import References from "./References";
+import { IReference } from "./References/Reference";
 
 import newLexiconWord from "@/actions/newLexiconWord";
-import { match } from "assert";
 import { MorphType, DialectLabel } from "@prisma/client";
 import {
 	getMorphType,
@@ -29,7 +22,7 @@ import { MultiSelect, Option } from "chakra-multiselect";
 enum SubPanel {
 	None,
 	Senses,
-	Variants,
+	References,
 }
 
 export default function Component() {
@@ -42,15 +35,7 @@ export default function Component() {
 	const [dialectLabels, setDialectLabels] = useState<string[]>([]);
 	const [pronunciation, setPronunciation] = useState<string>("");
 	const [senses, setSenses] = useState<ISense[]>([]);
-	// Variants
-	// const [variantsDefinition, setVariantsDefinition] = useState<IVariant[]>([
-	// 	{
-	// 		variantForm: "coolguy",
-	// 		dialectLabels: "",
-	// 		variantType: "",
-	// 		comment: "",
-	// 	},
-	// ]);
+	const [references, setReferences] = useState<IReference[]>([]);
 
 	async function handleSave() {
 		const realDialectLabels = dialectLabels.map(
@@ -62,7 +47,7 @@ export default function Component() {
 			morphType: getMorphType(morphType),
 			dialectLabels: realDialectLabels,
 			pronunciation: pronunciation !== "" ? pronunciation : undefined,
-			references: [],
+			references: references,
 			senses: senses,
 		});
 	}
@@ -79,14 +64,14 @@ export default function Component() {
 				<Senses value={senses} set={setSenses} close={closeSubPanel} />
 			);
 			break;
-		case SubPanel.Variants:
-			// subPanelDisplay = (
-			// 	<Variants
-			// 		value={variantsDefinition}
-			// 		set={setVariantsDefinition}
-			// 		close={closeSubPanel}
-			// 	/>
-			// );
+		case SubPanel.References:
+			subPanelDisplay = (
+				<References
+					value={references}
+					set={setReferences}
+					close={closeSubPanel}
+				/>
+			);
 			break;
 		default:
 			subPanelDisplay = <></>;
@@ -175,10 +160,10 @@ export default function Component() {
 									</Button>
 									<Button
 										onClick={() =>
-											setSubPanel(SubPanel.Variants)
+											setSubPanel(SubPanel.References)
 										}
 									>
-										Variants
+										References
 									</Button>
 									<hr />
 									<Button
