@@ -36,10 +36,17 @@ export default function Page() {
 				return sense.gloss;
 			})
 			.join(", ");
-		
+
 		const references = word.references
 			.map((reference) => {
-				return reference.spelling + " (" + reference.entry.source.name + ":" + reference.entry.id + ")";
+				return (
+					reference.spelling +
+					" (" +
+					reference.entry.source.name +
+					":" +
+					reference.entry.id +
+					")"
+				);
 			})
 			.join(", ");
 
