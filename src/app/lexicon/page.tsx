@@ -36,6 +36,12 @@ export default function Page() {
 				return sense.gloss;
 			})
 			.join(", ");
+		
+		const references = word.references
+			.map((reference) => {
+				return reference.spelling + " (" + reference.entry.source.name + ":" + reference.entry.id + ")";
+			})
+			.join(", ");
 
 		return [
 			word.id as unknown as string,
@@ -44,6 +50,7 @@ export default function Page() {
 			dialectLabels,
 			word.pronunciation ? word.pronunciation : "",
 			senses,
+			references,
 		];
 	});
 
@@ -61,6 +68,7 @@ export default function Page() {
 					"Dialect Labels",
 					"Pronunciation",
 					"Senses",
+					"References",
 				]}
 				data={data}
 			/>
