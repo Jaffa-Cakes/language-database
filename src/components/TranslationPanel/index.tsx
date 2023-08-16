@@ -17,6 +17,7 @@ import Senses from "./Senses";
 import newLexiconWord from "@/actions/newLexiconWord";
 import { match } from "assert";
 import { MorphType } from "@prisma/client";
+import { getMorphType, morphTypePretty } from "@/utils";
 
 enum SubPanel {
 	None,
@@ -190,58 +191,4 @@ export default function Component() {
 			</Flex>
 		</>
 	);
-}
-
-function morphTypePretty(morphType: string): string {
-	switch (morphType) {
-		case "BOUNDROOT":
-			return "Bound Root";
-		case "BOUNDSTEM":
-			return "Bound Stem";
-		case "CLITIC":
-			return "Clitic";
-		case "DISCONTIGUOUSPHRASE":
-			return "Discontiguous Phrase";
-		case "ENCLITIC":
-			return "Enclitic";
-		case "PARTICLE":
-			return "Particle";
-		case "PHRASE":
-			return "Phrase";
-		case "PROCLITIC":
-			return "Proclitic";
-		case "ROOT":
-			return "Root";
-		case "STEM":
-			return "Stem";
-		default:
-			return "Unknown";
-	}
-}
-
-function getMorphType(morphType: string): MorphType | undefined {
-	switch (morphType) {
-		case "BOUNDROOT":
-			return MorphType.BOUNDROOT;
-		case "BOUNDSTEM":
-			return MorphType.BOUNDSTEM;
-		case "CLITIC":
-			return MorphType.CLITIC;
-		case "DISCONTIGUOUSPHRASE":
-			return MorphType.DISCONTIGUOUSPHRASE;
-		case "ENCLITIC":
-			return MorphType.ENCLITIC;
-		case "PARTICLE":
-			return MorphType.PARTICLE;
-		case "PHRASE":
-			return MorphType.PHRASE;
-		case "PROCLITIC":
-			return MorphType.PROCLITIC;
-		case "ROOT":
-			return MorphType.ROOT;
-		case "STEM":
-			return MorphType.STEM;
-		default:
-			return undefined;
-	}
 }

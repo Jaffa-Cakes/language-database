@@ -5,6 +5,7 @@ import getAllLexiconWords, { IGetAllLexiconWordsReturns } from "@/actions/getAll
 import SimpleTable from "@/components/SimpleTable";
 import { useEffect, useState } from "react";
 import { Flex } from "@chakra-ui/react";
+import { morphTypePretty } from "@/utils";
 
 export default function Page() {
 	const [words, setWords] = useState<IGetAllLexiconWordsReturns[]>([]);
@@ -17,9 +18,16 @@ export default function Page() {
 	}, []);
 
 	const data = words.map((word) => {
+
+		let morphType = "";
+		if (word.morphType !== null) {
+			morphType = morphTypePretty(word.morphType);
+		}
+
 		return [
 			word.id as unknown as string,
 			word.spelling,
+			morphType,
 		];
 	});
 
@@ -33,6 +41,7 @@ export default function Page() {
 				headings={[
 					"ID",
 					"Lexeme Form",
+					"Morph Type",
 				]}
 				data={data}
 			/>

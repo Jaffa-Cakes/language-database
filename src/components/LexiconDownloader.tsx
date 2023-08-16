@@ -14,6 +14,7 @@ export default function Component(props: Props) {
 		const words: Word[] = wordsRaw.map((word) => {
 			return {
 				spelling: word.spelling,
+				morphType: word.morphType ? word.morphType : undefined,
 				references: word.references.map((reference) => {
 					return {
 						spelling: reference.spelling,

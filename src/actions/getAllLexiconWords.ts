@@ -1,10 +1,12 @@
 "use server";
 
 import prisma from "@/db";
+import { MorphType } from "@prisma/client";
 
 export interface IGetAllLexiconWordsReturns {
 	id: number;
 	spelling: string;
+	morphType: MorphType | null;
 	references: {
 		id: number;
 		spelling: string;
@@ -23,6 +25,7 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 		select: {
 			id: true,
 			spelling: true,
+			morphType: true,
 			references: {
 				select: {
 					id: true,
@@ -47,6 +50,7 @@ export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
 		return {
 			id: wordRaw.id,
 			spelling: wordRaw.spelling,
+			morphType: wordRaw.morphType,
 			references: wordRaw.references.map((referenceRaw) => {
 				return {
 					id: referenceRaw.id,

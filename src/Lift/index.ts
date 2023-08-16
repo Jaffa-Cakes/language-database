@@ -1,4 +1,5 @@
 import Word from "./Word";
+import { morphTypePretty } from "@/utils";
 
 export default class Lift {
 	words: Word[];
@@ -32,34 +33,34 @@ export default class Lift {
 					result += "</form>";
 				}
 				result += "</lexical-unit>";
+
+				// if (word.pronounciation !== undefined) {
+				//     result += "<pronunciation>";
+				//     result += '<form lang="en">';
+				//     result += "<text>" + word.pronounciation + "</text>";
+				//     result += "</form>";
+				//     result += "</pronunciation>";
+				// }
+
+				if (word.morphType !== undefined) {
+					result += '<trait name="morph-type" value="' + morphTypePretty(word.morphType) + '"/>';
+				}
+
+				// if (word.dialectLabels !== undefined) {
+				//     result += '<trait name="dialect-labels" value="' + word.dialectLabels + '"/>';
+				// }
+
+				// if (word.variants !== undefined) {
+				// 	word.variants.forEach((variant) => {
+				// 		result += "<variant>";
+				// 		result += '<form lang="en">';
+				// 		result += "<text>" + variant.variantForm + "</text>";
+				// 		result += "</form>";
+				// 		result += "</variant>";
+				// 	});
+				// }
 			}
 			result += "</entry>";
-
-			// if (word.pronounciation !== undefined) {
-			//     result += "<pronunciation>";
-			//     result += '<form lang="en">';
-			//     result += "<text>" + word.pronounciation + "</text>";
-			//     result += "</form>";
-			//     result += "</pronunciation>";
-			// }
-
-			// if (word.morphType !== undefined) {
-			//     result += '<trait name="morph-type" value="' + word.morphType + '"/>';
-			// }
-
-			// if (word.dialectLabels !== undefined) {
-			//     result += '<trait name="dialect-labels" value="' + word.dialectLabels + '"/>';
-			// }
-
-			// if (word.variants !== undefined) {
-			// 	word.variants.forEach((variant) => {
-			// 		result += "<variant>";
-			// 		result += '<form lang="en">';
-			// 		result += "<text>" + variant.variantForm + "</text>";
-			// 		result += "</form>";
-			// 		result += "</variant>";
-			// 	});
-			// }
 
 			// Reference Entries
 			{
