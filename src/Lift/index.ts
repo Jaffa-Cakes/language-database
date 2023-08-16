@@ -49,11 +49,11 @@ export default class Lift {
 				});
 
 				if (word.pronunciation !== undefined) {
-				    result += "<pronunciation>";
-				    result += '<form lang="en">';
-				    result += "<text>" + word.pronunciation + "</text>";
-				    result += "</form>";
-				    result += "</pronunciation>";
+					result += "<pronunciation>";
+					result += '<form lang="en">';
+					result += "<text>" + word.pronunciation + "</text>";
+					result += "</form>";
+					result += "</pronunciation>";
 				}
 			}
 			result += "</entry>";

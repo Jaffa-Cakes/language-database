@@ -47,7 +47,13 @@ export default function Page() {
 			</Flex>
 
 			<SimpleTable
-				headings={["ID", "Lexeme Form", "Morph Type", "Dialect Labels", "Pronunciation"]}
+				headings={[
+					"ID",
+					"Lexeme Form",
+					"Morph Type",
+					"Dialect Labels",
+					"Pronunciation",
+				]}
 				data={data}
 			/>
 		</>
