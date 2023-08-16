@@ -13,42 +13,77 @@ export default class Lift {
 		result += '<?xml version="1.0"?>';
 		result += '<lift version="0.13">';
 
+		let uid = 0;
+
 		this.words.forEach((word) => {
-			result += "<entry>";
+			uid += 1;
+
+			let wordId = uid;
+
+			// Word Entry
+			result += '<entry id="' + wordId + '" guid="' + wordId + '">';
 
 			result += "<lexical-unit>";
 			result += '<form lang="en">';
-			result += "<text>" + word.lexemeForm + "</text>";
+			result += "<text>" + word.spelling + "</text>";
 			result += "</form>";
 			result += "</lexical-unit>";
 
-            if (word.pronounciation !== undefined) {
-                result += "<pronunciation>";
-                result += '<form lang="en">';
-                result += "<text>" + word.pronounciation + "</text>";
-                result += "</form>";
-                result += "</pronunciation>";
-            }
-
-            if (word.morphType !== undefined) {
-                result += '<trait name="morph-type" value="' + word.morphType + '"/>';
-            }
-
-            if (word.dialectLabels !== undefined) {
-                result += '<trait name="dialect-labels" value="' + word.dialectLabels + '"/>';
-            }
-
-			if (word.variants !== undefined) {
-				word.variants.forEach((variant) => {
-					result += "<variant>";
-					result += '<form lang="en">';
-					result += "<text>" + variant.variantForm + "</text>";
-					result += "</form>";
-					result += "</variant>";
-				});
-			}
-
 			result += "</entry>";
+
+            // if (word.pronounciation !== undefined) {
+            //     result += "<pronunciation>";
+            //     result += '<form lang="en">';
+            //     result += "<text>" + word.pronounciation + "</text>";
+            //     result += "</form>";
+            //     result += "</pronunciation>";
+            // }
+
+            // if (word.morphType !== undefined) {
+            //     result += '<trait name="morph-type" value="' + word.morphType + '"/>';
+            // }
+
+            // if (word.dialectLabels !== undefined) {
+            //     result += '<trait name="dialect-labels" value="' + word.dialectLabels + '"/>';
+            // }
+
+			// if (word.variants !== undefined) {
+			// 	word.variants.forEach((variant) => {
+			// 		result += "<variant>";
+			// 		result += '<form lang="en">';
+			// 		result += "<text>" + variant.variantForm + "</text>";
+			// 		result += "</form>";
+			// 		result += "</variant>";
+			// 	});
+			// }
+
+			// Reference Entries
+			let referenceIndex = 1;
+			word.references.forEach((reference) => {
+				uid += 1;
+
+				let referenceId = uid;
+
+				result += '<entry id="' + referenceId + '" guid="' + referenceId + '">';
+
+				result += "<lexical-unit>";
+				result += '<form lang="en">';
+				result += "<text>" + reference.spelling + "</text>";
+				result += "</form>";
+				result += "</lexical-unit>";
+
+				result += '<trait name="source" value="' + reference.source + '"/>';
+				result += '<trait name="entry" value="' + reference.entry + '"/>';
+				result += '<trait name="morph-type" value="stem"/>';
+
+				result += '<relation type="_component-lexeme" ref="' + wordId + '" order="' + referenceIndex + '">';
+				result += '<trait name="hide-minor-entry" value="1"/>';
+				result += '</relation>';
+
+				result += "</entry>";
+
+				referenceIndex += 1;
+			});
 		});
 
 		result += "</lift>";

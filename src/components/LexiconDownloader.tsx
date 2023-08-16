@@ -2,46 +2,27 @@
 
 import Lift from "@/Lift";
 import Word from "@/Lift/Word";
-import searchLexiconWords from "@/actions/searchLexiconWords";
+import getAllLexiconWords from "@/actions/getAllLexiconWords";
 import { Button } from "@chakra-ui/react";
 
 interface Props {}
 
 export default function Component(props: Props) {
 	async function handleExport() {
-		const wordsRaw = await searchLexiconWords({
-			id: "",
-			lexemeForm: "",
-			morphType: "",
-			dialectLabels: "",
-			variantOf: "",
-			pronounciation: "",
-		});
+		const wordsRaw = await getAllLexiconWords();
 
 		const words: Word[] = wordsRaw.map((word) => {
-
-			console.log(word.variants);
-
 			return {
-        id: word.id,
-				lexemeForm: word.lexemeForm || undefined,
-				morphType: word.morphType || undefined,
-				dialectLabels: word.dialectLabels || undefined,
-				variantOf: word.variantOf || undefined,
-				pronounciation: word.pronounciation || undefined,
-				variants: word.variants.map((variant) => {
+				spelling: word.spelling,
+				references: word.references.map((reference) => {
 					return {
-						id: variant.id,
-						variantForm: variant.variantForm || undefined,
-						dialectLabels: variant.dialectLabels || undefined,
-						variantType: variant.variantType || undefined,
-						comment: variant.comment || undefined,
+						spelling: reference.spelling,
+						source: reference.source.name,
+						entry: reference.entry.id as unknown as string,
 					};
-				}),
+				})
 			};
 		});
-
-		console.log(words);
 
 		const lift = new Lift(words);
 

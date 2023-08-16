@@ -27,8 +27,9 @@ model Source {
   langName        String?
   notes           String?
   data            Data[]
-  senseReference  Sense[]       @relation("Reference")
-  senseSource     Sense[]       @relation("Source")
+  variants        Reference[]
+  // senseReference  Sense[]       @relation("Reference")
+  // senseSource     Sense[]       @relation("Source")
 }
 
 model Individuals {
@@ -72,82 +73,79 @@ model Data {
   categoryId Int?
   semanticId Int?
   notes      String?
+
+  variants Reference[]
 }
 
 //////////////////// LEXICON
-enum MorphType {
-  TYPEONE
-  TYPETWO
-  TYPETHREE
-}
+// enum MorphType {
+//   TYPEONE
+//   TYPETWO
+//   TYPETHREE
+// }
 
-enum DialectLabel {
-  LABELONE
-  LABELTWO
-  LABELTHREE
-}
+// enum DialectLabel {
+//   LABELONE
+//   LABELTWO
+//   LABELTHREE
+// }
 
 model Word {
-  id             Int            @id @default(autoincrement())
-  lexemeForm     String?        @unique
-  morphType      MorphType?
-  dialectLabels  DialectLabel[]
-  pronounciation String?
-  wordId         Int?
+  id       Int    @id @default(autoincrement())
+  spelling String @unique
 
-  variantParent Variant[] @relation("ParentWord")
-  variantChild  Variant[] @relation("ChildWord")
+  references Reference[]
 }
 
-model Variant {
-  id           Int  @id @default(autoincrement())
-  parentWord   Word @relation("ParentWord", fields: [parentWordId], references: [id])
-  parentWordId Int
-  childWord    Word @relation("ChildWord", fields: [childWordId], references: [id])
-  childWordId  Int
+model Reference {
+  id       Int    @id @default(autoincrement())
+  spelling String
+  wordId   Int
+  sourceId Int
+  entryId  Int
 
-  dialectLabels String?
-  variantType   String?
-  note          String?
+  source Source @relation(fields: [sourceId], references: [id])
+  entry  Data   @relation(fields: [entryId], references: [id])
+  word   Word   @relation(fields: [wordId], references: [id])
 }
 
-enum GrammaticalInfo {
-  INFOONE
-  INFOTWO
-  INFOTHREE
-}
+// enum GrammaticalInfo {
+//   INFOONE
+//   INFOTWO
+//   INFOTHREE
+// }
 
-enum SemanticDomain {
-  DOMAINONE
-  DOMAINTWO
-  DOMAINTHREE
-}
+// enum SemanticDomain {
+//   DOMAINONE
+//   DOMAINTWO
+//   DOMAINTHREE
+// }
 
-enum Status {
-  STATUSONE
-  STATUSTWO
-  STATUSTHREE
-}
+// enum Status {
+//   STATUSONE
+//   STATUSTWO
+//   STATUSTHREE
+// }
 
-model Sense {
-  id              Int              @id @default(autoincrement())
-  gloss           String?
-  reversal        String?
-  definition      String?
-  grammaticalInfo GrammaticalInfo?
-  example         String?
-  translation     String?
+// model Sense {
+//   id              Int              @id @default(autoincrement())
+//   gloss           String?
+//   reversal        String?
+//   definition      String?
+//   grammaticalInfo GrammaticalInfo?
+//   example         String?
+//   translation     String?
 
-  reference   Source? @relation("Reference", fields: [referenceId], references: [id])
-  referenceId Int?
+//   reference   Source? @relation("Reference", fields: [referenceId], references: [id])
+//   referenceId Int?
 
-  scientific   String?
-  bibliography String?
-  general      String?
+//   scientific   String?
+//   bibliography String?
+//   general      String?
 
-  source   Source? @relation("Source", fields: [sourceId], references: [id])
-  sourceId Int?
+//   source   Source? @relation("Source", fields: [sourceId], references: [id])
+//   sourceId Int?
 
-  semanticDomains SemanticDomain?
-  status          Status?
-}
+//   semanticDomains SemanticDomain?
+//   status          Status?
+// }

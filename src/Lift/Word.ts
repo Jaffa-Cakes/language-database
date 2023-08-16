@@ -1,11 +1,6 @@
-import { IVariant } from "@/actions/newLexiconWord";
+import Reference from "./Reference";
 
 export default interface Word {
-	id: number;
-	lexemeForm?: string;
-	morphType?: string;
-	dialectLabels?: string;
-	variantOf?: string;
-	pronounciation?: string;
-	variants: IVariant[];
+	spelling: string;
+	references: Reference[];
 }
