@@ -2,10 +2,12 @@
 
 import { Checkbox, Flex } from "@chakra-ui/react";
 
+import { Column, getColumnReadable } from "@/WordsList";
+
 interface IProps {
-	columns: string[];
-	activeColumns: string[];
-	toggleColumn: (column: string) => void;
+	columns: Column[];
+	activeColumns: Column[];
+	toggleColumn: (column: Column) => void;
 }
 
 export default function Component(props: IProps) {
@@ -24,7 +26,7 @@ export default function Component(props: IProps) {
 						defaultChecked={active}
 						onChange={() => toggleColumn(column)}
 					>
-						{column}
+						{getColumnReadable(column)}
 					</Checkbox>
 				);
 			})}

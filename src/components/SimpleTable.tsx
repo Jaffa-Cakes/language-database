@@ -41,14 +41,12 @@ export default function Component(props: Props) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	async function toggle(row: string[]) {
-		console.log("start");
 		let newScratchpad = scratchpad.data;
 		newScratchpad.push(row);
 
 		setScratchpad({
 			data: newScratchpad,
 		});
-		console.log("end");
 	}
 
 	async function expand(e: React.MouseEvent<HTMLTableCellElement>) {
