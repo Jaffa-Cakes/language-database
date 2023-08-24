@@ -10,9 +10,7 @@ import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
 
 export function Providers({ children }: { children: React.ReactNode }) {
-	const [scratchpad, setScratchpad] = useState<Scratchpad>({
-		data: [],
-	});
+	const [scratchpad, setScratchpad] = useState<Scratchpad>(new Scratchpad());
 
 	return (
 		<CacheProvider>

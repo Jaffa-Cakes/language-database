@@ -79,8 +79,6 @@ export default class Lift {
 							result += "</gloss>";
 						}
 
-						console.log(sense.reversalEntries);
-
 						if (sense.reversalEntries !== undefined) {
 							result += '<reversal type="en">';
 							{

@@ -29,7 +29,12 @@ export class Scratchpad {
 		let newRecords = await getWordsByIds(this.recordIds);
 		this.records = [];
 		newRecords.forEach((record) => {
-			this.records.push([record.english, record.language, record.sonetic, record.notes]);
+			this.records.push([
+				record.english,
+				record.language,
+				record.sonetic,
+				record.notes,
+			]);
 		});
 	}
 

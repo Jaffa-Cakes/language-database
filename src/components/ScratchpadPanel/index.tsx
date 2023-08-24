@@ -8,6 +8,8 @@ import {
 	Tbody,
 	Td,
 	Text,
+	Th,
+	Thead,
 	Tr,
 	VStack,
 } from "@chakra-ui/react";
@@ -26,28 +28,18 @@ export default function Component() {
 		},
 	};
 
-	async function remove(row: string[]) {
-		let newData = scratchpad.data.filter((r) => {
-			if (r.length !== row.length) return true;
+	async function remove(id: string) {
+		const newScratchpad = scratchpad.cloneRecordless();
+		newScratchpad.removeRecord(parseInt(id));
+		await newScratchpad.refreshRecords();
 
-			let match = true;
-
-			for (let index = 0; index < r.length; index++) {
-				if (r[index] !== row[index]) {
-					match = false;
-					break;
-				}
-			}
-
-			return !match;
-		});
-		setScratchpad({ data: newData });
+		setScratchpad(newScratchpad);
 	}
 
-	let dataElements = scratchpad.data.map((row) => {
+	let dataElements = scratchpad.getRecords().map((record) => {
 		return (
-			<Tr key={row[0]} onClick={(e) => remove(row)}>
-				{row.map((cell) => (
+			<Tr key={record[0]} onClick={(e) => remove(record[0])}>
+				{record.map((cell) => (
 					<Td
 						key={cell}
 						maxW={40}
@@ -112,6 +104,15 @@ export default function Component() {
 						overflowY="auto"
 					>
 						<Table size="sm">
+							<Thead>
+								<Tr>
+									<Th>ID</Th>
+									<Th>English</Th>
+									<Th>Language</Th>
+									<Th>Sonetic</Th>
+									<Th>Notes</Th>
+								</Tr>
+							</Thead>
 							<Tbody>{dataElements}</Tbody>
 						</Table>
 					</TableContainer>

@@ -84,7 +84,9 @@ export default function Page() {
 		]),
 	);
 	const [editorRecordId, setEditorRecordId] = useState<number>(0);
-	let isEditorOpen: boolean, onEditorOpen: () => void, onEditorClose: () => void;
+	let isEditorOpen: boolean,
+		onEditorOpen: () => void,
+		onEditorClose: () => void;
 	{
 		const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -93,7 +95,9 @@ export default function Page() {
 		onEditorClose = onClose;
 	}
 	const [expandedField, setExpandedField] = useState<ReactNode>(<></>);
-	let isExpandedOpen: boolean, onExpandedOpen: () => void, onExpandedClose: () => void;
+	let isExpandedOpen: boolean,
+		onExpandedOpen: () => void,
+		onExpandedClose: () => void;
 	{
 		const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -112,11 +116,14 @@ export default function Page() {
 		const [sourceName, setSourceName] = useState<string>("");
 		const [sourceFileName, setSourceFileName] = useState<string>("");
 		const [sourceReference, setSourceReference] = useState<string>("");
-		const [sourcePublicationType, setSourcePublicationType] = useState<string>("");
-		const [sourceDocumentType, setSourceDocumentType] = useState<string>("");
+		const [sourcePublicationType, setSourcePublicationType] =
+			useState<string>("");
+		const [sourceDocumentType, setSourceDocumentType] =
+			useState<string>("");
 		const [sourceLocation, setSourceLocation] = useState<string>("");
 		const [sourceLanguage, setSourceLanguage] = useState<string>("");
-		const [sourceLanguageName, setSourceLanguageName] = useState<string>("");
+		const [sourceLanguageName, setSourceLanguageName] =
+			useState<string>("");
 		const [sourceNotes, setSourceNotes] = useState<string>("");
 
 		filterHandles = {
@@ -172,14 +179,14 @@ export default function Page() {
 
 	function openRecordEditor(id: number) {
 		setEditorRecordId(id);
-		onEditorOpen();	
+		onEditorOpen();
 	}
 
 	function expandField(value: string) {
 		setExpandedField(
 			<Box backgroundColor="gray.800" rounded="lg" px="3" py="2">
 				<Text>{value}</Text>
-			</Box>
+			</Box>,
 		);
 		onExpandedOpen();
 	}
@@ -195,7 +202,22 @@ export default function Page() {
 		.getColumns()
 		.map((column) => getColumnReadable(column));
 
-	let allColumns = [Column.English, Column.Language, Column.Sonetic, Column.Notes, Column.SourceId, Column.SourceName, Column.SourceFileName, Column.SourceReference, Column.SourcePublicationType, Column.SourceDocumentType, Column.SourceLocation, Column.SourceLanguage, Column.SourceLanguageName, Column.SourceNotes];
+	let allColumns = [
+		Column.English,
+		Column.Language,
+		Column.Sonetic,
+		Column.Notes,
+		Column.SourceId,
+		Column.SourceName,
+		Column.SourceFileName,
+		Column.SourceReference,
+		Column.SourcePublicationType,
+		Column.SourceDocumentType,
+		Column.SourceLocation,
+		Column.SourceLanguage,
+		Column.SourceLanguageName,
+		Column.SourceNotes,
+	];
 
 	const records = wordsList.getRecords();
 
@@ -204,8 +226,8 @@ export default function Page() {
 			<Th textAlign="center" maxW={15}>
 				Scratchpad
 			</Th>
-			{columns.map((column) => (
-				<Th>{column}</Th>
+			{columns.map((column, i) => (
+				<Th key={i}>{column}</Th>
 			))}
 			<Th textAlign="center" maxW={15}>
 				Options
@@ -214,7 +236,6 @@ export default function Page() {
 	);
 
 	const searchInputs = wordsList.getColumns().map((column) => {
-
 		let setter: (value: string) => void;
 		let getter: string;
 
@@ -223,7 +244,7 @@ export default function Page() {
 				setter = filterHandles.setId;
 				getter = filterHandles.id;
 				break;
-			case Column.English:	
+			case Column.English:
 				setter = filterHandles.setEnglish;
 				getter = filterHandles.english;
 				break;
@@ -293,12 +314,16 @@ export default function Page() {
 			if (column == Column.SourceId) filters.SourceId = value;
 			if (column == Column.SourceName) filters.SourceName = value;
 			if (column == Column.SourceFileName) filters.SourceFileName = value;
-			if (column == Column.SourceReference) filters.SourceReference = value;
-			if (column == Column.SourcePublicationType) filters.SourcePublicationType = value;
-			if (column == Column.SourceDocumentType) filters.SourceDocumentType = value;
+			if (column == Column.SourceReference)
+				filters.SourceReference = value;
+			if (column == Column.SourcePublicationType)
+				filters.SourcePublicationType = value;
+			if (column == Column.SourceDocumentType)
+				filters.SourceDocumentType = value;
 			if (column == Column.SourceLocation) filters.SourceLocation = value;
 			if (column == Column.SourceLanguage) filters.SourceLanguage = value;
-			if (column == Column.SourceLanguageName) filters.SourceLanguageName = value;
+			if (column == Column.SourceLanguageName)
+				filters.SourceLanguageName = value;
 			if (column == Column.SourceNotes) filters.SourceNotes = value;
 
 			newWordsList.setFilters(filters);
@@ -326,15 +351,19 @@ export default function Page() {
 		<>
 			{isClient ? (
 				<>
-					<TableColumnToggle columns={allColumns} activeColumns={wordsList.getColumns()} toggleColumn={toggleColumn} />
+					<TableColumnToggle
+						columns={allColumns}
+						activeColumns={wordsList.getColumns()}
+						toggleColumn={toggleColumn}
+					/>
 
 					<hr />
 
-					<SearchParams>
-						{searchInputs}
-					</SearchParams>
+					<SearchParams>{searchInputs}</SearchParams>
 
-					<Button onClick={refreshSearch} py={5} mt={3}>Refresh</Button>
+					<Button onClick={refreshSearch} py={5} mt={3}>
+						Refresh
+					</Button>
 
 					<MainTableContainer total={records.length}>
 						<Thead>{headings}</Thead>
@@ -344,14 +373,27 @@ export default function Page() {
 								<Tr>
 									<Td>
 										<HStack justifyContent="center">
-											<Checkbox onChange={(e) => toggleScratchpadRecord(parseInt(record[0]))}/>
+											<Checkbox
+												onChange={(e) =>
+													toggleScratchpadRecord(
+														parseInt(record[0]),
+													)
+												}
+											/>
 										</HStack>
 									</Td>
 									{record.map((value) => (
-										<TData onClick={(e) => expandField(value)}>{value}</TData>
+										<TData
+											onClick={(e) => expandField(value)}
+										>
+											{value}
+										</TData>
 									))}
 									<Td maxW={15}>
-										<HStack spacing="2" justifyContent="center">
+										<HStack
+											spacing="2"
+											justifyContent="center"
+										>
 											<Button
 												size="xs"
 												background="purple.600"

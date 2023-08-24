@@ -18,7 +18,7 @@ export default function Component(props: Props) {
 			css={{
 				overflowX: "hidden",
 				textOverflow: "ellipsis",
-                cursor: onClick === undefined ? "default" : "pointer",
+				cursor: onClick === undefined ? "default" : "pointer",
 			}}
 			onClick={onClick}
 			_hover={{
