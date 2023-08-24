@@ -378,13 +378,17 @@ export default function Page() {
 									<Tr key={keyHelper}>
 										<Td>
 											<HStack justifyContent="center">
-												<Checkbox
-													onChange={(e) =>
+												<Button
+													size="xs"
+													background="green.600"
+													onClick={(e) =>
 														toggleScratchpadRecord(
 															parseInt(record[0]),
 														)
 													}
-												/>
+												>
+													+
+												</Button>
 											</HStack>
 										</Td>
 										{record.map((value) => {
@@ -414,7 +418,7 @@ export default function Page() {
 														)
 													}
 												>
-													+
+													/
 												</Button>
 												<Button
 													size="xs"

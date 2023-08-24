@@ -2,6 +2,7 @@
 
 import {
 	Box,
+	Button,
 	Flex,
 	Table,
 	TableContainer,
@@ -38,7 +39,16 @@ export default function Component() {
 
 	let dataElements = scratchpad.getRecords().map((record) => {
 		return (
-			<Tr key={record[0]} onClick={(e) => remove(record[0])}>
+			<Tr key={record[0]}>
+				<Td>
+					<Button
+						size="xs"
+						background="red.600"
+						onClick={(e) => remove(record[0])}
+					>
+						-
+					</Button>
+				</Td>
 				{record.map((cell) => (
 					<Td
 						key={cell}
@@ -106,6 +116,7 @@ export default function Component() {
 						<Table size="sm">
 							<Thead>
 								<Tr>
+									<Th>Remove</Th>
 									<Th>ID</Th>
 									<Th>English</Th>
 									<Th>Language</Th>

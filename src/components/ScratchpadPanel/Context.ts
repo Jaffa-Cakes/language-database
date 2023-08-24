@@ -30,6 +30,7 @@ export class Scratchpad {
 		this.records = [];
 		newRecords.forEach((record) => {
 			this.records.push([
+				record.id.toString(),
 				record.english,
 				record.language,
 				record.sonetic,
