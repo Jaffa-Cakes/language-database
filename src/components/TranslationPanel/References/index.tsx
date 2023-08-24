@@ -1,7 +1,8 @@
-import { Button, Stack } from "@chakra-ui/react";
+import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 import Drop from "./../Drop";
-import { ReactNode, useEffect, useState } from "react";
+import { DragEventHandler, ReactNode, useEffect, useState } from "react";
 import Reference, { IReference } from "./Reference";
+import getWordById from "@/actions/getWordById";
 
 interface Props {
 	value: IReference[];
@@ -56,6 +57,8 @@ export default function Component(props: Props) {
 	}
 
 	async function blankReference() {
+		setReferenceDrop("");
+		setSelectedReference(null);
 		set([
 			...value,
 			{
@@ -65,6 +68,35 @@ export default function Component(props: Props) {
 		]);
 		setReferenceDrop(value.length.toString());
 	}
+
+	const handleDrop: DragEventHandler<HTMLDivElement> = async (e) => {
+		e.preventDefault();
+
+		if (e.dataTransfer === null) return;
+
+		const data = e.dataTransfer.getData("text/plain");
+
+		if (data === "") return;
+
+		const entryId = parseInt(data);
+
+		const entry = await getWordById(entryId);
+
+		setReferenceDrop("");
+		setSelectedReference(null);
+		set([
+			...value,
+			{
+				spelling: entry.language,
+				entry: entryId,
+			},
+		]);
+		setReferenceDrop(value.length.toString());
+	};
+
+	const handleDragOver: DragEventHandler<HTMLDivElement> = (e) => {
+		e.preventDefault();
+	};
 
 	return (
 		<Stack
@@ -95,6 +127,22 @@ export default function Component(props: Props) {
 
 			<Button onClick={() => close()}>Close</Button>
 			<Button onClick={() => blankReference()}>Add Reference</Button>
+
+			<Flex
+				py={2}
+				px={2}
+				minH={32}
+				background="black"
+				onDrop={handleDrop}
+				onDragOver={handleDragOver}
+				direction="column"
+				placeContent="center"
+				placeItems="center"
+			>
+				<Text fontSize="xs" userSelect="none">
+					Drag &apos;n Drop Entry
+				</Text>
+			</Flex>
 		</Stack>
 	);
 }

@@ -350,6 +350,13 @@ export default function Page() {
 		setScratchpad(newScratchpad);
 	}
 
+	async function dragStart(
+		e: React.DragEvent<HTMLTableRowElement>,
+		id: string,
+	) {
+		e.dataTransfer.setData("text/plain", id);
+	}
+
 	return (
 		<>
 			{isClient ? (
@@ -375,7 +382,13 @@ export default function Page() {
 							{records.map((record) => {
 								keyHelper++;
 								return (
-									<Tr key={keyHelper}>
+									<Tr
+										key={keyHelper}
+										draggable="true"
+										onDragStart={(e) =>
+											dragStart(e, record[0])
+										}
+									>
 										<Td>
 											<HStack justifyContent="center">
 												<Button

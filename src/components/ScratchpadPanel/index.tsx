@@ -37,9 +37,20 @@ export default function Component() {
 		setScratchpad(newScratchpad);
 	}
 
+	async function dragStart(
+		e: React.DragEvent<HTMLTableRowElement>,
+		id: string,
+	) {
+		e.dataTransfer.setData("text/plain", id);
+	}
+
 	let dataElements = scratchpad.getRecords().map((record) => {
 		return (
-			<Tr key={record[0]}>
+			<Tr
+				key={record[0]}
+				draggable="true"
+				onDragStart={(e) => dragStart(e, record[0])}
+			>
 				<Td>
 					<Button
 						size="xs"
