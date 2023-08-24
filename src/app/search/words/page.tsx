@@ -75,6 +75,7 @@ interface FilterHandles {
 export default function Page() {
 	const [isClient, setIsClient] = useState(false);
 	const { scratchpad, setScratchpad } = useContext(ScratchpadContext);
+	let keyHelper = 0;
 	const [wordsList, setWordsList] = useState<WordsList>(
 		new WordsList([
 			Column.Id,
@@ -331,8 +332,10 @@ export default function Page() {
 			setter(value);
 		}
 
+		keyHelper++;
 		return (
 			<SearchInput
+				key={keyHelper}
 				w={40}
 				placeholder={getColumnReadable(column)}
 				setValue={completeSet}
@@ -369,57 +372,66 @@ export default function Page() {
 						<Thead>{headings}</Thead>
 
 						<Tbody>
-							{records.map((record) => (
-								<Tr>
-									<Td>
-										<HStack justifyContent="center">
-											<Checkbox
-												onChange={(e) =>
-													toggleScratchpadRecord(
-														parseInt(record[0]),
-													)
-												}
-											/>
-										</HStack>
-									</Td>
-									{record.map((value) => (
-										<TData
-											onClick={(e) => expandField(value)}
-										>
-											{value}
-										</TData>
-									))}
-									<Td maxW={15}>
-										<HStack
-											spacing="2"
-											justifyContent="center"
-										>
-											<Button
-												size="xs"
-												background="purple.600"
-												onClick={(e) =>
-													openRecordEditor(
-														parseInt(record[0]),
-													)
-												}
+							{records.map((record) => {
+								keyHelper++;
+								return (
+									<Tr key={keyHelper}>
+										<Td>
+											<HStack justifyContent="center">
+												<Checkbox
+													onChange={(e) =>
+														toggleScratchpadRecord(
+															parseInt(record[0]),
+														)
+													}
+												/>
+											</HStack>
+										</Td>
+										{record.map((value) => {
+											keyHelper++;
+											return (
+												<TData
+													key={keyHelper}
+													onClick={(e) =>
+														expandField(value)
+													}
+												>
+													{value}
+												</TData>
+											);
+										})}
+										<Td maxW={15}>
+											<HStack
+												spacing="2"
+												justifyContent="center"
 											>
-												+
-											</Button>
-											<Button
-												size="xs"
-												background="red.600"
-												onClick={(e) =>
-													deleteRecord(
-														parseInt(record[0]),
-													)
-												}
-											>
-												-
-											</Button>
-										</HStack>
-									</Td>
-								</Tr>
-							))}
+												<Button
+													size="xs"
+													background="purple.600"
+													onClick={(e) =>
+														openRecordEditor(
+															parseInt(record[0]),
+														)
+													}
+												>
+													+
+												</Button>
+												<Button
+													size="xs"
+													background="red.600"
+													onClick={(e) =>
+														deleteRecord(
+															parseInt(record[0]),
+														)
+													}
+												>
+													-
+												</Button>
+											</HStack>
+										</Td>
+									</Tr>
+								);
+							})}
 						</Tbody>
 
 						<Tfoot>{headings}</Tfoot>

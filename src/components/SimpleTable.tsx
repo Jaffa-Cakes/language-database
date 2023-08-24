@@ -41,12 +41,7 @@ export default function Component(props: Props) {
 	const { isOpen, onOpen, onClose } = useDisclosure();
 
 	async function toggle(row: string[]) {
-		let newScratchpad = scratchpad.data;
-		newScratchpad.push(row);
-
-		setScratchpad({
-			data: newScratchpad,
-		});
+		alert("TODO: Implement toggle");
 	}
 
 	async function expand(e: React.MouseEvent<HTMLTableCellElement>) {
