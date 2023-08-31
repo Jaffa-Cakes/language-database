@@ -50,6 +50,17 @@ export default function Component() {
 			references: references,
 			senses: senses,
 		});
+
+		// Reset Sub Panels
+		setSubPanel(SubPanel.None);
+
+		// Reset values
+		setSpelling("");
+		setMorphType("");
+		setDialectLabels([]);
+		setPronunciation("");
+		setSenses([]);
+		setReferences([]);
 	}
 
 	async function closeSubPanel() {

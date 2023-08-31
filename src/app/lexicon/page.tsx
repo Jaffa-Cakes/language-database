@@ -4,7 +4,6 @@ import LexiconDownloader from "@/components/LexiconDownloader";
 import getAllLexiconWords, {
 	IGetAllLexiconWordsReturns,
 } from "@/actions/getAllLexiconWords";
-import SimpleTable from "@/components/SimpleTable";
 import { useEffect, useState } from "react";
 import { Button, Flex, HStack, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
 import { dialectLabelPretty, morphTypePretty } from "@/utils";
@@ -79,21 +78,8 @@ export default function Page() {
 			</Flex>
 
 			<Flex flexDir="row" w="full" justifyContent="center" mt="5">
-			<Button onClick={() => refresh()}>Refresh</Button>
+				<Button onClick={() => refresh()}>Refresh</Button>
 			</Flex>
-
-			{/* <SimpleTable
-				headings={[
-					"ID",
-					"Lexeme Form",
-					"Morph Type",
-					"Dialect Labels",
-					"Pronunciation",
-					"Senses",
-					"References",
-				]}
-				data={data}
-			/> */}
 
 			<MainTableContainer total={words.length}>
 				<Thead>{headings}</Thead>
