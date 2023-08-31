@@ -111,8 +111,8 @@ model Reference {
   wordId   Int
   entryId  Int
 
-  entry Data @relation(fields: [entryId], references: [id])
-  word  Word @relation(fields: [wordId], references: [id])
+  entry Data @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  word  Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
 }
 
 enum GrammaticalInfo {
@@ -132,5 +132,5 @@ model Sense {
   definition      String?
   grammaticalInfo GrammaticalInfo?
 
-  word Word @relation(fields: [wordId], references: [id])
+  word Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
 }

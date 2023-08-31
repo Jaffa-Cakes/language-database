@@ -6,58 +6,69 @@ import getAllLexiconWords, {
 } from "@/actions/getAllLexiconWords";
 import SimpleTable from "@/components/SimpleTable";
 import { useEffect, useState } from "react";
-import { Flex } from "@chakra-ui/react";
+import { Button, Flex, HStack, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
 import { dialectLabelPretty, morphTypePretty } from "@/utils";
+import MainTableContainer from "@/components/tables/MainTableContainer";
+import TData from "@/components/tables/TData";
+import deleteLexiconWord from "@/actions/deleteLexiconWord";
 
 export default function Page() {
 	const [words, setWords] = useState<IGetAllLexiconWordsReturns[]>([]);
 
+	async function refresh() {
+		const newResults = await getAllLexiconWords();
+		setWords(newResults);
+	}
+
 	useEffect(() => {
 		(async () => {
-			const newResults = await getAllLexiconWords();
-			setWords(newResults);
+			await refresh();
 		})();
 	}, []);
 
-	const data = words.map((word) => {
-		let morphType = "";
-		if (word.morphType !== null) {
-			morphType = morphTypePretty(word.morphType);
-		}
+	async function deleteWord(id: number) {
+		await deleteLexiconWord(id);
+		await refresh();
+	}
 
-		const dialectLabels = word.dialectLabels
-			.map((dialectLabel) => {
-				return dialectLabelPretty(dialectLabel);
-			})
-			.join(", ");
+	let keyHelper = 0;
 
-		const senses = word.senses
-			.map((sense) => {
-				return sense.gloss;
-			})
-			.join(", ");
+	const columns = [
+		"ID",
+		"Lexeme Form",
+		"Morph Type",
+		"Dialect Labels",
+		"Pronunciation",
+		"Senses",
+		"References",
+	];
 
-		const references = word.references
-			.map((reference) => {
-				return (
-					reference.spelling +
-					" (" +
-					reference.entry.source.name +
-					":" +
-					reference.entry.id +
-					")"
-				);
-			})
-			.join(", ");
+	const headings = (
+		<Tr>
+			{columns.map((column, i) => (
+				<Th key={i} maxW={25}>{column}</Th>
+			))}
+			<Th textAlign="center" maxW={15}>
+				Options
+			</Th>
+		</Tr>
+	);
+	
+	const records = words.map((word) => {
+
+		const morphType = word.morphType ? morphTypePretty(word.morphType) : "";
+		const dialectLabels = word.dialectLabels.map((dialectLabel) => dialectLabelPretty(dialectLabel)).join(", ");
+		const senses = word.senses.map((sense) => sense.definition).join(" | ");
+		const references = word.references.map((reference) => reference.spelling).join(", ");
 
 		return [
-			word.id as unknown as string,
+			word.id,
 			word.spelling,
 			morphType,
 			dialectLabels,
-			word.pronunciation ? word.pronunciation : "",
+			word.pronunciation,
 			senses,
-			references,
+			references
 		];
 	});
 
@@ -67,7 +78,11 @@ export default function Page() {
 				<LexiconDownloader />
 			</Flex>
 
-			<SimpleTable
+			<Flex flexDir="row" w="full" justifyContent="center" mt="5">
+			<Button onClick={() => refresh()}>Refresh</Button>
+			</Flex>
+
+			{/* <SimpleTable
 				headings={[
 					"ID",
 					"Lexeme Form",
@@ -78,7 +93,55 @@ export default function Page() {
 					"References",
 				]}
 				data={data}
-			/>
+			/> */}
+
+			<MainTableContainer total={words.length}>
+				<Thead>{headings}</Thead>
+
+				<Tbody>
+					{records.map((record) => {
+						keyHelper++;
+						return (
+							<Tr
+								key={keyHelper}
+							>
+								{record.map((value) => {
+									keyHelper++;
+									return (
+										<TData
+											key={keyHelper}
+										>
+											{value}
+										</TData>
+									);
+								})}
+								<Td maxW={15}>
+									<HStack
+										spacing="2"
+										justifyContent="center"
+									>
+										<Button
+											size="xs"
+											background="purple.600"
+										>
+											/
+										</Button>
+										<Button
+											size="xs"
+											background="red.600"
+											onClick={(e) => deleteWord(record[0] as number)}
+										>
+											-
+										</Button>
+									</HStack>
+								</Td>
+							</Tr>
+						);
+					})}
+				</Tbody>
+
+				<Tfoot>{headings}</Tfoot>
+			</MainTableContainer>
 		</>
 	);
 }

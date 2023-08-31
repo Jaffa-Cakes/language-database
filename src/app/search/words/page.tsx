@@ -3,11 +3,7 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
 
 import SearchParams from "@/components/SearchParams";
-import SearchModeContainer from "@/components/SearchParams/SearchModeContainer";
 import SearchInput from "@/components/SearchParams/SearchInput";
-import SearchMode from "@/components/SearchParams/SearchMode";
-import SearchButton from "@/components/SearchButton";
-import { Mode } from "@/components/SearchParams/SearchMode";
 
 import TableColumnToggle from "@/components/Table/ColumnToggle";
 
@@ -22,11 +18,10 @@ import ScratchpadContext from "@/components/ScratchpadPanel/Context";
 
 import deleteWord from "@/actions/deleteWord";
 
-import WordsList, { Column, Filters, getColumnReadable } from "@/WordsList";
+import WordsList, { Column, getColumnReadable } from "@/WordsList";
 import {
 	Box,
 	Button,
-	Checkbox,
 	HStack,
 	Tbody,
 	Td,
@@ -35,7 +30,6 @@ import {
 	Th,
 	Thead,
 	Tr,
-	filter,
 	useDisclosure,
 } from "@chakra-ui/react";
 
