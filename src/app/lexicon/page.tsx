@@ -4,14 +4,18 @@ import LexiconDownloader from "@/components/LexiconDownloader";
 import getAllLexiconWords, {
 	IGetAllLexiconWordsReturns,
 } from "@/actions/getAllLexiconWords";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, Flex, HStack, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react";
 import { dialectLabelPretty, morphTypePretty } from "@/utils";
 import MainTableContainer from "@/components/tables/MainTableContainer";
 import TData from "@/components/tables/TData";
 import deleteLexiconWord from "@/actions/deleteLexiconWord";
 
+import TranslationPanelContext from "@/components/TranslationPanel/Context";
+
 export default function Page() {
+	// Context
+	const { translationPanel, setTranslationPanel } = useContext(TranslationPanelContext);
 	const [words, setWords] = useState<IGetAllLexiconWordsReturns[]>([]);
 
 	async function refresh() {
@@ -28,6 +32,12 @@ export default function Page() {
 	async function deleteWord(id: number) {
 		await deleteLexiconWord(id);
 		await refresh();
+	}
+
+	function editWord(id: number) {
+		setTranslationPanel({
+			editId: id,
+		});
 	}
 
 	let keyHelper = 0;
@@ -109,6 +119,7 @@ export default function Page() {
 										<Button
 											size="xs"
 											background="purple.600"
+											onClick={(e) => editWord(record[0] as number)}
 										>
 											/
 										</Button>

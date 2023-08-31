@@ -4,6 +4,7 @@ import prisma from "@/db";
 import { MorphType, DialectLabel, GrammaticalInfo } from "@prisma/client";
 
 export interface IWord {
+	id?: number;
 	spelling: string;
 	morphType?: MorphType;
 	dialectLabels?: DialectLabel[];
@@ -23,6 +24,7 @@ export interface IWord {
 export default async function Action(word: IWord) {
 	await prisma.word.create({
 		data: {
+			id: word.id,
 			spelling: word.spelling,
 			morphType: word.morphType,
 			dialectLabels: word.dialectLabels,

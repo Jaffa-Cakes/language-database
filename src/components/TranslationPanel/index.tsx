@@ -1,7 +1,7 @@
 "use client";
 
 import { Box, Button, Flex, Stack, Text } from "@chakra-ui/react";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Field from "./Field";
 import Drop from "./Drop";
 import Senses from "./Senses";
@@ -19,6 +19,13 @@ import {
 } from "@/utils";
 import { MultiSelect, Option } from "chakra-multiselect";
 
+import TranslationPanelContext from "@/components/TranslationPanel/Context";
+
+import getLexiconWord from "@/actions/getLexiconWord";
+
+import { useContext } from "react";
+import deleteLexiconWord from "@/actions/deleteLexiconWord";
+
 enum SubPanel {
 	None,
 	Senses,
@@ -26,6 +33,10 @@ enum SubPanel {
 }
 
 export default function Component() {
+	// Context
+	const { translationPanel, setTranslationPanel } = useContext(TranslationPanelContext);
+
+	// Panels
 	const [expanded, setExpanded] = useState<boolean>(false);
 	const [subPanel, setSubPanel] = useState<SubPanel>(SubPanel.None);
 
@@ -37,20 +48,27 @@ export default function Component() {
 	const [senses, setSenses] = useState<ISense[]>([]);
 	const [references, setReferences] = useState<IReference[]>([]);
 
-	async function handleSave() {
-		const realDialectLabels = dialectLabels.map(
-			(dialectLabel) => getDialectLabel(dialectLabel) as DialectLabel,
-		);
+	async function setEditValues(id: number) {
+		const lexiconWord = await getLexiconWord(id);
 
-		await newLexiconWord({
-			spelling,
-			morphType: getMorphType(morphType),
-			dialectLabels: realDialectLabels,
-			pronunciation: pronunciation !== "" ? pronunciation : undefined,
-			references: references,
-			senses: senses,
-		});
+		const morphTypeNew = lexiconWord.morphType ? morphTypePretty(lexiconWord.morphType) : "";
+		const dialectLabelsNew = lexiconWord.dialectLabels ? lexiconWord.dialectLabels.map((dialectLabel) => dialectLabelPretty(dialectLabel)) : [];
 
+		setSpelling(lexiconWord.spelling);
+		setMorphType(morphTypeNew);
+		setDialectLabels(dialectLabelsNew);
+		setPronunciation(lexiconWord.pronunciation ?? "");
+		setSenses(lexiconWord.senses);
+		setReferences(lexiconWord.references);
+	}
+
+	useEffect(() => {
+		if (translationPanel.editId !== undefined) {
+			setEditValues(translationPanel.editId);
+		}
+	}, [translationPanel]);
+
+	function resetForm() {
 		// Reset Sub Panels
 		setSubPanel(SubPanel.None);
 
@@ -61,6 +79,33 @@ export default function Component() {
 		setPronunciation("");
 		setSenses([]);
 		setReferences([]);
+
+		// Reset edit id
+		setTranslationPanel({
+			editId: undefined,
+		});
+	}
+
+	async function handleSave() {
+		const realDialectLabels = dialectLabels.map(
+			(dialectLabel) => getDialectLabel(dialectLabel) as DialectLabel,
+		);
+
+		if (translationPanel.editId !== undefined) {
+			await deleteLexiconWord(translationPanel.editId);
+		}
+
+		await newLexiconWord({
+			id: translationPanel.editId,
+			spelling,
+			morphType: getMorphType(morphType),
+			dialectLabels: realDialectLabels,
+			pronunciation: pronunciation !== "" ? pronunciation : undefined,
+			references: references,
+			senses: senses,
+		});
+
+		resetForm();
 	}
 
 	async function closeSubPanel() {
@@ -178,13 +223,13 @@ export default function Component() {
 									</Button>
 									<hr />
 									<Button
-										backgroundColor="green.700"
+										backgroundColor={translationPanel.editId !== undefined ? "yellow.700" : "green.700"}
 										type="submit"
 									>
-										Save
+										{translationPanel.editId !== undefined ? "Update #" + translationPanel.editId : "Create"}
 									</Button>
-									<Button backgroundColor="red.700">
-										Delete
+									<Button backgroundColor="red.700" onClick={resetForm}>
+										Reset
 									</Button>
 								</Stack>
 
