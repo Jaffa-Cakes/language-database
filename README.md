@@ -23,6 +23,16 @@ Data in this application is intended to be imported from a Google Spreadsheets d
 If this is the first time this application is being started, you will need to import your spreadsheet data containing your language data.
 This can be done by navigating to [http://localhost:3000/import](http://localhost:3000/import) and uploading each sheet in the `.csv` format when exported from Google Sheets.
 
+#### Backing Up Data
+
+The data for this application is stored in a PostgreSQL database.
+To back up the data, you simply need to copy the `db-data` directory that was created when the application is first started.
+This directory contains the database data files, and can be used to restore the database if needed.
+
+You may want to zip this directory to reduce the size of the backup.
+It is recommended that you do not backup the database while it is running to avoid any potential corruption.
+Consider storing the backup in cloud storage like [Google Drive](https://www.google.com/drive/), [Dropbox](https://www.dropbox.com/), or [OneDrive](https://www.microsoft.com/onedrive) for maximum safety.
+
 ### Development
 
 #### Pre-requisites
