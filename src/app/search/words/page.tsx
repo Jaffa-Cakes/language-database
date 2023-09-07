@@ -356,7 +356,12 @@ export default function Page() {
 		<>
 			{isClient ? (
 				<>
-					<form onSubmit={(e) => { e.preventDefault(); refreshSearch() }}>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							refreshSearch();
+						}}
+					>
 						<TableColumnToggle
 							columns={allColumns}
 							activeColumns={wordsList.getColumns()}
@@ -366,13 +371,22 @@ export default function Page() {
 						<SearchParams>{searchInputs}</SearchParams>
 
 						<Flex placeContent="center">
-							<Button onClick={refreshSearch} py={5} type="submit">
+							<Button
+								onClick={refreshSearch}
+								py={5}
+								type="submit"
+							>
 								Search
 							</Button>
 						</Flex>
 					</form>
 
-					<Box h="0.5" backgroundColor="gray.700" rounded="full" mt="3" />
+					<Box
+						h="0.5"
+						backgroundColor="gray.700"
+						rounded="full"
+						mt="3"
+					/>
 
 					<MainTableContainer total={records.length}>
 						<Thead>{headings}</Thead>
