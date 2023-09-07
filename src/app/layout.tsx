@@ -6,10 +6,6 @@ import TranslationPanel from "@/components/TranslationPanel";
 import ScratchpadPanel from "@/components/ScratchpadPanel";
 import { Box, Flex } from "@chakra-ui/react";
 
-export const metadata = {
-	title: "Woi Wurrung Language App",
-};
-
 export default function RootLayout({
 	children,
 }: {
