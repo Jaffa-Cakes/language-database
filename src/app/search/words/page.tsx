@@ -22,6 +22,7 @@ import WordsList, { Column, getColumnReadable } from "@/WordsList";
 import {
 	Box,
 	Button,
+	Flex,
 	HStack,
 	Tbody,
 	Td,
@@ -355,19 +356,23 @@ export default function Page() {
 		<>
 			{isClient ? (
 				<>
-					<TableColumnToggle
-						columns={allColumns}
-						activeColumns={wordsList.getColumns()}
-						toggleColumn={toggleColumn}
-					/>
+					<form onSubmit={(e) => { e.preventDefault(); refreshSearch() }}>
+						<TableColumnToggle
+							columns={allColumns}
+							activeColumns={wordsList.getColumns()}
+							toggleColumn={toggleColumn}
+						/>
 
-					<hr />
+						<SearchParams>{searchInputs}</SearchParams>
 
-					<SearchParams>{searchInputs}</SearchParams>
+						<Flex placeContent="center">
+							<Button onClick={refreshSearch} py={5} type="submit">
+								Search
+							</Button>
+						</Flex>
+					</form>
 
-					<Button onClick={refreshSearch} py={5} mt={3}>
-						Refresh
-					</Button>
+					<Box h="0.5" backgroundColor="gray.700" rounded="full" mt="3" />
 
 					<MainTableContainer total={records.length}>
 						<Thead>{headings}</Thead>
@@ -463,7 +468,7 @@ export default function Page() {
 					</SimpleModal>
 				</>
 			) : (
-				<div>Loading...</div>
+				<Text>Loading...</Text>
 			)}
 		</>
 	);
