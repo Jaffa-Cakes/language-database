@@ -4,7 +4,11 @@
 ## About
 
 This project is a web application that allows users to compile a lexicon of words for a language from a variety of data sources and entries within those sources.
-Data in this application is intended to be imported from a Google Spreadsheets document, edited analysed within the application, and then exported to (Fieldworks Language Explorer)[https://software.sil.org/fieldworks/] where a dictionary can be created.
+Data in this application is intended to be imported from a Google Spreadsheets document, edited analysed within the application, and then exported to [Fieldworks Language Explorer](https://software.sil.org/fieldworks/) where a dictionary can be created.
+
+The application is intended to be used by linguists, initially developed during my time at [La Trobe University](https://www.latrobe.edu.au/) for [Andrew Tanner](https://github.com/akrtanner) to use in his work with the Woi Wurrung language.
+
+Contributions are welcome, and can be made by forking this repository and submitting a pull request detailing your changes. New issues can also be created to report bugs or request new features.
 
 ## Running
 
@@ -55,14 +59,14 @@ Consider storing the backup in cloud storage like [Google Drive](https://www.goo
 
 ## Notable Dependencies in Use
 
-| Name | Note |
-| --- | --- |
-| [Next.JS](https://nextjs.org/) | React Framework |
-| [React](https://reactjs.org/) | Interface Library |
-| [Chakra UI](https://chakra-ui.com/) | Component Library |
-| [TypeScript](https://www.typescriptlang.org/) | Language |
-| [Prisma](https://www.prisma.io/) | Database ORM |
-| [PostgreSQL](https://www.postgresql.org/) | Database |
-| [Docker](https://www.docker.com/) | Containerisation |
-| [Prettier](https://prettier.io/) | Code Formatting |
-| [ESLint](https://eslint.org/) | Code Linting |
+| Name                                          | Note              |
+| --------------------------------------------- | ----------------- |
+| [Next.JS](https://nextjs.org/)                | React Framework   |
+| [React](https://reactjs.org/)                 | Interface Library |
+| [Chakra UI](https://chakra-ui.com/)           | Component Library |
+| [TypeScript](https://www.typescriptlang.org/) | Language          |
+| [Prisma](https://www.prisma.io/)              | Database ORM      |
+| [PostgreSQL](https://www.postgresql.org/)     | Database          |
+| [Docker](https://www.docker.com/)             | Containerisation  |
+| [Prettier](https://prettier.io/)              | Code Formatting   |
+| [ESLint](https://eslint.org/)                 | Code Linting      |
