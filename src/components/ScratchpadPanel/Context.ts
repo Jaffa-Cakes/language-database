@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import getWordsByIds from "@/actions/getWordsByIds";
+import getEntriesByIds from "@/actions/getEntriesByIds";
 
 export class Scratchpad {
 	private recordIds: number[];
@@ -26,7 +26,7 @@ export class Scratchpad {
 	}
 
 	public async refreshRecords(): Promise<void> {
-		let newRecords = await getWordsByIds(this.recordIds);
+		let newRecords = await getEntriesByIds(this.recordIds);
 		this.records = [];
 		newRecords.forEach((record) => {
 			this.records.push([

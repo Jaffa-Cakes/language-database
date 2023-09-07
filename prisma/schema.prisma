@@ -1,6 +1,7 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
+//// Client and Database
 generator client {
   provider = "prisma-client-js"
 }
@@ -10,8 +11,10 @@ datasource db {
   url      = env("DB_URL")
 }
 
+//// Source Related Data
+// A source "document" or "text" that is being analysed
 model Source {
-  id              Int           @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   name            String?
   flowScaned      Boolean?
   flowEntered     Boolean?
@@ -19,62 +22,81 @@ model Source {
   reference       String?
   publicationType String?
   documentType    String?
-  collectors      Individuals[] @relation("Collectors")
-  consultants     Individuals[] @relation("Consultants")
   date            DateTime?
   location        String?
   sourceLangName  String?
   langName        String?
   notes           String?
-  data            Data[]
+
+  entries Entry[]
+  // collectors  Person[] @relation("Collectors")
+  // consultants Person[] @relation("Consultants")
 }
 
-model Individuals {
-  id        Int      @id @default(autoincrement())
-  name      String
-  collected Source[] @relation("Collectors")
-  consulted Source[] @relation("Consultants")
-}
+//// A person who is related to a source
+// Not yet implemented
+// model Person {
+//   id   Int    @id @default(autoincrement())
+//   name String
 
-model Lexicon {
-  id         Int       @id @default(autoincrement())
-  category   Category? @relation(fields: [categoryId], references: [id])
-  categoryId Int?
+//   collected Source[] @relation("Collectors")
+//   consulted Source[] @relation("Consultants")
+// }
+
+// An entry of data that resides within a source
+model Entry {
+  id         Int        @id @default(autoincrement())
+  sourceId   Int?
   english    String?
-  grammar    String?
+  language   String?
+  sonetic    String?
+  type       EntryType?
+  // categoryId Int?
+  semanticId Int?
+  notes      String?
+
+  // category   Category? @relation(fields: [categoryId], references: [id])
+  source   Source?     @relation(fields: [sourceId], references: [id])
+  variants Reference[]
 }
 
-model Category {
-  id      Int       @id @default(autoincrement())
-  letter  String?
-  lexicon Lexicon[]
-  data    Data[]
-}
-
-enum Type {
+enum EntryType {
   ITEM
   SENT
   SUFF
   MISC
 }
 
-model Data {
-  id         Int       @id @default(autoincrement())
-  source     Source?   @relation(fields: [sourceId], references: [id])
-  sourceId   Int?
-  english    String?
-  language   String?
-  sonetic    String?
-  type       Type?
-  category   Category? @relation(fields: [categoryId], references: [id])
-  categoryId Int?
-  semanticId Int?
-  notes      String?
+//// Currently Unused
+// model Lexicon {
+//   id         Int       @id @default(autoincrement())
+//   category   Category? @relation(fields: [categoryId], references: [id])
+//   categoryId Int?
+//   english    String?
+//   grammar    String?
+// }
 
-  variants Reference[]
+//// Currently Unused
+// model Category {
+//   id      Int       @id @default(autoincrement())
+//   letter  String?
+//   lexicon Lexicon[]
+//   data    Entry[]
+// }
+
+//// Lexicon
+// A word that will be in the lexicon
+model Word {
+  id            Int        @id @default(autoincrement())
+  spelling      String     @unique
+  morphType     MorphType?
+  pronunciation String?
+
+  dialectLabels DialectLabel[]
+  references    Reference[]
+  senses        Sense[]
 }
 
-//////////////////// LEXICON
 enum MorphType {
   BOUNDROOT
   BOUNDSTEM
@@ -94,36 +116,18 @@ enum DialectLabel {
   THREE
 }
 
-model Word {
-  id            Int            @id @default(autoincrement())
-  spelling      String         @unique
-  morphType     MorphType?
-  dialectLabels DialectLabel[]
-  pronunciation String?
-
-  references Reference[]
-  senses     Sense[]
-}
-
+// A reference to a word in a source entry
 model Reference {
   id       Int    @id @default(autoincrement())
   spelling String
   wordId   Int
   entryId  Int
 
-  entry Data @relation(fields: [entryId], references: [id], onDelete: Cascade)
-  word  Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
+  entry Entry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  word  Word  @relation(fields: [wordId], references: [id], onDelete: Cascade)
 }
 
-enum GrammaticalInfo {
-  ADVERB
-  COORDINATINGCONNECTIVE
-  NOUN
-  PROFORM
-  PRONOUN
-  VERB
-}
-
+// A sense of a word
 model Sense {
   id              Int              @id @default(autoincrement())
   gloss           String
@@ -133,4 +137,13 @@ model Sense {
   grammaticalInfo GrammaticalInfo?
 
   word Word @relation(fields: [wordId], references: [id], onDelete: Cascade)
+}
+
+enum GrammaticalInfo {
+  ADVERB
+  COORDINATINGCONNECTIVE
+  NOUN
+  PROFORM
+  PRONOUN
+  VERB
 }

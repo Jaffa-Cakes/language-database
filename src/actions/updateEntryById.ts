@@ -13,7 +13,7 @@ export default async function Action(
 	id: number,
 	values: Values,
 ): Promise<void> {
-	await prisma.data.update({
+	await prisma.entry.update({
 		data: {
 			english: values.english == "" ? null : values.english,
 			language: values.language == "" ? null : values.language,

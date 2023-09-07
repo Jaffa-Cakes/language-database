@@ -14,8 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
-import getWordById from "@/actions/getWordById";
-import updateWordById from "@/actions/updateWordById";
+import getEntryById from "@/actions/getEntryById";
+import updateEntryById from "@/actions/updateEntryById";
 
 export interface Props {
 	isOpen: boolean;
@@ -33,7 +33,7 @@ export default function Component(props: Props) {
 
 	useEffect(() => {
 		if (id !== 0 && isOpen) {
-			getWordById(id).then((word) => {
+			getEntryById(id).then((word) => {
 				setEnglish(word.english);
 				setLanguage(word.language);
 				setSonetic(word.sonetic);
@@ -43,7 +43,7 @@ export default function Component(props: Props) {
 	}, [id, isOpen]);
 
 	async function save() {
-		await updateWordById(id, {
+		await updateEntryById(id, {
 			english,
 			language,
 			sonetic,

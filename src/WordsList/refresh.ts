@@ -82,7 +82,7 @@ export default async function refresh(
 	const select = generateSelect(columns);
 	const where = generateWhere(columns, filters);
 
-	const results = await prisma.data.findMany({
+	const results = await prisma.entry.findMany({
 		select: select,
 		where: where,
 	});

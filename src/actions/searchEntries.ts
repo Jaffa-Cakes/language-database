@@ -59,7 +59,7 @@ export default async function Action(params: Params): Promise<Data[]> {
 			params.sourceId == "" ? "0" : params.sourceId,
 		);
 
-	const results = await prisma.data.findMany({
+	const results = await prisma.entry.findMany({
 		select: {
 			id: true,
 			english: true,

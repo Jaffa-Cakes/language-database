@@ -2,7 +2,7 @@ import { Button, Flex, Stack, Text } from "@chakra-ui/react";
 import Drop from "./../Drop";
 import { DragEventHandler, ReactNode, useEffect, useState } from "react";
 import Reference, { IReference } from "./Reference";
-import getWordById from "@/actions/getWordById";
+import getEntryById from "@/actions/getEntryById";
 
 interface Props {
 	value: IReference[];
@@ -80,7 +80,7 @@ export default function Component(props: Props) {
 
 		const entryId = parseInt(data);
 
-		const entry = await getWordById(entryId);
+		const entry = await getEntryById(entryId);
 
 		setReferenceDrop("");
 		setSelectedReference(null);

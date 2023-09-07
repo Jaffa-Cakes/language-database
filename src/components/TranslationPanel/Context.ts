@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 export interface TranslationPanel {
-    editId?: number;
+	editId?: number;
 }
 
 interface TranslationPanelContext {

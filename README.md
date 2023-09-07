@@ -52,10 +52,18 @@ Consider storing the backup in cloud storage like [Google Drive](https://www.goo
 4. Run `npm run dev` to start the Next.JS development server
 5. Access the application from [http://localhost:3000](http://localhost:3000)
 
+The Next.JS portion of the application is not run in Docker for a few reasons.
+Docker on Windows does not support hot reloading, and the Next.JS development server does not support hot reloading when run in Docker.
+Next.JS in development mode in a container on Windows is very slow for some reason.
+
+As I primarily use Windows, I have chosen to run the Next.JS development server outside of Docker.
+If you are using Linux or MacOS and want to run the Next.JS development server in Docker, feel free to submit a pull request to add this functionality.
+
 #### Before Committing
 
 1. Run `npm run build` to to ensure the code compiles without errors
 2. Run `npm run format` to format the code
+3. Run `npx prisma format` to format the database schema file
 
 ## Notable Dependencies in Use
 

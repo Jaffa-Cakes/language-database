@@ -16,7 +16,7 @@ import EditWordModal from "@/components/EditWordModal";
 
 import ScratchpadContext from "@/components/ScratchpadPanel/Context";
 
-import deleteWord from "@/actions/deleteWord";
+import deleteEntry from "@/actions/deleteEntry";
 
 import WordsList, { Column, getColumnReadable } from "@/WordsList";
 import {
@@ -168,7 +168,7 @@ export default function Page() {
 	}
 
 	async function deleteRecord(id: number) {
-		await deleteWord(id);
+		await deleteEntry(id);
 		await refreshSearch();
 	}
 

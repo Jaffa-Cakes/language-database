@@ -10,7 +10,7 @@ interface Returns {
 }
 
 export default async function Action(id: number): Promise<Returns> {
-	const record = await prisma.data.findUnique({
+	const record = await prisma.entry.findUnique({
 		select: {
 			english: true,
 			language: true,

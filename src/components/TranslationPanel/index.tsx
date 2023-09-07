@@ -34,7 +34,9 @@ enum SubPanel {
 
 export default function Component() {
 	// Context
-	const { translationPanel, setTranslationPanel } = useContext(TranslationPanelContext);
+	const { translationPanel, setTranslationPanel } = useContext(
+		TranslationPanelContext,
+	);
 
 	// Panels
 	const [expanded, setExpanded] = useState<boolean>(false);
@@ -51,8 +53,14 @@ export default function Component() {
 	async function setEditValues(id: number) {
 		const lexiconWord = await getLexiconWord(id);
 
-		const morphTypeNew = lexiconWord.morphType ? morphTypePretty(lexiconWord.morphType) : "";
-		const dialectLabelsNew = lexiconWord.dialectLabels ? lexiconWord.dialectLabels.map((dialectLabel) => dialectLabelPretty(dialectLabel)) : [];
+		const morphTypeNew = lexiconWord.morphType
+			? morphTypePretty(lexiconWord.morphType)
+			: "";
+		const dialectLabelsNew = lexiconWord.dialectLabels
+			? lexiconWord.dialectLabels.map((dialectLabel) =>
+					dialectLabelPretty(dialectLabel),
+			  )
+			: [];
 
 		setSpelling(lexiconWord.spelling);
 		setMorphType(morphTypeNew);
@@ -223,12 +231,23 @@ export default function Component() {
 									</Button>
 									<hr />
 									<Button
-										backgroundColor={translationPanel.editId !== undefined ? "yellow.700" : "green.700"}
+										backgroundColor={
+											translationPanel.editId !==
+											undefined
+												? "yellow.700"
+												: "green.700"
+										}
 										type="submit"
 									>
-										{translationPanel.editId !== undefined ? "Update #" + translationPanel.editId : "Create"}
+										{translationPanel.editId !== undefined
+											? "Update #" +
+											  translationPanel.editId
+											: "Create"}
 									</Button>
-									<Button backgroundColor="red.700" onClick={resetForm}>
+									<Button
+										backgroundColor="red.700"
+										onClick={resetForm}
+									>
 										Reset
 									</Button>
 								</Stack>

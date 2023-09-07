@@ -11,7 +11,7 @@ interface Returns {
 }
 
 export default async function Action(ids: number[]): Promise<Returns[]> {
-	const records = await prisma.data.findMany({
+	const records = await prisma.entry.findMany({
 		select: {
 			id: true,
 			english: true,

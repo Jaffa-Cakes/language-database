@@ -108,8 +108,8 @@ export default async function Action(
 		});
 	});
 
-	await prisma.data.deleteMany();
-	await prisma.data.createMany({
+	await prisma.entry.deleteMany();
+	await prisma.entry.createMany({
 		data: data,
 	});
 }
