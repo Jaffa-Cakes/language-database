@@ -24,7 +24,7 @@ import TranslationPanelContext from "@/components/TranslationPanel/Context";
 import getLexiconWord from "@/actions/getLexiconWord";
 
 import { useContext } from "react";
-import deleteLexiconWord from "@/actions/deleteLexiconWord";
+import deleteWord from "@/actions/deleteWord";
 
 enum SubPanel {
 	None,
@@ -100,7 +100,7 @@ export default function Component() {
 		);
 
 		if (translationPanel.editId !== undefined) {
-			await deleteLexiconWord(translationPanel.editId);
+			await deleteWord(translationPanel.editId);
 		}
 
 		await newLexiconWord({

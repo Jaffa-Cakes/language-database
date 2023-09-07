@@ -2,14 +2,14 @@
 
 import Lift from "@/Lift";
 import Word from "@/Lift/Word";
-import getAllLexiconWords from "@/actions/getAllLexiconWords";
+import getWords from "@/actions/getWords";
 import { Button } from "@chakra-ui/react";
 
 interface Props {}
 
 export default function Component(props: Props) {
 	async function handleExport() {
-		const wordsRaw = await getAllLexiconWords();
+		const wordsRaw = await getWords();
 
 		const words: Word[] = wordsRaw.map((word) => {
 			return {

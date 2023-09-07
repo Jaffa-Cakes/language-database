@@ -3,7 +3,7 @@
 import prisma from "@/db";
 import { MorphType, DialectLabel, GrammaticalInfo } from "@prisma/client";
 
-export interface IGetAllLexiconWordsReturns {
+export interface Returns {
 	id: number;
 	spelling: string;
 	morphType: MorphType | null;
@@ -29,7 +29,7 @@ export interface IGetAllLexiconWordsReturns {
 	}[];
 }
 
-export default async function Action(): Promise<IGetAllLexiconWordsReturns[]> {
+export default async function Action(): Promise<Returns[]> {
 	let wordsRaw = await prisma.word.findMany({
 		select: {
 			id: true,

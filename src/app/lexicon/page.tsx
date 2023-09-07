@@ -1,9 +1,9 @@
 "use client";
 
 import LexiconDownloader from "@/components/LexiconDownloader";
-import getAllLexiconWords, {
-	IGetAllLexiconWordsReturns,
-} from "@/actions/getAllLexiconWords";
+import getWords, {
+	Returns as getWordsReturns,
+} from "@/actions/getWords";
 import { useContext, useEffect, useState } from "react";
 import {
 	Button,
@@ -19,7 +19,7 @@ import {
 import { dialectLabelPretty, morphTypePretty } from "@/utils";
 import MainTableContainer from "@/components/tables/MainTableContainer";
 import TData from "@/components/tables/TData";
-import deleteLexiconWord from "@/actions/deleteLexiconWord";
+import deleteWord from "@/actions/deleteWord";
 
 import TranslationPanelContext from "@/components/TranslationPanel/Context";
 
@@ -28,10 +28,10 @@ export default function Page() {
 	const { translationPanel, setTranslationPanel } = useContext(
 		TranslationPanelContext,
 	);
-	const [words, setWords] = useState<IGetAllLexiconWordsReturns[]>([]);
+	const [words, setWords] = useState<getWordsReturns[]>([]);
 
 	async function refresh() {
-		const newResults = await getAllLexiconWords();
+		const newResults = await getWords();
 		setWords(newResults);
 	}
 
@@ -41,8 +41,8 @@ export default function Page() {
 		})();
 	}, []);
 
-	async function deleteWord(id: number) {
-		await deleteLexiconWord(id);
+	async function doDeleteWord(id: number) {
+		await deleteWord(id);
 		await refresh();
 	}
 
@@ -137,7 +137,7 @@ export default function Page() {
 											size="xs"
 											background="red.600"
 											onClick={(e) =>
-												deleteWord(record[0] as number)
+												doDeleteWord(record[0] as number)
 											}
 										>
 											-
