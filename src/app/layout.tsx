@@ -4,7 +4,7 @@ import { Providers } from "./providers";
 import Navbar from "@/components/Navbar";
 import TranslationPanel from "@/components/TranslationPanel";
 import ScratchpadPanel from "@/components/ScratchpadPanel";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, DarkMode, Flex } from "@chakra-ui/react";
 
 export default function RootLayout({
 	children,
@@ -17,34 +17,38 @@ export default function RootLayout({
 		<html lang="en-AU">
 			<body>
 				<Providers>
-					<Flex
-						h={h}
-						maxH={h}
-						w={w}
-						maxW={w}
-						overflow="hidden"
-						flexDir="column"
-					>
-						<Box>
-							<Navbar />
-						</Box>
-						<Flex flexGrow="1" minH="0px">
-							<Flex
-								flexGrow="1"
-								py="2.5"
-								px="5"
-								minH="0px"
-								maxH="100%"
-								flexDir="column"
-							>
-								{children}
+					<DarkMode>
+						<Flex
+							h={h}
+							maxH={h}
+							w={w}
+							maxW={w}
+							overflow="hidden"
+							flexDir="column"
+							backgroundColor="gray.800"
+							color="gray.100"
+						>
+							<Box>
+								<Navbar />
+							</Box>
+							<Flex flexGrow="1" minH="0px">
+								<Flex
+									flexGrow="1"
+									py="2.5"
+									px="5"
+									minH="0px"
+									maxH="100%"
+									flexDir="column"
+								>
+									{children}
+								</Flex>
+								<TranslationPanel />
 							</Flex>
-							<TranslationPanel />
+							<Box>
+								<ScratchpadPanel />
+							</Box>
 						</Flex>
-						<Box>
-							<ScratchpadPanel />
-						</Box>
-					</Flex>
+					</DarkMode>
 				</Providers>
 			</body>
 		</html>

@@ -1,9 +1,7 @@
 "use client";
 
 import LexiconDownloader from "@/components/LexiconDownloader";
-import getWords, {
-	Returns as getWordsReturns,
-} from "@/actions/getWords";
+import getWords, { Returns as getWordsReturns } from "@/actions/getWords";
 import { useContext, useEffect, useState } from "react";
 import {
 	Button,
@@ -137,7 +135,9 @@ export default function Page() {
 											size="xs"
 											background="red.600"
 											onClick={(e) =>
-												doDeleteWord(record[0] as number)
+												doDeleteWord(
+													record[0] as number,
+												)
 											}
 										>
 											-

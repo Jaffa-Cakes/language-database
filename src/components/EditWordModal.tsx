@@ -53,10 +53,18 @@ export default function Component(props: Props) {
 		onClose();
 	}
 
+	const inputBackgroundColor = "blackAlpha.300";
+	const inputHover = {
+		backgroundColor: "blackAlpha.500",
+	};
+	const inputFocus = {
+		backgroundColor: "blackAlpha.500",
+	};
+
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
 			<ModalOverlay />
-			<ModalContent>
+			<ModalContent color="gray.100">
 				<ModalHeader>Edit Entry</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody>
@@ -64,24 +72,36 @@ export default function Component(props: Props) {
 					<Input
 						value={english}
 						onChange={(e) => setEnglish(e.target.value)}
+						backgroundColor={inputBackgroundColor}
+						_hover={inputHover}
+						_focus={inputFocus}
 					/>
 
 					<Text>Language</Text>
 					<Input
 						value={language}
 						onChange={(e) => setLanguage(e.target.value)}
+						backgroundColor={inputBackgroundColor}
+						_hover={inputHover}
+						_focus={inputFocus}
 					/>
 
 					<Text>Sonetic</Text>
 					<Input
 						value={sonetic}
 						onChange={(e) => setSonetic(e.target.value)}
+						backgroundColor={inputBackgroundColor}
+						_hover={inputHover}
+						_focus={inputFocus}
 					/>
 
 					<Text>Notes</Text>
 					<Input
 						value={notes}
 						onChange={(e) => setNotes(e.target.value)}
+						backgroundColor={inputBackgroundColor}
+						_hover={inputHover}
+						_focus={inputFocus}
 					/>
 				</ModalBody>
 
