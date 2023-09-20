@@ -49,8 +49,9 @@ Consider storing the backup in cloud storage like [Google Drive](https://www.goo
 1. Clone the repository
 2. Run `docker compose up -d db --build` to start the PostgreSQL database
 3. Run `npm install` to install any dependencies
-4. Run `npm run dev` to start the Next.JS development server
-5. Access the application from [http://localhost:3000](http://localhost:3000)
+4. Run `npx prisma migrate deploy` to apply any database migrations that have not been applied, and run `npx prisma migrate dev` if you have made changes to schema.prisma
+5. Run `npm run dev` to start the Next.JS development server
+6. Access the application from [http://localhost:3000](http://localhost:3000)
 
 The Next.JS portion of the application is not run in Docker for a few reasons.
 Docker on Windows does not support hot reloading, and the Next.JS development server does not support hot reloading when run in Docker.
