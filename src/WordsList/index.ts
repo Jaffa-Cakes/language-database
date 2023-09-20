@@ -45,6 +45,10 @@ export default class WordsList {
 	}
 
 	public async runRefresh(): Promise<void> {
+		console.log("Before refresh:");
+		console.log(Date.now());
 		this.records = await refresh(this.columns, this.filters);
+		console.log("After refresh:");
+		console.log(Date.now());
 	}
 }

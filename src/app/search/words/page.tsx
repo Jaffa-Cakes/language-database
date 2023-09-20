@@ -162,6 +162,8 @@ export default function Page() {
 	}, []);
 
 	async function refreshSearch() {
+		console.log("runRefresh Triggered");
+		console.log(Date.now());
 		const newWordsList = wordsList.cloneRecordless();
 		await newWordsList.runRefresh();
 
@@ -372,7 +374,6 @@ export default function Page() {
 
 						<Flex placeContent="center">
 							<Button
-								onClick={refreshSearch}
 								py={5}
 								type="submit"
 							>
