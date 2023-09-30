@@ -48,14 +48,14 @@ function StyledCheckbox(props: IStyledCheckboxProps) {
 
 	return (
 		<Box
-			backgroundColor={active ? "gray.700" : "gray.900"}
+			backgroundColor={active ? "panel.300" : "panel.100"}
 			px="1.5"
 			py="0.5"
 			mx="1.5"
 			my="1"
 			rounded="lg"
 			border="1px"
-			borderColor={active ? "gray.900" : "gray.700"}
+			borderColor="panel.100"
 		>
 			<Checkbox
 				size="sm"

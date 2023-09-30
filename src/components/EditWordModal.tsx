@@ -11,6 +11,8 @@ import {
 	Button,
 	Text,
 	Input,
+	VStack,
+	Box,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
@@ -64,49 +66,63 @@ export default function Component(props: Props) {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
 			<ModalOverlay />
-			<ModalContent color="gray.100">
-				<ModalHeader>Edit Entry</ModalHeader>
+			<ModalContent backgroundColor="panel.300">
+				<ModalHeader color="heading.100">Edit Entry</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody>
-					<Text>English</Text>
-					<Input
-						value={english}
-						onChange={(e) => setEnglish(e.target.value)}
-						backgroundColor={inputBackgroundColor}
-						_hover={inputHover}
-						_focus={inputFocus}
-					/>
+					<VStack spacing={4} align="left">
+						<Box>
+							<Text>English</Text>
+							<Input
+								mt="2"
+								value={english}
+								onChange={(e) => setEnglish(e.target.value)}
+								backgroundColor={inputBackgroundColor}
+								_hover={inputHover}
+								_focus={inputFocus}
+							/>
+						</Box>
 
-					<Text>Language</Text>
-					<Input
-						value={language}
-						onChange={(e) => setLanguage(e.target.value)}
-						backgroundColor={inputBackgroundColor}
-						_hover={inputHover}
-						_focus={inputFocus}
-					/>
+						<Box>
+							<Text>Language</Text>
+							<Input
+								mt="2"
+								value={language}
+								onChange={(e) => setLanguage(e.target.value)}
+								backgroundColor={inputBackgroundColor}
+								_hover={inputHover}
+								_focus={inputFocus}
+							/>
+						</Box>
 
-					<Text>Sonetic</Text>
-					<Input
-						value={sonetic}
-						onChange={(e) => setSonetic(e.target.value)}
-						backgroundColor={inputBackgroundColor}
-						_hover={inputHover}
-						_focus={inputFocus}
-					/>
+						<Box>
+							<Text>Sonetic</Text>
+							<Input
+								mt="2"
+								value={sonetic}
+								onChange={(e) => setSonetic(e.target.value)}
+								backgroundColor={inputBackgroundColor}
+								_hover={inputHover}
+								_focus={inputFocus}
+							/>
+						</Box>
 
-					<Text>Notes</Text>
-					<Input
-						value={notes}
-						onChange={(e) => setNotes(e.target.value)}
-						backgroundColor={inputBackgroundColor}
-						_hover={inputHover}
-						_focus={inputFocus}
-					/>
+						<Box>
+							<Text>Notes</Text>
+							<Input
+								mt="2"
+								value={notes}
+								onChange={(e) => setNotes(e.target.value)}
+								backgroundColor={inputBackgroundColor}
+								_hover={inputHover}
+								_focus={inputFocus}
+							/>
+						</Box>
+					</VStack>
 				</ModalBody>
 
 				<ModalFooter>
-					<Button colorScheme="blue" mr={3} onClick={save}>
+					<Button backgroundColor="panel.100" mr={3} onClick={save}>
 						Save
 					</Button>
 				</ModalFooter>

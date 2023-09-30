@@ -32,7 +32,7 @@ export default function Component(props: Props) {
 			<Field label="Spelling" value={spelling} set={setSpelling} />
 			<Field label="Entry" value={entry} set={setEntry} />
 
-			<Button colorScheme="blue" onClick={saveChanges}>
+			<Button backgroundColor="green.600" onClick={saveChanges}>
 				Save
 			</Button>
 		</Stack>

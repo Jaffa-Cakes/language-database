@@ -33,7 +33,7 @@ export default function Component(props: Props) {
 			rounded="xl"
 			mt="5"
 			shadow="xl"
-			backgroundColor="blackAlpha.100"
+			backgroundColor="panel.100"
 		>
 			<Box
 				rounded="lg"
@@ -84,7 +84,7 @@ function TotalResults(props: TotalResultsProps) {
 			const onClick = () => {
 				if (enabled) nextPage();
 			};
-			const color = enabled ? "orange.600" : "whiteAlpha.400";
+			const color = enabled ? "orange.600" : "panel.300";
 
 			return (
 				<Button onClick={onClick} size="xs" backgroundColor={color}>
@@ -100,7 +100,7 @@ function TotalResults(props: TotalResultsProps) {
 			const onClick = () => {
 				if (enabled) previousPage();
 			};
-			const color = enabled ? "orange.600" : "whiteAlpha.400";
+			const color = enabled ? "orange.600" : "panel.300";
 
 			return (
 				<Button onClick={onClick} size="xs" backgroundColor={color}>

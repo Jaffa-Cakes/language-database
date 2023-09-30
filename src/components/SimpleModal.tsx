@@ -24,13 +24,17 @@ export default function Component(props: Props) {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose}>
 			<ModalOverlay />
-			<ModalContent color="gray.100">
-				<ModalHeader>{title}</ModalHeader>
+			<ModalContent backgroundColor="panel.300">
+				<ModalHeader color="heading.100">{title}</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody>{children}</ModalBody>
 
 				<ModalFooter>
-					<Button colorScheme="blue" mr={3} onClick={onClose}>
+					<Button
+						backgroundColor="panel.100"
+						mr={3}
+						onClick={onClose}
+					>
 						Close
 					</Button>
 				</ModalFooter>

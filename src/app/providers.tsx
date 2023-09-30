@@ -11,6 +11,7 @@ import TranslationPanelContext, {
 
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
+import theme from "./theme";
 
 export function Providers({ children }: { children: React.ReactNode }) {
 	const [scratchpad, setScratchpad] = useState<Scratchpad>(new Scratchpad());
@@ -20,7 +21,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
 
 	return (
 		<CacheProvider>
-			<ChakraProvider>
+			<ChakraProvider theme={theme}>
 				<ScratchpadContext.Provider
 					value={{ scratchpad, setScratchpad }}
 				>

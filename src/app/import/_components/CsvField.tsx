@@ -32,13 +32,14 @@ export default function Component<T extends { length: number }>(
 	return (
 		<Box
 			mb={2}
-			borderWidth="thin"
+			borderWidth="medium"
 			borderStyle="solid"
-			borderColor="gray.600"
+			borderColor="panel.100"
+			background="panel.100"
 			rounded="md"
 			overflow="hidden"
 		>
-			<Box backgroundColor="gray.700" px="2" py="1">
+			<Box backgroundColor="panel.300" px="2" py="1">
 				<Text fontWeight="medium">{name}</Text>
 			</Box>
 			<Flex px="3" py="2">

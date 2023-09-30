@@ -25,8 +25,6 @@ export default function RootLayout({
 							maxW={w}
 							overflow="hidden"
 							flexDir="column"
-							backgroundColor="gray.800"
-							color="gray.100"
 						>
 							<Box>
 								<Navbar />

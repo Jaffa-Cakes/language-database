@@ -182,7 +182,7 @@ export default function Page() {
 
 	function expandField(value: string) {
 		setExpandedField(
-			<Box backgroundColor="gray.800" rounded="lg" px="3" py="2">
+			<Box backgroundColor="panel.100" rounded="lg" px="3" py="2">
 				<Text>{value}</Text>
 			</Box>,
 		);
@@ -227,13 +227,15 @@ export default function Page() {
 
 	const headings = (
 		<Tr>
-			<Th textAlign="center" maxW={15}>
+			<Th textAlign="center" maxW={15} color="heading.100">
 				Scratchpad
 			</Th>
 			{columns.map((column, i) => (
-				<Th key={i}>{column}</Th>
+				<Th key={i} color="heading.200">
+					{column}
+				</Th>
 			))}
-			<Th textAlign="center" maxW={15}>
+			<Th textAlign="center" maxW={15} color="heading.100">
 				Options
 			</Th>
 		</Tr>
@@ -395,7 +397,11 @@ export default function Page() {
 						<SearchParams>{searchInputs}</SearchParams>
 
 						<Flex placeContent="center">
-							<Button py={5} type="submit">
+							<Button
+								py={5}
+								type="submit"
+								backgroundColor="panel.300"
+							>
 								Search
 							</Button>
 						</Flex>
@@ -403,9 +409,9 @@ export default function Page() {
 
 					<Box
 						h="0.5"
-						backgroundColor="gray.700"
+						backgroundColor="panel.100"
 						rounded="full"
-						mt="3"
+						mt="5"
 					/>
 
 					<MainTableContainer

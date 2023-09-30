@@ -66,7 +66,7 @@ export default function Component(props: Props) {
 				))}
 			</Drop>
 
-			<Button colorScheme="blue" onClick={saveChanges}>
+			<Button backgroundColor="green.600" onClick={saveChanges}>
 				Save
 			</Button>
 		</Stack>

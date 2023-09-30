@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 
 export default function Component() {
 	return (
-		<HStack spacing={4} background="gray.900" px={4} py={2} shadow="base">
+		<HStack spacing={4} background="panel.100" px={4} py={2} shadow="base">
 			<Text>Lexicon Helper</Text>
 			<NavButton href="/search/words" name="Words" />
 			<NavButton href="/search/sources" name="Sources" />

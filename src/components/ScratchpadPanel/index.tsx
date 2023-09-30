@@ -86,35 +86,40 @@ export default function Component() {
 	return (
 		<VStack spacing={0} h={show ? "100%" : "fit-content"}>
 			<Box
-				background="gray.700"
+				background="panel.100"
 				w="100%"
 				h="4"
 				cursor="pointer"
 				onClick={toggle}
 				display={show ? "none" : "block"}
 				_hover={{
-					background: "gray.600",
+					background: "panel.300",
 				}}
 			></Box>
 
 			<Box
-				backgroundColor="gray.900"
+				backgroundColor="panel.100"
 				flexGrow={1}
 				h="100%"
 				w="100%"
 				display={show ? "block" : "none"}
 			>
 				<Flex
-					background="gray.700"
+					background="panel.200"
+					borderTopColor="panel.100"
+					borderTopWidth="medium"
+					borderTopStyle="solid"
 					placeContent="center"
 					py="2"
 					onClick={toggle}
 					cursor="pointer"
 					_hover={{
-						background: "gray.600",
+						background: "panel.300",
 					}}
 				>
-					<Text fontWeight="medium">Scratchpad Panel</Text>
+					<Text fontWeight="medium" color="heading.100">
+						Scratchpad Panel
+					</Text>
 				</Flex>
 
 				<Box px="3" py="2">
@@ -127,12 +132,12 @@ export default function Component() {
 						<Table size="sm">
 							<Thead>
 								<Tr>
-									<Th>Remove</Th>
-									<Th>ID</Th>
-									<Th>English</Th>
-									<Th>Language</Th>
-									<Th>Sonetic</Th>
-									<Th>Notes</Th>
+									<Th color="heading.100">Remove</Th>
+									<Th color="heading.200">ID</Th>
+									<Th color="heading.200">English</Th>
+									<Th color="heading.200">Language</Th>
+									<Th color="heading.200">Sonetic</Th>
+									<Th color="heading.200">Notes</Th>
 								</Tr>
 							</Thead>
 							<Tbody>{dataElements}</Tbody>

@@ -16,7 +16,7 @@ export default function Component(props: DropProps) {
 	return (
 		<Stack spacing="0">
 			<FormLabel
-				backgroundColor="gray.700"
+				backgroundColor="panel.300"
 				px="2"
 				py="1"
 				roundedTop="md"
@@ -24,7 +24,7 @@ export default function Component(props: DropProps) {
 				borderWidth="thin"
 				borderBottomWidth="inherit"
 				borderStyle="solid"
-				borderColor="gray.600"
+				borderColor="panel.300"
 			>
 				{label}
 			</FormLabel>
@@ -33,17 +33,17 @@ export default function Component(props: DropProps) {
 				roundedTop="none"
 				roundedBottom="md"
 				mt="0"
-				backgroundColor="gray.800"
+				backgroundColor="panel.200"
 				borderWidth="thin"
 				borderTopWidth="inherit"
 				borderStyle="solid"
-				borderColor="gray.600"
+				borderColor="panel.300"
 				placeholder="Select value..."
 				_hover={{
-					backgroundColor: "gray.900",
+					backgroundColor: "panel.100",
 				}}
 				_focus={{
-					backgroundColor: "gray.900",
+					backgroundColor: "panel.100",
 				}}
 				value={value}
 				onChange={(e) => {

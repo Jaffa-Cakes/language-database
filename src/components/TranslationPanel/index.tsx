@@ -146,34 +146,36 @@ export default function Component() {
 		<>
 			<Flex direction={expanded ? "row" : "row-reverse"}>
 				<Box
-					background="gray.700"
+					background="panel.100"
 					h="100%"
 					w={expanded ? "1" : "4"}
 					onClick={(e) => setExpanded(!expanded)}
 					cursor="pointer"
 					placeSelf="center"
 					_hover={{
-						background: "gray.600",
+						background: "panel.300",
 					}}
 				></Box>
 
 				<Box
 					h="100%"
 					flexGrow={1}
-					background="gray.900"
+					background="panel.100"
 					display={expanded ? "block" : "none"}
 				>
 					<Flex
-						background="gray.700"
+						background="panel.200"
 						placeContent="center"
 						py="2"
 						onClick={(e) => setExpanded(!expanded)}
 						cursor="pointer"
 						_hover={{
-							background: "gray.600",
+							background: "panel.300",
 						}}
 					>
-						<Text fontWeight="medium">Translation Panel</Text>
+						<Text fontWeight="medium" color="heading.100">
+							Translation Panel
+						</Text>
 					</Flex>
 
 					<Box px="3" py="2">
