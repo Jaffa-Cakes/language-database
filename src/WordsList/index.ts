@@ -30,6 +30,8 @@ export default class WordsList {
 		if (this.columns.includes(column))
 			this.columns.splice(this.columns.indexOf(column), 1);
 		else this.columns.push(column);
+
+		this.columns.sort((a, b) => a - b);
 	}
 
 	public getFilters(): Filters {
