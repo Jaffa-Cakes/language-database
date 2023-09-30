@@ -228,15 +228,15 @@ export default function Page() {
 
 	const headings = (
 		<Tr>
-			<Th textAlign="center" maxW={15} color="heading.100">
+			<Th textAlign="center" maxW={15} color="heading.100" borderColor="panel.300">
 				Scratchpad
 			</Th>
 			{columns.map((column, i) => (
-				<Th key={i} color="heading.200">
+				<Th key={i} color="heading.200" borderColor="panel.300">
 					{column}
 				</Th>
 			))}
-			<Th textAlign="center" maxW={15} color="heading.100">
+			<Th textAlign="center" maxW={15} color="heading.100" borderColor="panel.300">
 				Options
 			</Th>
 		</Tr>
@@ -458,7 +458,7 @@ export default function Page() {
 											dragStart(e, record[0])
 										}
 									>
-										<Td>
+										<Td borderColor="panel.300">
 											<HStack justifyContent="center">
 												<Button
 													size="xs"
@@ -496,7 +496,7 @@ export default function Page() {
 												</TData>
 											);
 										})}
-										<Td maxW={15}>
+										<Td borderColor="panel.300" maxW={15}>
 											<HStack
 												spacing="2"
 												justifyContent="center"

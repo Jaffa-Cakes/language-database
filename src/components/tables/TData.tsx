@@ -13,6 +13,7 @@ export default function Component(props: Props) {
 
 	return (
 		<Td
+			borderColor="panel.300"
 			maxW={40}
 			overflowX="auto"
 			css={{

@@ -9,6 +9,7 @@ import {
 	Tbody,
 	Td,
 	Text,
+	Tfoot,
 	Th,
 	Thead,
 	Tr,
@@ -51,7 +52,7 @@ export default function Component() {
 				draggable="true"
 				onDragStart={(e) => dragStart(e, record[0])}
 			>
-				<Td>
+				<Td borderColor="panel.300">
 					<Button
 						size="xs"
 						background="red.600"
@@ -61,7 +62,7 @@ export default function Component() {
 					</Button>
 				</Td>
 				{record.map((cell) => (
-					<Td
+					<Td borderColor="panel.300"
 						key={cell}
 						maxW={40}
 						overflowX="auto"
@@ -132,15 +133,25 @@ export default function Component() {
 						<Table size="sm">
 							<Thead>
 								<Tr>
-									<Th color="heading.100">Remove</Th>
-									<Th color="heading.200">ID</Th>
-									<Th color="heading.200">English</Th>
-									<Th color="heading.200">Language</Th>
-									<Th color="heading.200">Sonetic</Th>
-									<Th color="heading.200">Notes</Th>
+									<Th borderColor="panel.300" color="heading.100">Remove</Th>
+									<Th borderColor="panel.300" color="heading.200">ID</Th>
+									<Th borderColor="panel.300" color="heading.200">English</Th>
+									<Th borderColor="panel.300" color="heading.200">Language</Th>
+									<Th borderColor="panel.300" color="heading.200">Sonetic</Th>
+									<Th borderColor="panel.300" color="heading.200">Notes</Th>
 								</Tr>
 							</Thead>
 							<Tbody>{dataElements}</Tbody>
+							<Tfoot>
+								<Tr>
+									<Th borderColor="panel.300" color="heading.100">Remove</Th>
+									<Th borderColor="panel.300" color="heading.200">ID</Th>
+									<Th borderColor="panel.300" color="heading.200">English</Th>
+									<Th borderColor="panel.300" color="heading.200">Language</Th>
+									<Th borderColor="panel.300" color="heading.200">Sonetic</Th>
+									<Th borderColor="panel.300" color="heading.200">Notes</Th>
+								</Tr>
+							</Tfoot>
 						</Table>
 					</TableContainer>
 				</Box>
