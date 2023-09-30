@@ -101,6 +101,7 @@ export default function Page() {
 		onExpandedOpen = onOpen;
 		onExpandedClose = onClose;
 	}
+	const [searchMinimised, setSearchMinimised] = useState<boolean>(false);
 	let filterHandles: FilterHandles;
 	{
 		const [id, setId] = useState<string>("");
@@ -382,37 +383,54 @@ export default function Page() {
 		<>
 			{isClient ? (
 				<>
-					<form
-						onSubmit={(e) => {
-							e.preventDefault();
-							refreshSearch();
-						}}
-					>
-						<TableColumnToggle
-							columns={allColumns}
-							activeColumns={wordsList.getColumns()}
-							toggleColumn={toggleColumn}
-						/>
+					<Box display={searchMinimised ? "none" : "block"}>
+						<form
+							onSubmit={(e) => {
+								e.preventDefault();
+								refreshSearch();
+							}}
+						>
+							<TableColumnToggle
+								columns={allColumns}
+								activeColumns={wordsList.getColumns()}
+								toggleColumn={toggleColumn}
+							/>
 
-						<SearchParams>{searchInputs}</SearchParams>
+							<SearchParams>{searchInputs}</SearchParams>
 
-						<Flex placeContent="center">
-							<Button
-								py={5}
-								type="submit"
-								backgroundColor="panel.300"
-							>
-								Search
-							</Button>
-						</Flex>
-					</form>
+							<Flex placeContent="center">
+								<Button
+									py={5}
+									type="submit"
+									backgroundColor="panel.300"
+								>
+									Search
+								</Button>
+							</Flex>
+						</form>
+					</Box>
 
-					<Box
+					<Flex
 						h="0.5"
 						backgroundColor="panel.100"
 						rounded="full"
-						mt="5"
-					/>
+						mt={searchMinimised ? "3" : "5"}
+						justifyContent="center"
+						placeContent="center"
+					>
+						<Button
+							top="-13px"
+							size="xs"
+							background="none"
+							onClick={() => setSearchMinimised(!searchMinimised)}
+						>
+							<Text color="heading.100" fontSize="xs">
+								{searchMinimised
+									? "Show Search"
+									: "Hide Search"}
+							</Text>
+						</Button>
+					</Flex>
 
 					<MainTableContainer
 						total={{
