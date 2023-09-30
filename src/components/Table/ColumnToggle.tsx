@@ -61,6 +61,7 @@ function StyledCheckbox(props: IStyledCheckboxProps) {
 				size="sm"
 				key={column}
 				defaultChecked={active}
+				colorScheme="orange"
 				onChange={() => {
 					toggleColumn(column);
 					setIsChecked(!isChecked);
