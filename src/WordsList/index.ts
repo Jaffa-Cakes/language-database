@@ -44,6 +44,10 @@ export default class WordsList {
 		return this.records;
 	}
 
+	public totalRecords(): number {
+		return this.records.length;
+	}
+
 	public async runRefresh(): Promise<void> {
 		console.log("Before refresh:");
 		console.log(Date.now());

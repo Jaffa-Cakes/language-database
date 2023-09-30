@@ -106,7 +106,13 @@ export default function Page() {
 				<Button onClick={() => refresh()}>Refresh</Button>
 			</Flex>
 
-			<MainTableContainer total={words.length}>
+			<MainTableContainer
+				total={{
+					start: 0,
+					end: words.length,
+					total: words.length,
+				}}
+			>
 				<Thead>{headings}</Thead>
 
 				<Tbody>

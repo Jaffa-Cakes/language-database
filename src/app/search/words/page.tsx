@@ -155,6 +155,7 @@ export default function Page() {
 			setSourceNotes,
 		};
 	}
+	const [offset, setOffset] = useState<number>(0);
 
 	// Prevent SSR Error from Hydration Missmatch
 	useEffect(() => {
@@ -162,8 +163,7 @@ export default function Page() {
 	}, []);
 
 	async function refreshSearch() {
-		console.log("runRefresh Triggered");
-		console.log(Date.now());
+		setOffset(0);
 		const newWordsList = wordsList.cloneRecordless();
 		await newWordsList.runRefresh();
 
@@ -217,7 +217,13 @@ export default function Page() {
 		Column.SourceNotes,
 	];
 
-	const records = wordsList.getRecords();
+	// Use offset to return a subset of the records as a page (50 at a time)
+	const recordsPerPage = 50;
+	const recordsStart = offset * recordsPerPage;
+	const records = wordsList
+		.getRecords()
+		.slice(recordsStart, recordsStart + recordsPerPage);
+	const recordsEnd = recordsStart + records.length;
 
 	const headings = (
 		<Tr>
@@ -402,7 +408,19 @@ export default function Page() {
 						mt="3"
 					/>
 
-					<MainTableContainer total={records.length}>
+					<MainTableContainer
+						total={{
+							start: recordsStart,
+							end: recordsEnd,
+							total: wordsList.totalRecords(),
+						}}
+						nextPage={() => {
+							setOffset(offset + 1);
+						}}
+						previousPage={() => {
+							setOffset(offset - 1);
+						}}
+					>
 						<Thead>{headings}</Thead>
 
 						<Tbody>
