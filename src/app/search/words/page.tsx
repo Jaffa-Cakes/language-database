@@ -340,9 +340,25 @@ export default function Page() {
 		);
 	});
 
+	function isInScratchpad(id: number) {
+		let result = false;
+
+		scratchpad.getRecords().forEach((record) => {
+			if (parseInt(record[0]) == id) result = true;
+		});
+
+		return result;
+	}
+
 	async function toggleScratchpadRecord(id: number) {
 		const newScratchpad = scratchpad.cloneRecordless();
-		newScratchpad.addRecord(id);
+
+		if (isInScratchpad(id)) {
+			newScratchpad.removeRecord(id);
+		} else {
+			newScratchpad.addRecord(id);
+		}
+
 		await newScratchpad.refreshRecords();
 		setScratchpad(newScratchpad);
 	}
@@ -373,10 +389,7 @@ export default function Page() {
 						<SearchParams>{searchInputs}</SearchParams>
 
 						<Flex placeContent="center">
-							<Button
-								py={5}
-								type="submit"
-							>
+							<Button py={5} type="submit">
 								Search
 							</Button>
 						</Flex>
@@ -407,14 +420,24 @@ export default function Page() {
 											<HStack justifyContent="center">
 												<Button
 													size="xs"
-													background="green.600"
+													background={
+														isInScratchpad(
+															parseInt(record[0]),
+														)
+															? "red.600"
+															: "green.600"
+													}
 													onClick={(e) =>
 														toggleScratchpadRecord(
 															parseInt(record[0]),
 														)
 													}
 												>
-													+
+													{isInScratchpad(
+														parseInt(record[0]),
+													)
+														? "-"
+														: "+"}
 												</Button>
 											</HStack>
 										</Td>
