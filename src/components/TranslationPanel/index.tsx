@@ -17,7 +17,8 @@ import {
 	getDialectLabel,
 	dialectLabelPretty,
 } from "@/utils";
-import { MultiSelect, Option } from "chakra-multiselect";
+// import { MultiSelect, Option } from "chakra-multiselect";
+import MultiSelect from "@/components/MultiSelect";
 
 import TranslationPanelContext from "@/components/TranslationPanel/Context";
 
@@ -199,17 +200,10 @@ export default function Component() {
 										))}
 									</Drop>
 									<MultiSelect
-										options={Object.keys(DialectLabel).map(
-											(key) => ({
-												label: dialectLabelPretty(key),
-												value: dialectLabelPretty(key),
-											}),
-										)}
-										value={dialectLabels}
-										onChange={(e) =>
-											setDialectLabels(e as string[])
-										}
 										label="Dialect Labels"
+										options={Object.keys(DialectLabel)}
+										value={dialectLabels}
+										set={setDialectLabels}
 									/>
 									<Field
 										label="Pronunciation"

@@ -227,16 +227,39 @@ export default function Page() {
 	const recordsEnd = recordsStart + records.length;
 
 	const headings = (
-		<Tr>
-			<Th textAlign="center" maxW={15} color="heading.100" borderColor="panel.300">
+		<Tr position="sticky" top="0" zIndex="1">
+			<Th
+				textAlign="center"
+				maxW={15}
+				color="heading.100"
+				borderColor="panel.300"
+				position="sticky"
+				top="0"
+				zIndex="1"
+			>
 				Scratchpad
 			</Th>
 			{columns.map((column, i) => (
-				<Th key={i} color="heading.200" borderColor="panel.300">
+				<Th
+					key={i}
+					color="heading.200"
+					borderColor="panel.300"
+					position="sticky"
+					top="0"
+					zIndex="1"
+				>
 					{column}
 				</Th>
 			))}
-			<Th textAlign="center" maxW={15} color="heading.100" borderColor="panel.300">
+			<Th
+				textAlign="center"
+				maxW={15}
+				color="heading.100"
+				borderColor="panel.300"
+				position="sticky"
+				top="0"
+				zIndex="1"
+			>
 				Options
 			</Th>
 		</Tr>
@@ -445,7 +468,9 @@ export default function Page() {
 							setOffset(offset - 1);
 						}}
 					>
-						<Thead>{headings}</Thead>
+						<Thead position="sticky" top="0" zIndex="1">
+							{headings}
+						</Thead>
 
 						<Tbody>
 							{records.map((record) => {
