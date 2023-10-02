@@ -104,7 +104,7 @@ export default function Component(props: Props) {
 			spacing="2"
 			pl="2"
 			borderLeft="2px"
-			borderColor="gray.800"
+			borderColor="panel.200"
 			mt="4"
 		>
 			<Drop

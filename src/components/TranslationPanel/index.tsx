@@ -225,7 +225,7 @@ export default function Component() {
 									>
 										References
 									</Button>
-									<hr />
+
 									<Button
 										backgroundColor={
 											translationPanel.editId !==
