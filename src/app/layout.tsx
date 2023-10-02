@@ -37,6 +37,7 @@ export default function RootLayout({
 									minH="0px"
 									maxH="100%"
 									flexDir="column"
+									overflowY="hidden"
 								>
 									{children}
 								</Flex>

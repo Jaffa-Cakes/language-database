@@ -16,13 +16,14 @@ import {
 	VStack,
 } from "@chakra-ui/react";
 
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import ScratchpadContext from "./Context";
 
 export default function Component() {
 	const { scratchpad, setScratchpad } = useContext(ScratchpadContext);
 	const [show, setShow] = useState<boolean>(false);
+	const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
 
 	const hideScrollbar = {
 		"&::-webkit-scrollbar": {
@@ -85,6 +86,18 @@ export default function Component() {
 		setShow(!show);
 	}
 
+	const fullscreenButton = (
+		<Button
+			size="xs"
+			onClick={(e) => {
+				e.stopPropagation();
+				setIsFullscreen(!isFullscreen);
+			}}
+		>
+			{isFullscreen ? "↓" : "↑"}
+		</Button>
+	);
+
 	return (
 		<VStack spacing={0} h={show ? "100%" : "fit-content"}>
 			<Box
@@ -111,24 +124,29 @@ export default function Component() {
 					borderTopColor="panel.100"
 					borderTopWidth="medium"
 					borderTopStyle="solid"
-					placeContent="center"
+					placeContent="space-between"
+					justifyContent="space-between"
 					py="2"
+					px="3"
 					onClick={toggle}
 					cursor="pointer"
 					_hover={{
 						background: "panel.300",
 					}}
 				>
+					<Box>{fullscreenButton}</Box>
 					<Text fontWeight="medium" color="heading.100">
 						Scratchpad Panel
 					</Text>
+					<Box>{fullscreenButton}</Box>
 				</Flex>
 
 				<Box px="3" py="2">
 					<TableContainer
 						mt={3}
 						maxW="100vw"
-						maxH="250px"
+						maxH={isFullscreen ? "80vh" : "250px"}
+						h={isFullscreen ? "80vh" : undefined}
 						overflowY="auto"
 					>
 						<Table size="sm">
