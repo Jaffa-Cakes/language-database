@@ -64,6 +64,26 @@ Since I primarily use Windows, I chose to run the Next.js development server out
 2. Run `npm run format` to format the code.
 3. Run `npx prisma format` to format the database schema file.
 
+#### AI Chat Prompt for Developers
+
+If you are developing this application, you may find it helpful to use an AI chat (such as ChatGPT) during development. I would recommend pasting the following prompt into the chat to initialise it with some useful information:
+
+```
+I am developing a Nextj.js application and will ask you questions to help me in my endeavour. For context, the project uses the following technologies:
+- Next.js
+- React
+- Chakra UI
+- TypeScript
+- Prisma
+- PostgreSQL
+- Docker
+- Prettier
+- ESLint
+
+A breif description of the application:
+This project is a web application that allows users to compile a lexicon of words for a language from various data sources and entries within those sources.
+```
+
 ## Notable Dependencies in Use
 
 | Name                                          | Note              |
