@@ -37,7 +37,4 @@ jobs:
                   git config --local user.name "GitHub Action"
                   git add -A
                   git commit -m "Auto format code"
-                  git push
-
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  git push https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
