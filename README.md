@@ -21,7 +21,7 @@ Contributions are welcome and can be made by forking this repository and submitt
 #### Instructions
 
 1. Clone the repository.
-2. Run `docker-compose up --build` in the root directory.
+2. Run `docker compose up --build` in the root directory.
 3. Access the application at [http://localhost:3000](http://localhost:3000).
 
 If this is the first time you are starting the application, you will need to import your spreadsheet data containing language information. Navigate to [http://localhost:3000/import](http://localhost:3000/import) and upload each sheet in `.csv` format, exported from Google Sheets.
@@ -45,7 +45,7 @@ For maximum safety, consider storing the backup in cloud storage, such as [Googl
 #### Instructions
 
 1. Clone the repository.
-2. Run `docker-compose up -d db --build` to start the PostgreSQL database.
+2. Run `docker compose up -d db --build` to start the PostgreSQL database.
 3. Run `npm install` to install dependencies.
 4. Run `npx prisma migrate deploy` to apply any pending database migrations, and `npx prisma migrate dev` if you have made schema changes.
 5. Run `npm run dev` to start the Next.js development server.
