@@ -248,7 +248,10 @@ export default async function refresh(
 		}
 
 		if (columns.includes(Column.SourceName)) {
-			if (filters.SourceName !== undefined && isRegex(filters.SourceName)) {
+			if (
+				filters.SourceName !== undefined &&
+				isRegex(filters.SourceName)
+			) {
 				if (!runRegex(filters.SourceName, record[colNum])) return false;
 			}
 			colNum++;
@@ -259,7 +262,8 @@ export default async function refresh(
 				filters.SourceFileName !== undefined &&
 				isRegex(filters.SourceFileName)
 			) {
-				if (!runRegex(filters.SourceFileName, record[colNum])) return false;
+				if (!runRegex(filters.SourceFileName, record[colNum]))
+					return false;
 			}
 			colNum++;
 		}
@@ -269,7 +273,8 @@ export default async function refresh(
 				filters.SourceReference !== undefined &&
 				isRegex(filters.SourceReference)
 			) {
-				if (!runRegex(filters.SourceReference, record[colNum])) return false;
+				if (!runRegex(filters.SourceReference, record[colNum]))
+					return false;
 			}
 			colNum++;
 		}
@@ -301,14 +306,19 @@ export default async function refresh(
 				filters.SourceLocation !== undefined &&
 				isRegex(filters.SourceLocation)
 			) {
-				if (!runRegex(filters.SourceLocation, record[colNum])) return false;
+				if (!runRegex(filters.SourceLocation, record[colNum]))
+					return false;
 			}
 			colNum++;
 		}
 
 		if (columns.includes(Column.SourceNotes)) {
-			if (filters.SourceNotes !== undefined && isRegex(filters.SourceNotes)) {
-				if (!runRegex(filters.SourceNotes, record[colNum])) return false;
+			if (
+				filters.SourceNotes !== undefined &&
+				isRegex(filters.SourceNotes)
+			) {
+				if (!runRegex(filters.SourceNotes, record[colNum]))
+					return false;
 			}
 			colNum++;
 		}
@@ -451,13 +461,16 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 	}
 
 	columns.forEach((column) => {
-
 		switch (column) {
 			case Column.Id:
-				if (filters.Id !== undefined && !isRegex(filters.Id)) select.id = parseInt(filters.Id);
+				if (filters.Id !== undefined && !isRegex(filters.Id))
+					select.id = parseInt(filters.Id);
 				break;
 			case Column.English:
-				if (filters.English !== undefined && !isRegex(filters.English)) {
+				if (
+					filters.English !== undefined &&
+					!isRegex(filters.English)
+				) {
 					select.english = {
 						contains: filters.English,
 						mode: "insensitive",
@@ -465,7 +478,10 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.Language:
-				if (filters.Language !== undefined && !isRegex(filters.Language)) {
+				if (
+					filters.Language !== undefined &&
+					!isRegex(filters.Language)
+				) {
 					select.language = {
 						contains: filters.Language,
 						mode: "insensitive",
@@ -473,7 +489,10 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.Sonetic:
-				if (filters.Sonetic !== undefined && !isRegex(filters.Sonetic)) {
+				if (
+					filters.Sonetic !== undefined &&
+					!isRegex(filters.Sonetic)
+				) {
 					select.sonetic = {
 						contains: filters.Sonetic,
 						mode: "insensitive",
@@ -489,13 +508,19 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceId:
-				if (filters.SourceId !== undefined && !isRegex(filters.SourceId)) {
+				if (
+					filters.SourceId !== undefined &&
+					!isRegex(filters.SourceId)
+				) {
 					select = ensureSourceExists(select);
 					select.source!.id = parseInt(filters.SourceId);
 				}
 				break;
 			case Column.SourceName:
-				if (filters.SourceName !== undefined && !isRegex(filters.SourceName)) {
+				if (
+					filters.SourceName !== undefined &&
+					!isRegex(filters.SourceName)
+				) {
 					select = ensureSourceExists(select);
 					select.source!.name = {
 						contains: filters.SourceName,
@@ -504,7 +529,10 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceFileName:
-				if (filters.SourceFileName !== undefined && !isRegex(filters.SourceFileName)) {
+				if (
+					filters.SourceFileName !== undefined &&
+					!isRegex(filters.SourceFileName)
+				) {
 					select = ensureSourceExists(select);
 					select.source!.fileName = {
 						contains: filters.SourceFileName,
@@ -513,7 +541,10 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceReference:
-				if (filters.SourceReference !== undefined && !isRegex(filters.SourceReference)) {
+				if (
+					filters.SourceReference !== undefined &&
+					!isRegex(filters.SourceReference)
+				) {
 					select = ensureSourceExists(select);
 					select.source!.reference = {
 						contains: filters.SourceReference,
@@ -522,7 +553,10 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourcePublicationType:
-				if (filters.SourcePublicationType !== undefined && !isRegex(filters.SourcePublicationType)) {
+				if (
+					filters.SourcePublicationType !== undefined &&
+					!isRegex(filters.SourcePublicationType)
+				) {
 					select = ensureSourceExists(select);
 					select.source!.publicationType = {
 						contains: filters.SourcePublicationType,
@@ -531,7 +565,10 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceDocumentType:
-				if (filters.SourceDocumentType !== undefined && !isRegex(filters.SourceDocumentType)) {
+				if (
+					filters.SourceDocumentType !== undefined &&
+					!isRegex(filters.SourceDocumentType)
+				) {
 					select = ensureSourceExists(select);
 					select.source!.documentType = {
 						contains: filters.SourceDocumentType,
@@ -540,7 +577,10 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceLocation:
-				if (filters.SourceLocation !== undefined && !isRegex(filters.SourceLocation)) {
+				if (
+					filters.SourceLocation !== undefined &&
+					!isRegex(filters.SourceLocation)
+				) {
 					select = ensureSourceExists(select);
 					select.source!.location = {
 						contains: filters.SourceLocation,
@@ -549,7 +589,10 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceNotes:
-				if (filters.SourceNotes !== undefined && !isRegex(filters.SourceNotes)) {
+				if (
+					filters.SourceNotes !== undefined &&
+					!isRegex(filters.SourceNotes)
+				) {
 					select = ensureSourceExists(select);
 					select.source!.notes = {
 						contains: filters.SourceNotes,
