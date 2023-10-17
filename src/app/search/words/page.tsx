@@ -450,16 +450,6 @@ export default function Page() {
 							<SearchParams>{searchInputs}</SearchParams>
 
 							<Flex placeContent="center" pb="3">
-								<Select
-									w="15"
-									backgroundColor="blackAlpha.100"
-									borderColor="whiteAlpha.200"
-									_hover={{
-										backgroundColor: "blackAlpha.300",
-									}}
-									_focus={{
-										backgroundColor: "blackAlpha.300",
-									}}
 									onChange={(e) =>
 										doSetSortBy(
 											getColumnEnum(e.target.value),
