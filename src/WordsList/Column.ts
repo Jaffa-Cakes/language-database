@@ -52,3 +52,40 @@ export function getColumnReadable(column: Column): string {
 			return "Source Notes";
 	}
 }
+
+export function getColumnEnum(column: string): Column {
+	switch (column) {
+		case "Id":
+			return Column.Id;
+		case "English":
+			return Column.English;
+		case "Language":
+			return Column.Language;
+		case "Sonetic":
+			return Column.Sonetic;
+		case "Notes":
+			return Column.Notes;
+		case "Source Id":
+			return Column.SourceId;
+		case "Source Name":
+			return Column.SourceName;
+		case "Source File Name":
+			return Column.SourceFileName;
+		case "Source Reference":
+			return Column.SourceReference;
+		case "Source Publication Type":
+			return Column.SourcePublicationType;
+		case "Source Document Type":
+			return Column.SourceDocumentType;
+		case "Source Location":
+			return Column.SourceLocation;
+		case "Source Language":
+			return Column.SourceLanguage;
+		case "Source Language Name":
+			return Column.SourceLanguageName;
+		case "Source Notes":
+			return Column.SourceNotes;
+		default:
+			throw new Error(`Unknown column: ${column}`);
+	}
+}

@@ -24,6 +24,8 @@ import {
 	Button,
 	Flex,
 	HStack,
+	Radio,
+	Select,
 	Tbody,
 	Td,
 	Text,
@@ -33,6 +35,7 @@ import {
 	Tr,
 	useDisclosure,
 } from "@chakra-ui/react";
+import { getColumnEnum } from "@/WordsList/Column";
 
 interface FilterHandles {
 	id: string;
@@ -65,6 +68,11 @@ interface FilterHandles {
 	setSourceLanguageName: (value: string) => void;
 	sourceNotes: string;
 	setSourceNotes: (value: string) => void;
+
+	sortBy: Column;
+	setSortBy: (value: Column) => void;
+	sortDesc: boolean;
+	setSortDesc: (value: boolean) => void;
 }
 
 export default function Page() {
@@ -122,6 +130,8 @@ export default function Page() {
 		const [sourceLanguageName, setSourceLanguageName] =
 			useState<string>("");
 		const [sourceNotes, setSourceNotes] = useState<string>("");
+		const [sortBy, setSortBy] = useState<Column>(Column.Id);
+		const [sortDesc, setSortDesc] = useState<boolean>(false);
 
 		filterHandles = {
 			id,
@@ -154,6 +164,11 @@ export default function Page() {
 			setSourceLanguageName,
 			sourceNotes,
 			setSourceNotes,
+
+			sortBy,
+			setSortBy,
+			sortDesc,
+			setSortDesc,
 		};
 	}
 	const [offset, setOffset] = useState<number>(0);
@@ -167,7 +182,6 @@ export default function Page() {
 		setOffset(0);
 		const newWordsList = wordsList.cloneRecordless();
 		await newWordsList.runRefresh();
-
 		setWordsList(newWordsList);
 	}
 
@@ -372,6 +386,20 @@ export default function Page() {
 		);
 	});
 
+	function doSetSortBy(column: Column) {
+		filterHandles.setSortBy(column);
+		const newWordsList = wordsList.cloneRecordless();
+		newWordsList.setSortBy(column);
+		setWordsList(newWordsList);
+	};
+
+	function doSetSortDesc(value: boolean) {
+		filterHandles.setSortDesc(value);
+		const newWordsList = wordsList.cloneRecordless();
+		newWordsList.setSortDirection(value ? "desc" : "asc");
+		setWordsList(newWordsList);
+	}
+
 	function isInScratchpad(id: number) {
 		let result = false;
 
@@ -420,6 +448,48 @@ export default function Page() {
 							/>
 
 							<SearchParams>{searchInputs}</SearchParams>
+
+							<Flex placeContent="center" pb="3">
+								<Select
+								w="15"
+								backgroundColor="blackAlpha.100"
+			borderColor="whiteAlpha.200"
+			_hover={{
+				backgroundColor: "blackAlpha.300",
+			}}
+			_focus={{
+				backgroundColor: "blackAlpha.300",
+			}}
+								onChange={(e) => doSetSortBy(getColumnEnum(e.target.value))}
+								>
+									{wordsList.getColumns().map((column, i) => {
+
+										const readable = getColumnReadable(column);
+
+										return (
+											<option key={i} value={readable}>
+												{readable}
+											</option>
+										);
+									})}
+								</Select>
+								<Select
+								ml={4}
+								w="15"
+								backgroundColor="blackAlpha.100"
+			borderColor="whiteAlpha.200"
+			_hover={{
+				backgroundColor: "blackAlpha.300",
+			}}
+			_focus={{
+				backgroundColor: "blackAlpha.300",
+			}}
+								onChange={(e) => doSetSortDesc(e.target.value == "true")}
+								>
+									<option value="false">Ascending</option>
+									<option value="true">Descending</option>
+								</Select>
+							</Flex>
 
 							<Flex placeContent="center">
 								<Button

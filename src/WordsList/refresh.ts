@@ -4,6 +4,24 @@ import prisma from "@/db";
 
 import WordsList, { Column, Filters } from ".";
 
+interface OrderBy {
+	id?: "asc" | "desc";
+	english?: "asc" | "desc";
+	language?: "asc" | "desc";
+	sonetic?: "asc" | "desc";
+	notes?: "asc" | "desc";
+	source?: {
+		id?: "asc" | "desc";
+		name?: "asc" | "desc";
+		fileName?: "asc" | "desc";
+		reference?: "asc" | "desc";
+		publicationType?: "asc" | "desc";
+		documentType?: "asc" | "desc";
+		location?: "asc" | "desc";
+		notes?: "asc" | "desc";
+	};
+}
+
 interface Select {
 	id?: boolean;
 	english?: boolean;
@@ -78,11 +96,16 @@ interface Where {
 export default async function refresh(
 	columns: Column[],
 	filters: Filters,
+	sortBy: Column,
+	sortDirection: "asc" | "desc"
 ): Promise<string[][]> {
+	console.log(sortBy);
+	const orderBy = generateOrderBy(sortBy, sortDirection);
 	const select = generateSelect(columns);
 	const where = generateWhere(columns, filters);
 
 	const results = await prisma.entry.findMany({
+		orderBy: orderBy,
 		select: select,
 		where: where,
 	});
@@ -172,6 +195,55 @@ export default async function refresh(
 
 	return out;
 }
+
+function generateOrderBy(column: Column, sortDirection: "asc" | "desc"): OrderBy {
+	let orderBy = {};
+
+	switch (column) {
+		case Column.Id:
+			orderBy = { id: sortDirection };
+			break;
+		case Column.English:
+			orderBy = { english: sortDirection };
+			break;
+		case Column.Language:
+			orderBy = { language: sortDirection };
+			break;
+		case Column.Sonetic:
+			orderBy = { sonetic: sortDirection };
+			break;
+		case Column.Notes:
+			orderBy = { notes: sortDirection };
+			break;
+		case Column.SourceId:
+			orderBy = { source: { id: sortDirection } };
+			break;
+		case Column.SourceName:
+			orderBy = { source: { name: sortDirection } };
+			break;
+		case Column.SourceFileName:
+			orderBy = { source: { fileName: sortDirection } };
+			break;
+		case Column.SourceReference:
+			orderBy = { source: { reference: sortDirection } };
+			break;
+		case Column.SourcePublicationType:
+			orderBy = { source: { publicationType: sortDirection } };
+			break;
+		case Column.SourceDocumentType:
+			orderBy = { source: { documentType: sortDirection } };
+			break;
+		case Column.SourceLocation:
+			orderBy = { source: { location: sortDirection } };
+			break;
+		case Column.SourceNotes:
+			orderBy = { source: { notes: sortDirection } };
+			break;
+	}
+
+	return orderBy;
+}
+
 
 function generateSelect(columns: Column[]): Select {
 	function ensureSourceExists(select: Select): Select {
