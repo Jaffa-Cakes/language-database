@@ -391,7 +391,7 @@ export default function Page() {
 		const newWordsList = wordsList.cloneRecordless();
 		newWordsList.setSortBy(column);
 		setWordsList(newWordsList);
-	};
+	}
 
 	function doSetSortDesc(value: boolean) {
 		filterHandles.setSortDesc(value);
@@ -451,20 +451,24 @@ export default function Page() {
 
 							<Flex placeContent="center" pb="3">
 								<Select
-								w="15"
-								backgroundColor="blackAlpha.100"
-			borderColor="whiteAlpha.200"
-			_hover={{
-				backgroundColor: "blackAlpha.300",
-			}}
-			_focus={{
-				backgroundColor: "blackAlpha.300",
-			}}
-								onChange={(e) => doSetSortBy(getColumnEnum(e.target.value))}
+									w="15"
+									backgroundColor="blackAlpha.100"
+									borderColor="whiteAlpha.200"
+									_hover={{
+										backgroundColor: "blackAlpha.300",
+									}}
+									_focus={{
+										backgroundColor: "blackAlpha.300",
+									}}
+									onChange={(e) =>
+										doSetSortBy(
+											getColumnEnum(e.target.value),
+										)
+									}
 								>
 									{wordsList.getColumns().map((column, i) => {
-
-										const readable = getColumnReadable(column);
+										const readable =
+											getColumnReadable(column);
 
 										return (
 											<option key={i} value={readable}>
@@ -474,17 +478,19 @@ export default function Page() {
 									})}
 								</Select>
 								<Select
-								ml={4}
-								w="15"
-								backgroundColor="blackAlpha.100"
-			borderColor="whiteAlpha.200"
-			_hover={{
-				backgroundColor: "blackAlpha.300",
-			}}
-			_focus={{
-				backgroundColor: "blackAlpha.300",
-			}}
-								onChange={(e) => doSetSortDesc(e.target.value == "true")}
+									ml={4}
+									w="15"
+									backgroundColor="blackAlpha.100"
+									borderColor="whiteAlpha.200"
+									_hover={{
+										backgroundColor: "blackAlpha.300",
+									}}
+									_focus={{
+										backgroundColor: "blackAlpha.300",
+									}}
+									onChange={(e) =>
+										doSetSortDesc(e.target.value == "true")
+									}
 								>
 									<option value="false">Ascending</option>
 									<option value="true">Descending</option>

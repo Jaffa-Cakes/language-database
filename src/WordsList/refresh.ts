@@ -97,7 +97,7 @@ export default async function refresh(
 	columns: Column[],
 	filters: Filters,
 	sortBy: Column,
-	sortDirection: "asc" | "desc"
+	sortDirection: "asc" | "desc",
 ): Promise<string[][]> {
 	console.log(sortBy);
 	const orderBy = generateOrderBy(sortBy, sortDirection);
@@ -196,7 +196,10 @@ export default async function refresh(
 	return out;
 }
 
-function generateOrderBy(column: Column, sortDirection: "asc" | "desc"): OrderBy {
+function generateOrderBy(
+	column: Column,
+	sortDirection: "asc" | "desc",
+): OrderBy {
 	let orderBy = {};
 
 	switch (column) {
@@ -243,7 +246,6 @@ function generateOrderBy(column: Column, sortDirection: "asc" | "desc"): OrderBy
 
 	return orderBy;
 }
-
 
 function generateSelect(columns: Column[]): Select {
 	function ensureSourceExists(select: Select): Select {
