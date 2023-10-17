@@ -193,6 +193,129 @@ export default async function refresh(
 		out.push(record);
 	});
 
+	function isRegex(value: string): boolean {
+		return value.startsWith("/") && value.endsWith("/");
+	}
+
+	function runRegex(regex: string, value: string): boolean {
+		const reg = new RegExp(regex.slice(1, -1));
+		return reg.test(value);
+	}
+
+	out = out.filter((record) => {
+		let colNum = 0;
+
+		if (columns.includes(Column.Id)) {
+			if (filters.Id !== undefined && isRegex(filters.Id)) {
+				if (!runRegex(filters.Id, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.English)) {
+			if (filters.English !== undefined && isRegex(filters.English)) {
+				if (!runRegex(filters.English, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.Language)) {
+			if (filters.Language !== undefined && isRegex(filters.Language)) {
+				if (!runRegex(filters.Language, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.Sonetic)) {
+			if (filters.Sonetic !== undefined && isRegex(filters.Sonetic)) {
+				if (!runRegex(filters.Sonetic, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.Notes)) {
+			if (filters.Notes !== undefined && isRegex(filters.Notes)) {
+				if (!runRegex(filters.Notes, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.SourceId)) {
+			if (filters.SourceId !== undefined && isRegex(filters.SourceId)) {
+				if (!runRegex(filters.SourceId, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.SourceName)) {
+			if (filters.SourceName !== undefined && isRegex(filters.SourceName)) {
+				if (!runRegex(filters.SourceName, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.SourceFileName)) {
+			if (
+				filters.SourceFileName !== undefined &&
+				isRegex(filters.SourceFileName)
+			) {
+				if (!runRegex(filters.SourceFileName, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.SourceReference)) {
+			if (
+				filters.SourceReference !== undefined &&
+				isRegex(filters.SourceReference)
+			) {
+				if (!runRegex(filters.SourceReference, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.SourcePublicationType)) {
+			if (
+				filters.SourcePublicationType !== undefined &&
+				isRegex(filters.SourcePublicationType)
+			) {
+				if (!runRegex(filters.SourcePublicationType, record[colNum]))
+					return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.SourceDocumentType)) {
+			if (
+				filters.SourceDocumentType !== undefined &&
+				isRegex(filters.SourceDocumentType)
+			) {
+				if (!runRegex(filters.SourceDocumentType, record[colNum]))
+					return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.SourceLocation)) {
+			if (
+				filters.SourceLocation !== undefined &&
+				isRegex(filters.SourceLocation)
+			) {
+				if (!runRegex(filters.SourceLocation, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		if (columns.includes(Column.SourceNotes)) {
+			if (filters.SourceNotes !== undefined && isRegex(filters.SourceNotes)) {
+				if (!runRegex(filters.SourceNotes, record[colNum])) return false;
+			}
+			colNum++;
+		}
+
+		return true;
+	});
+
 	return out;
 }
 
@@ -323,13 +446,18 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 
 	let select: Where = {};
 
+	function isRegex(value: string): boolean {
+		return value.startsWith("/") && value.endsWith("/");
+	}
+
 	columns.forEach((column) => {
+
 		switch (column) {
 			case Column.Id:
-				if (filters.Id !== undefined) select.id = parseInt(filters.Id);
+				if (filters.Id !== undefined && !isRegex(filters.Id)) select.id = parseInt(filters.Id);
 				break;
 			case Column.English:
-				if (filters.English !== undefined) {
+				if (filters.English !== undefined && !isRegex(filters.English)) {
 					select.english = {
 						contains: filters.English,
 						mode: "insensitive",
@@ -337,7 +465,7 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.Language:
-				if (filters.Language !== undefined) {
+				if (filters.Language !== undefined && !isRegex(filters.Language)) {
 					select.language = {
 						contains: filters.Language,
 						mode: "insensitive",
@@ -345,7 +473,7 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.Sonetic:
-				if (filters.Sonetic !== undefined) {
+				if (filters.Sonetic !== undefined && !isRegex(filters.Sonetic)) {
 					select.sonetic = {
 						contains: filters.Sonetic,
 						mode: "insensitive",
@@ -353,7 +481,7 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.Notes:
-				if (filters.Notes !== undefined) {
+				if (filters.Notes !== undefined && !isRegex(filters.Notes)) {
 					select.notes = {
 						contains: filters.Notes,
 						mode: "insensitive",
@@ -361,13 +489,13 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceId:
-				if (filters.SourceId !== undefined) {
+				if (filters.SourceId !== undefined && !isRegex(filters.SourceId)) {
 					select = ensureSourceExists(select);
 					select.source!.id = parseInt(filters.SourceId);
 				}
 				break;
 			case Column.SourceName:
-				if (filters.SourceName !== undefined) {
+				if (filters.SourceName !== undefined && !isRegex(filters.SourceName)) {
 					select = ensureSourceExists(select);
 					select.source!.name = {
 						contains: filters.SourceName,
@@ -376,7 +504,7 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceFileName:
-				if (filters.SourceFileName !== undefined) {
+				if (filters.SourceFileName !== undefined && !isRegex(filters.SourceFileName)) {
 					select = ensureSourceExists(select);
 					select.source!.fileName = {
 						contains: filters.SourceFileName,
@@ -385,7 +513,7 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceReference:
-				if (filters.SourceReference !== undefined) {
+				if (filters.SourceReference !== undefined && !isRegex(filters.SourceReference)) {
 					select = ensureSourceExists(select);
 					select.source!.reference = {
 						contains: filters.SourceReference,
@@ -394,7 +522,7 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourcePublicationType:
-				if (filters.SourcePublicationType !== undefined) {
+				if (filters.SourcePublicationType !== undefined && !isRegex(filters.SourcePublicationType)) {
 					select = ensureSourceExists(select);
 					select.source!.publicationType = {
 						contains: filters.SourcePublicationType,
@@ -403,7 +531,7 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceDocumentType:
-				if (filters.SourceDocumentType !== undefined) {
+				if (filters.SourceDocumentType !== undefined && !isRegex(filters.SourceDocumentType)) {
 					select = ensureSourceExists(select);
 					select.source!.documentType = {
 						contains: filters.SourceDocumentType,
@@ -412,7 +540,7 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceLocation:
-				if (filters.SourceLocation !== undefined) {
+				if (filters.SourceLocation !== undefined && !isRegex(filters.SourceLocation)) {
 					select = ensureSourceExists(select);
 					select.source!.location = {
 						contains: filters.SourceLocation,
@@ -421,7 +549,7 @@ function generateWhere(columns: Column[], filters: Filters): Where {
 				}
 				break;
 			case Column.SourceNotes:
-				if (filters.SourceNotes !== undefined) {
+				if (filters.SourceNotes !== undefined && !isRegex(filters.SourceNotes)) {
 					select = ensureSourceExists(select);
 					select.source!.notes = {
 						contains: filters.SourceNotes,
